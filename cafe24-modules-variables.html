@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카페24 스마트디자인 - 모듈 & 변수 전체 레퍼런스</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --code-bg: #1e293b;
+      --code-text: #e2e8f0;
+      --green: #059669;
+      --green-bg: #d1fae5;
+      --orange: #d97706;
+      --orange-bg: #fef3c7;
+      --purple: #7c3aed;
+      --purple-bg: #ede9fe;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --cyan: #0891b2;
+      --cyan-bg: #cffafe;
+      --pink: #db2777;
+      --pink-bg: #fce7f3;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    header { background: linear-gradient(135deg, #1e3a8a, #7c3aed); color: white; padding: 3rem 2rem; text-align: center; }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    header p { opacity: 0.9; font-size: 1.05rem; }
+    header .stats { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    header .stat { background: rgba(255,255,255,0.15); padding: 0.6rem 1.2rem; border-radius: 8px; }
+    header .stat strong { font-size: 1.4rem; display: block; }
+
+    nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0.8rem 2rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; max-width: 1400px; margin: 0 auto; justify-content: center; }
+    nav a { text-decoration: none; color: var(--primary); padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.85rem; transition: background 0.2s; white-space: nowrap; }
+    nav a:hover { background: var(--primary-light); }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+    section { background: var(--card); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); color: var(--primary); }
+    h3 { font-size: 1.15rem; margin: 1.5rem 0 0.7rem; color: var(--text); }
+    h4 { font-size: 1rem; margin: 1rem 0 0.5rem; color: var(--text-light); }
+    p { margin-bottom: 0.7rem; }
+
+    pre { background: var(--code-bg); color: var(--code-text); padding: 1.2rem; border-radius: 8px; overflow-x: auto; margin: 0.8rem 0; font-size: 0.85rem; line-height: 1.5; }
+    code { background: #f1f5f9; color: #be185d; padding: 0.12rem 0.35rem; border-radius: 4px; font-size: 0.85rem; }
+    pre code { background: none; color: inherit; padding: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.88rem; }
+    th { background: var(--primary); color: white; padding: 0.6rem 0.8rem; text-align: left; font-weight: 600; position: sticky; top: 45px; }
+    td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:hover td { background: #f8fafc; }
+    td code { font-size: 0.82rem; }
+
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 20px; font-size: 0.73rem; font-weight: 600; }
+    .badge-blue { background: var(--primary-light); color: var(--primary); }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-orange { background: var(--orange-bg); color: var(--orange); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-cyan { background: var(--cyan-bg); color: var(--cyan); }
+    .badge-pink { background: var(--pink-bg); color: var(--pink); }
+
+    .tip { background: #fffbeb; border-left: 4px solid var(--orange); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; margin: 0.8rem 0; font-size: 0.9rem; }
+    .tip strong { color: var(--orange); }
+    .info { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; margin: 0.8rem 0; font-size: 0.9rem; }
+    .warn { background: var(--red-bg); border-left: 4px solid var(--red); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; margin: 0.8rem 0; font-size: 0.9rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+    .folder-tree { font-family: monospace; background: var(--code-bg); color: var(--code-text); padding: 1.2rem; border-radius: 8px; line-height: 1.6; font-size: 0.85rem; white-space: pre; overflow-x: auto; }
+    .folder-tree .f { color: #60a5fa; }
+    .folder-tree .fi { color: #a5b4fc; }
+
+    .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.8rem; }
+    .toc-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+    .toc-card h4 { margin: 0 0 0.5rem; color: var(--primary); }
+    .toc-card ul { list-style: none; padding: 0; }
+    .toc-card li { padding: 0.2rem 0; }
+    .toc-card a { text-decoration: none; color: var(--text); font-size: 0.85rem; }
+    .toc-card a:hover { color: var(--primary); }
+
+    details { margin: 0.5rem 0; }
+    details summary { cursor: pointer; font-weight: 600; padding: 0.5rem; background: var(--bg); border-radius: 6px; }
+    details summary:hover { background: var(--primary-light); }
+
+    .search-box { width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; }
+    .search-box:focus { outline: none; border-color: var(--primary); }
+
+    footer { text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.85rem; }
+    footer a { color: var(--primary); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.5rem; }
+      nav ul { justify-content: flex-start; }
+      .container { padding: 1rem; }
+      section { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>카페24 스마트디자인 전체 레퍼런스</h1>
+  <p>모듈(Module) & 변수(Variable) & 모디파이어(Modifier) 완벽 가이드</p>
+  <div class="stats">
+    <div class="stat"><strong>70+</strong>모듈</div>
+    <div class="stat"><strong>250+</strong>변수</div>
+    <div class="stat"><strong>13</strong>모디파이어</div>
+    <div class="stat"><strong>8</strong>카테고리</div>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#overview">개요</a></li>
+    <li><a href="#structure">구조</a></li>
+    <li><a href="#syntax">기본 문법</a></li>
+    <li><a href="#layout-modules">레이아웃</a></li>
+    <li><a href="#product-modules">상품</a></li>
+    <li><a href="#order-modules">주문/장바구니</a></li>
+    <li><a href="#member-modules">회원</a></li>
+    <li><a href="#board-modules">게시판</a></li>
+    <li><a href="#variables-all">변수 전체</a></li>
+    <li><a href="#modifiers">모디파이어</a></li>
+    <li><a href="#control">조건문/반복문</a></li>
+    <li><a href="#include">Include</a></li>
+    <li><a href="#patterns">실전 패턴</a></li>
+    <li><a href="#tips">팁</a></li>
+    <li><a href="#sources">참고</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+<!-- ===================== 1. 개요 ===================== -->
+<section id="overview">
+  <h2>1. 개요</h2>
+  <div class="grid-2">
+    <div>
+      <p><strong>스마트디자인</strong>은 HTML 기본 지식만으로 쇼핑몰을 자유롭게 편집할 수 있는 카페24의 디자인 관리 도구입니다.</p>
+      <p>핵심 개념 두 가지:</p>
+      <div class="info" style="margin-top:0.5rem">
+        <strong>모듈(Module)</strong> — 콘텐츠+기능의 묶음. 프로그램의 최소 단위.<br>
+        <code>&lt;div module="모듈아이디"&gt; ... &lt;/div&gt;</code>
+      </div>
+      <div class="info">
+        <strong>변수(Variable)</strong> — 어드민 설정값이 자동 반영되는 동적 데이터.<br>
+        <code>{$변수명}</code> 형태로 사용
+      </div>
+    </div>
+    <div>
+      <h3>문서 구성</h3>
+      <div class="toc-grid" style="grid-template-columns:1fr">
+        <div class="toc-card">
+          <ul>
+            <li><a href="#structure">2. 스킨 폴더 구조</a></li>
+            <li><a href="#syntax">3. 기본 문법 (모듈 선언, 주석 옵션)</a></li>
+            <li><a href="#layout-modules">4. 레이아웃 모듈 (7개)</a></li>
+            <li><a href="#product-modules">5. 상품 모듈 (25개+)</a></li>
+            <li><a href="#order-modules">6. 주문/장바구니 모듈 (20개+)</a></li>
+            <li><a href="#member-modules">7. 회원 모듈</a></li>
+            <li><a href="#board-modules">8. 게시판 모듈 (12개)</a></li>
+            <li><a href="#variables-all">9. 변수 전체 목록 (250개+)</a></li>
+            <li><a href="#modifiers">10. 모디파이어 13종</a></li>
+            <li><a href="#control">11. 조건문 & 반복문</a></li>
+            <li><a href="#include">12. Import / CSS / JS</a></li>
+            <li><a href="#patterns">13. 실전 코드 패턴</a></li>
+            <li><a href="#tips">14. 실무 팁</a></li>
+            <li><a href="#sources">15. 공식 문서 링크</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 2. 구조 ===================== -->
+<section id="structure">
+  <h2>2. 스킨 폴더 구조</h2>
+  <div class="folder-tree">
+<span class="f">/design/skin/스킨명/</span>
+├── <span class="f">layout/</span>
+│   ├── <span class="fi">layout.html</span>    ← 공통 레이아웃 (헤더·푸터·네비)
+│   └── <span class="fi">index.html</span>     ← 메인 페이지
+├── <span class="f">product/</span>
+│   ├── <span class="fi">list.html</span>      ← 상품 목록(카테고리)
+│   └── <span class="fi">detail.html</span>    ← 상품 상세
+├── <span class="f">order/</span>
+│   ├── <span class="fi">basket.html</span>    ← 장바구니
+│   ├── <span class="fi">orderform.html</span> ← 주문서 작성
+│   └── <span class="fi">orderresult.html</span> ← 주문 완료
+├── <span class="f">member/</span>
+│   ├── <span class="fi">login.html</span>     ← 로그인
+│   ├── <span class="fi">join.html</span>      ← 회원가입
+│   └── <span class="fi">modify.html</span>    ← 정보수정
+├── <span class="f">board/</span>
+│   ├── <span class="fi">list.html</span>      ← 게시판 목록
+│   └── <span class="fi">detail.html</span>    ← 게시판 상세
+├── <span class="f">myshop/</span>
+│   └── <span class="fi">myshop.html</span>    ← 마이쇼핑
+├── <span class="f">css/</span>
+│   └── <span class="fi">style.css</span>
+└── <span class="f">js/</span>
+    └── <span class="fi">script.js</span>
+  </div>
+</section>
+
+<!-- ===================== 3. 기본 문법 ===================== -->
+<section id="syntax">
+  <h2>3. 기본 문법</h2>
+
+  <h3>모듈 선언</h3>
+  <pre><code>&lt;div module="모듈아이디"&gt;
+  &lt;!-- HTML + {$변수} --&gt;
+&lt;/div&gt;</code></pre>
+
+  <h3>주석 옵션 (Comment Options)</h3>
+  <pre><code>&lt;div module="product_listrecommend"&gt;
+  &lt;!--
+  $fixed = top
+  $count = 15
+  $only_html = no
+  --&gt;
+  ...모듈 내용...
+&lt;/div&gt;</code></pre>
+
+  <table>
+    <thead><tr><th>옵션</th><th>설명</th><th>값</th><th>우선순위</th></tr></thead>
+    <tbody>
+      <tr><td><code>$count</code></td><td>반복 출력 횟수</td><td>숫자</td><td>2</td></tr>
+      <tr><td><code>$only_html</code></td><td>HTML 항목 수만큼만 반복</td><td>yes / no</td><td>1 (최우선)</td></tr>
+      <tr><td><code>$fixed</code></td><td>고정 위치</td><td>top 등</td><td>-</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <strong>주의:</strong> 주석 옵션은 반드시 줄바꿈을 포함해야 동작합니다. 한 줄로 작성하면 인식 안 됨.
+  </div>
+</section>
+
+<!-- ===================== 4. 레이아웃 모듈 ===================== -->
+<section id="layout-modules">
+  <h2>4. 레이아웃 모듈</h2>
+  <p>모든 페이지에 공통으로 사용되는 모듈입니다. <code>layout.html</code>에 배치합니다.</p>
+
+  <table>
+    <thead><tr><th>모듈 아이디</th><th>설명</th><th>주요 변수</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>Layout_LogoTop</code></td>
+        <td>쇼핑몰 로고 (상단형)</td>
+        <td><code>{$mall_name}</code>, <code>{$mobile_title}</code></td>
+      </tr>
+      <tr>
+        <td><code>Layout_category</code></td>
+        <td>전체 상품 분류 (카테고리 메뉴)</td>
+        <td><code>{$name_or_img_tag}</code>, <code>{$link_product_list}</code>, <code>{$param_cate_no}</code></td>
+      </tr>
+      <tr>
+        <td><code>Layout_SearchHeader</code></td>
+        <td>상품 검색 (상단형)</td>
+        <td><code>{$form.search}</code>, <code>{$action_search}</code></td>
+      </tr>
+      <tr>
+        <td><code>Layout_statelogon</code></td>
+        <td>로그인 후 상태 표시</td>
+        <td><code>{$name}</code>, <code>{$basket_cnt}</code></td>
+      </tr>
+      <tr>
+        <td><code>Layout_statelogoff</code></td>
+        <td>로그아웃 상태 표시</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td><code>Layout_shoppingInfo</code></td>
+        <td>장바구니·적립금·위시리스트 정보</td>
+        <td><code>{$basket_cnt}</code>, <code>{$mylikeprd_total_cnt}</code>, <code>{$interest_prd_cnt}</code></td>
+      </tr>
+      <tr>
+        <td><code>Layout_orderBasketcount</code></td>
+        <td>장바구니 상품 수량 카운트</td>
+        <td><code>{$basket_cnt}</code></td>
+      </tr>
+      <tr>
+        <td><code>Layout_MobileAction</code></td>
+        <td>모바일 이전 화면 이동</td>
+        <td><code>{$go_back}</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>레이아웃 모듈 사용 예시</h3>
+  <pre><code>&lt;!-- 로고 --&gt;
+&lt;h1 module="Layout_LogoTop"&gt;
+  &lt;a href="/"&gt;{$mall_name}&lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;!-- 카테고리 메뉴 --&gt;
+&lt;nav module="Layout_category"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="{$link_product_list}"&gt;{$name_or_img_tag}&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;!-- 로그인 상태 분기 --&gt;
+&lt;div module="Layout_statelogon"&gt;
+  환영합니다, {$name}님! | &lt;a href="/exec/front/Member/logout/"&gt;로그아웃&lt;/a&gt;
+&lt;/div&gt;
+&lt;div module="Layout_statelogoff"&gt;
+  &lt;a href="/member/login.html"&gt;로그인&lt;/a&gt; | &lt;a href="/member/join.html"&gt;회원가입&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;!-- 검색 --&gt;
+&lt;div module="Layout_SearchHeader"&gt;
+  &lt;input type="text" name="search" value="{$form.search}"&gt;
+  &lt;button onclick="{$action_search}"&gt;검색&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- ===================== 5. 상품 모듈 ===================== -->
+<section id="product-modules">
+  <h2>5. 상품 모듈</h2>
+
+  <h3>5-1. 메인 페이지 상품 목록</h3>
+  <table>
+    <thead><tr><th>모듈 아이디</th><th>설명</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td><code>product_listmain_1</code></td><td>메인 추천상품 목록</td><td rowspan="5">번호는 관리자의 분류 순서에 따라 자동 생성. 5번 이상도 가능.</td></tr>
+      <tr><td><code>product_listmain_2</code></td><td>메인 신상품 목록</td></tr>
+      <tr><td><code>product_listmain_3</code></td><td>메인 추가 카테고리 1</td></tr>
+      <tr><td><code>product_listmain_4</code></td><td>메인 추가 카테고리 2</td></tr>
+      <tr><td><code>product_listmain_5</code></td><td>추가분류관리(진열순서1)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5-2. 카테고리/목록 페이지</h3>
+  <table>
+    <thead><tr><th>모듈 아이디</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>product_headcategory</code></td><td>카테고리 경로 (breadcrumb) + 카테고리 타이틀/배너</td></tr>
+      <tr><td><code>product_displaycategory</code></td><td>중분류·소분류·상세분류 메뉴</td></tr>
+      <tr><td><code>product_children</code></td><td>카테고리 하위메뉴</td></tr>
+      <tr><td><code>product_listrecommend</code></td><td>카테고리별 추천 상품 목록</td></tr>
+      <tr><td><code>product_listnew</code></td><td>카테고리별 신상품 목록</td></tr>
+      <tr><td><code>product_listnormal</code></td><td>일반 상품 목록 (나열)</td></tr>
+      <tr><td><code>product_ListItem</code></td><td>상품 목록 표시항목 (공통 아이템)</td></tr>
+      <tr><td><code>product_normalmenu</code></td><td>상품 정렬·검색·비교 기능</td></tr>
+      <tr><td><code>product_normalpaging</code></td><td>상품 목록 페이지네이션</td></tr>
+      <tr><td><code>product_FirstSelect</code></td><td>조건별 검색 첫번째 선택</td></tr>
+      <tr><td><code>product_SecondSelect</code></td><td>조건별 검색 두번째 선택</td></tr>
+      <tr><td><code>product_Colorchip</code></td><td>컬러칩 미리보기</td></tr>
+      <tr><td><code>product_Orderby</code></td><td>상품 정렬 기능</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5-3. 상품 상세 페이지</h3>
+  <table>
+    <thead><tr><th>모듈 아이디</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>product_detail</code></td><td>상품 주요 정보 (이름, 가격, 배송 등) + 구매 기능</td></tr>
+      <tr><td><code>product_image</code></td><td>상품 이미지 + 확대보기</td></tr>
+      <tr><td><code>Product_mobileImage</code></td><td>모바일 상품 이미지</td></tr>
+      <tr><td><code>product_addimage</code></td><td>추가 상품 이미지 목록 (썸네일)</td></tr>
+      <tr><td><code>product_Colorchip</code></td><td>색상 옵션 칩</td></tr>
+      <tr><td><code>product_option</code></td><td>기본 상품 옵션 (색상, 사이즈 등)</td></tr>
+      <tr><td><code>product_addoption</code></td><td>추가 입력 옵션</td></tr>
+      <tr><td><code>product_fileoption</code></td><td>파일 업로드 옵션</td></tr>
+      <tr><td><code>product_noneoption</code></td><td>옵션 없는 상품 수량 선택</td></tr>
+      <tr><td><code>product_action</code></td><td>구매·장바구니·관심상품 버튼</td></tr>
+      <tr><td><code>product_setproduct</code></td><td>세트 상품 표시</td></tr>
+      <tr><td><code>product_addproduct</code></td><td>추가구성 상품 표시</td></tr>
+      <tr><td><code>product_additional</code></td><td>상품 추가 정보</td></tr>
+      <tr><td><code>product_detaildesign</code></td><td>상품 상세정보 (에디터 내용)</td></tr>
+      <tr><td><code>product_relation</code></td><td>관련 상품 영역</td></tr>
+      <tr><td><code>product_relationlist</code></td><td>관련 상품 목록</td></tr>
+      <tr><td><code>product_review</code></td><td>상품 리뷰 목록</td></tr>
+      <tr><td><code>product_reviewpaging</code></td><td>리뷰 페이지네이션</td></tr>
+      <tr><td><code>product_qna</code></td><td>상품 Q&A 목록</td></tr>
+      <tr><td><code>product_qnapaging</code></td><td>Q&A 페이지네이션</td></tr>
+      <tr><td><code>coupon_productdetail</code></td><td>상품 상세 쿠폰 표시</td></tr>
+      <tr><td><code>myshop_benefit</code></td><td>회원 할인/적립 정보</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 6. 주문/장바구니 ===================== -->
+<section id="order-modules">
+  <h2>6. 주문 / 장바구니 모듈</h2>
+
+  <h3>6-1. 장바구니 (basket)</h3>
+  <table>
+    <thead><tr><th>모듈 아이디</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>Order_TabInfo</code></td><td>국내/해외 상품 탭</td></tr>
+      <tr><td><code>Order_Empty</code></td><td>장바구니 비어있음 안내</td></tr>
+      <tr><td><code>Order_EmptyItem</code></td><td>장바구니 상품 정보</td></tr>
+      <tr><td><code>Order_BasketOption</code></td><td>할인금액 정보</td></tr>
+      <tr><td><code>Order_NormTitle</code></td><td>일반상품 제목</td></tr>
+      <tr><td><code>Order_NormNormal</code></td><td>일반상품 (기본배송)</td></tr>
+      <tr><td><code>Order_list</code></td><td>상품 목록</td></tr>
+      <tr><td><code>Order_optionAll</code></td><td>모든 옵션</td></tr>
+      <tr><td><code>Order_optionList</code></td><td>옵션 목록</td></tr>
+      <tr><td><code>Order_optionAddList</code></td><td>추가옵션 목록</td></tr>
+      <tr><td><code>Order_SuppNormal</code></td><td>일반상품 (업체기본배송)</td></tr>
+      <tr><td><code>Order_NormIndividual</code></td><td>일반상품 (개별배송)</td></tr>
+      <tr><td><code>Order_NormOverseaTitle</code></td><td>해외배송 상품 제목</td></tr>
+      <tr><td><code>Order_NormOversea</code></td><td>일반상품 (해외배송)</td></tr>
+      <tr><td><code>Order_InstTitle</code></td><td>무이자할부 상품 제목</td></tr>
+      <tr><td><code>Order_InstNormal</code></td><td>무이자 상품 (기본배송)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>6-2. 주문서 작성 (orderform)</h3>
+  <table>
+    <thead><tr><th>모듈 아이디</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>Order_form</code></td><td>주문서 메인 모듈</td></tr>
+      <tr><td><code>Order_normallist</code></td><td>기본배송 상품 목록</td></tr>
+      <tr><td><code>Order_optionSet</code></td><td>상품 옵션 설정</td></tr>
+      <tr><td><code>Order_individuallist</code></td><td>개별배송 상품 목록</td></tr>
+      <tr><td><code>Order_oversealist</code></td><td>해외배송 상품 목록</td></tr>
+      <tr><td><code>Order_DeliveryList</code></td><td>배송지 선택 목록</td></tr>
+      <tr><td><code>Order_ordadd</code></td><td>추가 정보 입력</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 7. 회원 모듈 ===================== -->
+<section id="member-modules">
+  <h2>7. 회원 모듈</h2>
+
+  <table>
+    <thead><tr><th>모듈 아이디</th><th>설명</th><th>주요 변수</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>member_login</code></td>
+        <td>로그인 폼 (전체 화면형)</td>
+        <td><code>{$form.member_id}</code>, <code>{$form.member_passwd}</code>, <code>{$action_func_login}</code>, <code>{$returnUrl}</code></td>
+      </tr>
+      <tr>
+        <td><code>member_join</code></td>
+        <td>회원가입 폼</td>
+        <td><code>{$form.member_id}</code>, <code>{$form.passwd}</code>, <code>{$form.name}</code>, <code>{$form.email}</code>, <code>{$action_func_join}</code></td>
+      </tr>
+      <tr>
+        <td><code>member_modify</code></td>
+        <td>회원정보 수정</td>
+        <td>회원가입과 유사한 변수 세트</td>
+      </tr>
+      <tr>
+        <td><code>member_find</code></td>
+        <td>아이디/비밀번호 찾기</td>
+        <td><code>{$form.name}</code>, <code>{$form.email}</code></td>
+      </tr>
+      <tr>
+        <td><code>MyShop_OrderHistoryNologin</code></td>
+        <td>비회원 주문 조회</td>
+        <td><code>{$form.order_name}</code>, <code>{$form.order_id}</code>, <code>{$form.order_password}</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <details>
+    <summary>회원가입 (member_join) 상세 변수 목록</summary>
+    <table>
+      <thead><tr><th>분류</th><th>변수</th></tr></thead>
+      <tbody>
+        <tr><td>기본 인증</td><td><code>{$form.member_id}</code>, <code>{$form.passwd}</code>, <code>{$form.user_passwd_confirm}</code>, <code>{$form.hint}</code>, <code>{$form.hint_answer}</code></td></tr>
+        <tr><td>개인정보</td><td><code>{$form.name}</code>, <code>{$form.name_en}</code>, <code>{$form.email}</code>, <code>{$form.is_news_mail}</code></td></tr>
+        <tr><td>연락처</td><td><code>{$form.phone}</code>, <code>{$form.mobile}</code>, <code>{$form.is_sms}</code></td></tr>
+        <tr><td>주소</td><td><code>{$form.postcode1}</code>, <code>{$form.postcode2}</code>, <code>{$form.addr1}</code>, <code>{$form.addr2}</code></td></tr>
+        <tr><td>추가정보</td><td><code>{$form.nick_name}</code>, <code>{$form.is_sex}</code>, <code>{$form.birth_year}</code>, <code>{$form.birth_month}</code>, <code>{$form.birth_day}</code></td></tr>
+        <tr><td>직업/기타</td><td><code>{$form.job_class}</code>, <code>{$form.job}</code>, <code>{$form.earning}</code>, <code>{$form.region}</code>, <code>{$form.reco_id}</code></td></tr>
+        <tr><td>환불계좌</td><td><code>{$form.bank_account_owner}</code>, <code>{$form.refund_bank_code}</code>, <code>{$form.bank_account_no}</code></td></tr>
+        <tr><td>본인인증</td><td><code>{$action_ipin_open}</code>, <code>{$action_mobile_open}</code>, <code>{$action_check_id}</code>, <code>{$action_find_address}</code></td></tr>
+        <tr><td>사업자</td><td><code>{$form.member_type}</code>, <code>{$form.company_type}</code>, <code>{$form.bname}</code>, <code>{$form.bssn1}</code>, <code>{$form.bssn2}</code>, <code>{$form.cname}</code>, <code>{$form.cssn}</code></td></tr>
+        <tr><td>외국인</td><td><code>{$form.foreigner_name}</code>, <code>{$form.foreigner_type}</code>, <code>{$form.foreigner_ssn}</code>, <code>{$form.citizenship}</code></td></tr>
+      </tbody>
+    </table>
+  </details>
+</section>
+
+<!-- ===================== 8. 게시판 모듈 ===================== -->
+<section id="board-modules">
+  <h2>8. 게시판 모듈</h2>
+  <p>게시판 모듈의 번호(<code>_1002</code> 등)는 게시판 번호에 따라 변경됩니다.</p>
+
+  <table>
+    <thead><tr><th>모듈 아이디</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>board_title_{no}</code></td><td>게시판 제목/정보</td></tr>
+      <tr><td><code>board_category</code></td><td>게시판 카테고리 분류</td></tr>
+      <tr><td><code>board_ReplySort</code></td><td>댓글 정렬</td></tr>
+      <tr><td><code>board_listheader_{no}</code></td><td>목록 헤더 (제목, 작성자, 날짜 등 컬럼)</td></tr>
+      <tr><td><code>board_notice_{no}</code></td><td>공지사항 목록</td></tr>
+      <tr><td><code>board_fixed_{no}</code></td><td>고정 게시글</td></tr>
+      <tr><td><code>board_list_{no}</code></td><td>일반 게시글 목록</td></tr>
+      <tr><td><code>board_ButtonList_{no}</code></td><td>글쓰기 버튼 등</td></tr>
+      <tr><td><code>board_paging_{no}</code></td><td>페이지네이션</td></tr>
+      <tr><td><code>board_catemove_{no}</code></td><td>카테고리/게시판 이동</td></tr>
+      <tr><td><code>board_function_{no}</code></td><td>게시판 기능 (이동, 복사 등)</td></tr>
+      <tr><td><code>board_search_{no}</code></td><td>게시판 검색</td></tr>
+      <tr><td><code>board_listpackage_5</code></td><td>자유게시판 패키지</td></tr>
+      <tr><td><code>board_listpackage_6</code></td><td>상품 Q&A 패키지</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 9. 변수 전체 ===================== -->
+<section id="variables-all">
+  <h2>9. 변수 전체 목록</h2>
+
+  <input type="text" class="search-box" id="varSearch" placeholder="변수명 검색... (예: product_name, image, price)" oninput="filterVars()">
+
+  <div id="varTables">
+
+  <h3>9-1. 상품 기본정보</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th><th>사용 위치</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$product_no}</code></td><td>상품 번호</td><td>목록, 상세</td></tr>
+      <tr><td><code>{$product_name}</code></td><td>상품명</td><td>목록, 상세</td></tr>
+      <tr><td><code>{$product_name_title}</code></td><td>상품명 (title 속성용)</td><td>목록</td></tr>
+      <tr><td><code>{$product_name_title_display}</code></td><td>상품명 title 표시 여부</td><td>목록</td></tr>
+      <tr><td><code>{$name}</code></td><td>상품명 (상세 페이지)</td><td>상세</td></tr>
+      <tr><td><code>{$product_code}</code></td><td>상품 코드</td><td>상세</td></tr>
+      <tr><td><code>{$product_custom}</code></td><td>사용자 정의 상품 정보</td><td>상세</td></tr>
+      <tr><td><code>{$param}</code></td><td>상품 파라미터 (링크용)</td><td>목록</td></tr>
+      <tr><td><code>{$link_product_detail}</code></td><td>상품 상세 페이지 링크</td><td>목록</td></tr>
+      <tr><td><code>{$link_product_list}</code></td><td>카테고리 상품 목록 링크</td><td>카테고리</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-2. 상품 가격</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th><th>사용 위치</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$product_price}</code></td><td>상품 가격 (정가)</td><td>목록, 상세</td></tr>
+      <tr><td><code>{$product_sale_price}</code></td><td>판매가 (할인가)</td><td>목록, 상세</td></tr>
+      <tr><td><code>{$product_price_mobile}</code></td><td>모바일 상품 가격</td><td>모바일 상세</td></tr>
+      <tr><td><code>{$mobile_dc_price}</code></td><td>모바일 할인가</td><td>모바일 상세</td></tr>
+      <tr><td><code>{$mileage_value}</code></td><td>적립금</td><td>상세</td></tr>
+      <tr><td><code>{$dc_price}</code></td><td>회원 할인가</td><td>상세</td></tr>
+      <tr><td><code>{$dc_min_price}</code></td><td>최소 할인가</td><td>상세</td></tr>
+      <tr><td><code>{$display_product_sale_price}</code></td><td>판매가 표시 여부</td><td>장바구니</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-3. 상품 이미지</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th><th>주요 사용처</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$image_big}</code></td><td>대표 이미지 (큰 사이즈)</td><td>상품 상세</td></tr>
+      <tr><td><code>{$big_img}</code></td><td>상세 페이지 대표 이미지</td><td>상품 상세</td></tr>
+      <tr><td><code>{$image_medium}</code></td><td>목록 이미지 (가장 많이 사용)</td><td>상품 목록</td></tr>
+      <tr><td><code>{$image_small}</code></td><td>축소 이미지 (썸네일)</td><td>상세 하단</td></tr>
+      <tr><td><code>{$image_tiny}</code></td><td>작은 목록 이미지</td><td>최근 본 상품</td></tr>
+      <tr><td><code>{$zoom_param}</code></td><td>이미지 확대 파라미터</td><td>상세</td></tr>
+      <tr><td><code>{$top_image1_tag}</code></td><td>카테고리 상단 이미지 1</td><td>목록</td></tr>
+      <tr><td><code>{$top_image2_tag}</code></td><td>카테고리 상단 이미지 2</td><td>목록</td></tr>
+      <tr><td><code>{$top_image3_tag}</code></td><td>카테고리 상단 이미지 3</td><td>목록</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-4. 상품 상태/아이콘</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$soldout_icon}</code></td><td>품절 아이콘</td></tr>
+      <tr><td><code>{$recommend_icon}</code></td><td>추천 아이콘</td></tr>
+      <tr><td><code>{$new_icon}</code></td><td>신상품 아이콘</td></tr>
+      <tr><td><code>{$sale_icon}</code></td><td>세일 아이콘</td></tr>
+      <tr><td><code>{$product_icons}</code></td><td>상품 아이콘 모음</td></tr>
+      <tr><td><code>{$option_preview_icon}</code></td><td>옵션 미리보기 아이콘</td></tr>
+      <tr><td><code>{$basket_icon}</code></td><td>장바구니 아이콘</td></tr>
+      <tr><td><code>{$zoom_icon}</code></td><td>확대 아이콘</td></tr>
+      <tr><td><code>{$delvtype_display}</code></td><td>배송 타입 표시</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-5. 상품 옵션</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$option_name}</code></td><td>옵션명 (색상, 사이즈 등)</td></tr>
+      <tr><td><code>{$option_value}</code></td><td>옵션 값</td></tr>
+      <tr><td><code>{$option_maxlength}</code></td><td>옵션 최대 글자수</td></tr>
+      <tr><td><code>{$add_option_name}</code></td><td>추가 옵션명</td></tr>
+      <tr><td><code>{$file_option_name}</code></td><td>파일 옵션명</td></tr>
+      <tr><td><code>{$form.option}</code></td><td>기본 옵션 폼</td></tr>
+      <tr><td><code>{$form.add_option}</code></td><td>추가 옵션 폼</td></tr>
+      <tr><td><code>{$form.option_value}</code></td><td>옵션 값 폼</td></tr>
+      <tr><td><code>{$quantity}</code></td><td>수량</td></tr>
+      <tr><td><code>{$color}</code></td><td>컬러칩 색상값</td></tr>
+      <tr><td><code>{$option_str}</code></td><td>옵션 문자열</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-6. 상품 상세정보 / 배송</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$product_detail}</code></td><td>상품 상세 설명</td></tr>
+      <tr><td><code>{$item_display}</code></td><td>항목 표시 여부</td></tr>
+      <tr><td><code>{$item_title}</code></td><td>항목 제목</td></tr>
+      <tr><td><code>{$item_title_display}</code></td><td>항목 제목 표시 여부</td></tr>
+      <tr><td><code>{$item_content}</code></td><td>항목 내용</td></tr>
+      <tr><td><code>{$supply_info}</code></td><td>공급사 정보</td></tr>
+      <tr><td><code>{$payment_info}</code></td><td>결제 안내</td></tr>
+      <tr><td><code>{$shipping_method}</code></td><td>배송 방법</td></tr>
+      <tr><td><code>{$shipping_area}</code></td><td>배송 지역</td></tr>
+      <tr><td><code>{$shipping}</code></td><td>배송비</td></tr>
+      <tr><td><code>{$delivery}</code></td><td>배송 정보</td></tr>
+      <tr><td><code>{$delivery_price}</code></td><td>배송비</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-7. 상품 액션 (구매/장바구니)</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$action_buy}</code></td><td>바로 구매</td></tr>
+      <tr><td><code>{$action_basket}</code></td><td>장바구니 담기</td></tr>
+      <tr><td><code>{$action_wishlist}</code></td><td>위시리스트 추가</td></tr>
+      <tr><td><code>{$action_recommend}</code></td><td>추천하기</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-8. 카테고리</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$category_name}</code></td><td>카테고리명</td></tr>
+      <tr><td><code>{$category_title_text}</code></td><td>카테고리 타이틀 텍스트</td></tr>
+      <tr><td><code>{$category_title_text_display}</code></td><td>타이틀 텍스트 표시 여부</td></tr>
+      <tr><td><code>{$category_title_img}</code></td><td>카테고리 타이틀 이미지</td></tr>
+      <tr><td><code>{$category_title_img_display}</code></td><td>타이틀 이미지 표시 여부</td></tr>
+      <tr><td><code>{$title_text_or_image}</code></td><td>텍스트 또는 이미지 타이틀</td></tr>
+      <tr><td><code>{$name_or_img_tag}</code></td><td>카테고리 이름 또는 이미지</td></tr>
+      <tr><td><code>{$product_count}</code></td><td>카테고리 내 상품 수</td></tr>
+      <tr><td><code>{$product_count_display}</code></td><td>상품 수 표시 여부</td></tr>
+      <tr><td><code>{$children_icon}</code></td><td>하위카테고리 아이콘</td></tr>
+      <tr><td><code>{$disp_cate_1}</code> ~ <code>{$disp_cate_4}</code></td><td>카테고리 depth 1~4 표시</td></tr>
+      <tr><td><code>{$name_1}</code> ~ <code>{$name_4}</code></td><td>카테고리 depth 1~4 이름</td></tr>
+      <tr><td><code>{$param_1}</code> ~ <code>{$param_4}</code></td><td>카테고리 depth 1~4 파라미터</td></tr>
+      <tr><td><code>{$param_cate_no}</code></td><td>카테고리 번호 파라미터</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-9. 정렬 / 페이지네이션</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$total_count}</code></td><td>전체 상품 수</td></tr>
+      <tr><td><code>{$param_first}</code></td><td>첫 페이지 링크</td></tr>
+      <tr><td><code>{$param_before}</code></td><td>이전 페이지 링크</td></tr>
+      <tr><td><code>{$param_next}</code></td><td>다음 페이지 링크</td></tr>
+      <tr><td><code>{$param_last}</code></td><td>마지막 페이지 링크</td></tr>
+      <tr><td><code>{$param_class}</code></td><td>현재 페이지 클래스</td></tr>
+      <tr><td><code>{$no}</code></td><td>페이지 번호</td></tr>
+      <tr><td><code>{$param_num}</code></td><td>페이지 번호 파라미터</td></tr>
+      <tr><td><code>{$selected}</code></td><td>선택 상태</td></tr>
+      <tr><td><code>{$value}</code></td><td>옵션 값</td></tr>
+      <tr><td><code>{$title}</code></td><td>옵션 타이틀</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-10. 쇼핑 정보</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$basket_cnt}</code></td><td>장바구니 상품 수</td></tr>
+      <tr><td><code>{$mylikeprd_total_cnt}</code></td><td>좋아요 상품 수</td></tr>
+      <tr><td><code>{$interest_prd_cnt}</code></td><td>위시리스트 상품 수</td></tr>
+      <tr><td><code>{$mall_name}</code></td><td>쇼핑몰 이름</td></tr>
+      <tr><td><code>{$mobile_title}</code></td><td>모바일 타이틀</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-11. 장바구니 변수</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$basket_count}</code></td><td>장바구니 상품 수</td></tr>
+      <tr><td><code>{$item_total}</code></td><td>상품 합계</td></tr>
+      <tr><td><code>{$img}</code></td><td>상품 이미지</td></tr>
+      <tr><td><code>{$product_name}</code></td><td>상품명</td></tr>
+      <tr><td><code>{$product_sale_price}</code></td><td>판매가</td></tr>
+      <tr><td><code>{$form.quantity}</code></td><td>수량 입력</td></tr>
+      <tr><td><code>{$option_str}</code></td><td>옵션 문자열</td></tr>
+      <tr><td><code>{$mileage}</code></td><td>적립금</td></tr>
+      <tr><td><code>{$discount}</code></td><td>할인금액</td></tr>
+      <tr><td><code>{$delv_price_front}</code></td><td>배송비 (기본화폐)</td></tr>
+      <tr><td><code>{$delv_price_back}</code></td><td>배송비 (보조화폐)</td></tr>
+      <tr><td><code>{$delv_type}</code></td><td>배송 유형</td></tr>
+      <tr><td><code>{$sum_price_front}</code></td><td>합계 (기본화폐)</td></tr>
+      <tr><td><code>{$sum_price_back}</code></td><td>합계 (보조화폐)</td></tr>
+      <tr><td><code>{$total_product_price}</code></td><td>전체 상품 금액</td></tr>
+      <tr><td><code>{$total_option_price}</code></td><td>전체 옵션 금액</td></tr>
+      <tr><td><code>{$total_delv_price}</code></td><td>전체 배송비</td></tr>
+      <tr><td><code>{$total_sum_price_front}</code></td><td>총 합계 (기본화폐)</td></tr>
+      <tr><td><code>{$total_sum_price_back}</code></td><td>총 합계 (보조화폐)</td></tr>
+      <tr><td><code>{$action_modify}</code></td><td>수정 액션</td></tr>
+      <tr><td><code>{$action_option_change}</code></td><td>옵션 변경</td></tr>
+      <tr><td><code>{$action_wish_item}</code></td><td>위시리스트 이동</td></tr>
+      <tr><td><code>{$action_buy_item}</code></td><td>선택 상품 구매</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-12. 주문서 변수</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$product_image}</code></td><td>상품 이미지</td></tr>
+      <tr><td><code>{$product_name}</code></td><td>상품명</td></tr>
+      <tr><td><code>{$product_price_front}</code></td><td>상품 가격</td></tr>
+      <tr><td><code>{$product_quantity_text}</code></td><td>수량 텍스트</td></tr>
+      <tr><td><code>{$product_total_price_front}</code></td><td>상품 합계</td></tr>
+      <tr><td><code>{$form.oname}</code></td><td>주문자 이름</td></tr>
+      <tr><td><code>{$form.ozipcode1}</code></td><td>주문자 우편번호</td></tr>
+      <tr><td><code>{$form.oaddr1}</code></td><td>주문자 주소</td></tr>
+      <tr><td><code>{$form.ophone1_}</code></td><td>주문자 전화번호</td></tr>
+      <tr><td><code>{$form.oemail}</code></td><td>주문자 이메일</td></tr>
+      <tr><td><code>{$form.rname}</code></td><td>수령자 이름</td></tr>
+      <tr><td><code>{$form.rzipcode1}</code></td><td>수령자 우편번호</td></tr>
+      <tr><td><code>{$form.raddr1}</code></td><td>수령자 주소</td></tr>
+      <tr><td><code>{$total_price}</code></td><td>총 결제 금액</td></tr>
+      <tr><td><code>{$total_order_price_front}</code></td><td>총 주문 금액</td></tr>
+      <tr><td><code>{$coupon_cnt}</code></td><td>사용 가능 쿠폰 수</td></tr>
+      <tr><td><code>{$total_avail_mileage}</code></td><td>사용 가능 적립금</td></tr>
+      <tr><td><code>{$total_deposit}</code></td><td>사용 가능 예치금</td></tr>
+      <tr><td><code>{$addr_paymethod}</code></td><td>결제 수단</td></tr>
+      <tr><td><code>{$pname}</code></td><td>은행명</td></tr>
+      <tr><td><code>{$bankaccount}</code></td><td>계좌번호</td></tr>
+      <tr><td><code>{$item_count}</code></td><td>상품 수</td></tr>
+      <tr><td><code>{$price_unit_head}</code></td><td>화폐 단위</td></tr>
+      <tr><td><code>{$mileage_name}</code></td><td>적립금 명칭</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-13. 회원 정보</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$member_name}</code></td><td>회원 이름</td></tr>
+      <tr><td><code>{$group_name}</code></td><td>회원 등급명</td></tr>
+      <tr><td><code>{$member_login_module_id}</code></td><td>로그인 모듈 ID</td></tr>
+      <tr><td><code>{$member_login_tab_display}</code></td><td>로그인 탭 표시</td></tr>
+      <tr><td><code>{$form.member_id}</code></td><td>회원 아이디 입력</td></tr>
+      <tr><td><code>{$form.member_passwd}</code></td><td>비밀번호 입력</td></tr>
+      <tr><td><code>{$form.use_login_keeping}</code></td><td>로그인 유지</td></tr>
+      <tr><td><code>{$form.check_save_id}</code></td><td>아이디 저장</td></tr>
+      <tr><td><code>{$action_func_login}</code></td><td>로그인 액션</td></tr>
+      <tr><td><code>{$returnUrl}</code></td><td>로그인 후 리턴 URL</td></tr>
+      <tr><td><code>{$display_nomember}</code></td><td>비회원 주문 표시 여부</td></tr>
+      <tr><td><code>{$action_nomember_order}</code></td><td>비회원 주문 액션</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-14. 게시판 변수</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$board_name}</code></td><td>게시판명</td></tr>
+      <tr><td><code>{$board_title}</code></td><td>게시판 제목</td></tr>
+      <tr><td><code>{$board_info}</code></td><td>게시판 정보</td></tr>
+      <tr><td><code>{$board_adult_icon}</code></td><td>성인 인증 아이콘</td></tr>
+      <tr><td><code>{$board_top_image}</code></td><td>게시판 상단 이미지</td></tr>
+      <tr><td><code>{$subject}</code></td><td>게시글 제목</td></tr>
+      <tr><td><code>{$content}</code></td><td>게시글 내용</td></tr>
+      <tr><td><code>{$writer}</code></td><td>작성자</td></tr>
+      <tr><td><code>{$write_date}</code></td><td>작성일</td></tr>
+      <tr><td><code>{$hit_count}</code></td><td>조회수</td></tr>
+      <tr><td><code>{$vote}</code></td><td>추천수</td></tr>
+      <tr><td><code>{$point_count}</code></td><td>포인트</td></tr>
+      <tr><td><code>{$comment_count}</code></td><td>댓글 수</td></tr>
+      <tr><td><code>{$no}</code></td><td>게시글 번호</td></tr>
+      <tr><td><code>{$notice_icon}</code></td><td>공지 아이콘</td></tr>
+      <tr><td><code>{$fixed_icon}</code></td><td>고정글 아이콘</td></tr>
+      <tr><td><code>{$icon_re}</code></td><td>답글 아이콘</td></tr>
+      <tr><td><code>{$icon_new}</code></td><td>NEW 아이콘</td></tr>
+      <tr><td><code>{$icon_hit}</code></td><td>인기글 아이콘</td></tr>
+      <tr><td><code>{$icon_file}</code></td><td>첨부파일 아이콘</td></tr>
+      <tr><td><code>{$icon_lock}</code></td><td>비밀글 아이콘</td></tr>
+      <tr><td><code>{$member_icon}</code></td><td>회원 아이콘</td></tr>
+      <tr><td><code>{$category_name}</code></td><td>카테고리명</td></tr>
+      <tr><td><code>{$list_bg_color}</code></td><td>목록 배경색</td></tr>
+      <tr><td><code>{$list_char_color}</code></td><td>목록 글자색</td></tr>
+      <tr><td><code>{$link_color}</code></td><td>링크 색상</td></tr>
+      <tr><td><code>{$checkbox}</code></td><td>체크박스</td></tr>
+      <tr><td><code>{$param_read}</code></td><td>게시글 읽기 파라미터</td></tr>
+      <tr><td><code>{$param_write}</code></td><td>글쓰기 파라미터</td></tr>
+      <tr><td><code>{$param_prev}</code></td><td>이전 페이지</td></tr>
+      <tr><td><code>{$param_next}</code></td><td>다음 페이지</td></tr>
+      <tr><td><code>{$form.board_category}</code></td><td>카테고리 선택 폼</td></tr>
+      <tr><td><code>{$form.search_key}</code></td><td>검색 키워드 폼</td></tr>
+      <tr><td><code>{$form.search}</code></td><td>검색어 폼</td></tr>
+      <tr><td><code>{$form.search_date}</code></td><td>검색 날짜 폼</td></tr>
+      <tr><td><code>{$action_search}</code></td><td>검색 액션</td></tr>
+      <tr><td><code>{$action_category_move}</code></td><td>카테고리 이동 액션</td></tr>
+      <tr><td><code>{$action_article_move}</code></td><td>게시글 이동 액션</td></tr>
+      <tr><td><code>{$action_article_copy}</code></td><td>게시글 복사 액션</td></tr>
+      <tr><td><code>{$reply_sort}</code></td><td>댓글 정렬</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9-15. config 조건 변수 (display 용)</h3>
+  <table class="var-table">
+    <thead><tr><th>변수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td><code>{$config.is_category|display}</code></td><td>카테고리 사용 여부</td></tr>
+      <tr><td><code>{$config.use_date|display}</code></td><td>날짜 표시 여부</td></tr>
+      <tr><td><code>{$config.use_cnt|display}</code></td><td>조회수 표시 여부</td></tr>
+      <tr><td><code>{$config.is_use_recom|display}</code></td><td>추천 사용 여부</td></tr>
+      <tr><td><code>{$config.is_use_point|display}</code></td><td>포인트 사용 여부</td></tr>
+      <tr><td><code>{$write_display|display}</code></td><td>글쓰기 버튼 표시</td></tr>
+      <tr><td><code>{$category_display|display}</code></td><td>카테고리 컬럼 표시</td></tr>
+      <tr><td><code>{$date_display|display}</code></td><td>날짜 컬럼 표시</td></tr>
+      <tr><td><code>{$hit_display|display}</code></td><td>조회수 컬럼 표시</td></tr>
+      <tr><td><code>{$vote_display|display}</code></td><td>추천 컬럼 표시</td></tr>
+      <tr><td><code>{$point_display|display}</code></td><td>포인트 컬럼 표시</td></tr>
+    </tbody>
+  </table>
+
+  </div><!-- #varTables -->
+</section>
+
+<!-- ===================== 10. 모디파이어 ===================== -->
+<section id="modifiers">
+  <h2>10. 모디파이어 13종</h2>
+  <p>변수에 <code>|</code>(파이프)로 연결하여 데이터를 변환합니다. 형식: <code>{$변수명|모디파이어:파라미터}</code></p>
+
+  <table>
+    <thead><tr><th>#</th><th>이름</th><th>목적</th><th>문법</th><th>실전 예시</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><code>cut</code></td><td>문자열 자르기</td><td><code>{$v|cut:글자수,표현}</code></td><td><code>{$product_name|cut:20,...}</code></td></tr>
+      <tr><td>2</td><td><code>numberformat</code></td><td>천단위 구분</td><td><code>{$v|numberformat}</code></td><td><code>{$product_price|numberformat}</code></td></tr>
+      <tr><td>3</td><td><code>date</code></td><td>날짜 포맷</td><td><code>{$v|date:Y-m-d}</code></td><td><code>{$write_date|date:Y.m.d}</code></td></tr>
+      <tr><td>4</td><td><code>display</code></td><td>false → display:none</td><td><code>{$v|display}</code></td><td><code>class="{$soldout_icon|display}"</code></td></tr>
+      <tr><td>5</td><td><code>cover</code></td><td>문자열 감싸기</td><td><code>{$v|cover:앞,뒤}</code></td><td><code>{$subject|cover:【,】}</code></td></tr>
+      <tr><td>6</td><td><code>replace</code></td><td>문자열 치환</td><td><code>{$v|replace:찾기,바꾸기}</code></td><td><code>{$notice_icon|replace:공지,NOTICE}</code></td></tr>
+      <tr><td>7</td><td><code>strconv</code></td><td>문자열 변환</td><td><code>{$v|strconv:변경문자}</code></td><td><code>{$new_icon|strconv:NEW}</code></td></tr>
+      <tr><td>8</td><td><code>imgconv</code></td><td>이미지 태그 변환</td><td><code>{$v|imgconv:이미지경로}</code></td><td><code>{$name_or_img_tag|imgconv:'/img/a.png'}</code></td></tr>
+      <tr><td>9</td><td><code>nl2br</code></td><td>줄바꿈 → &lt;br&gt;</td><td><code>{$v|nl2br}</code></td><td><code>{$content|nl2br}</code></td></tr>
+      <tr><td>10</td><td><code>striptag</code></td><td>HTML 태그 제거</td><td><code>{$v|striptag}</code></td><td><code>{$content|striptag}</code></td></tr>
+      <tr><td>11</td><td><code>timetodate</code></td><td>타임스탬프→날짜</td><td><code>{$v|timetodate:Y-m-d}</code></td><td><code>{$write_date|timetodate:Y-m-d}</code></td></tr>
+      <tr><td>12</td><td><code>lower</code></td><td>소문자 변환</td><td><code>{$v|lower}</code></td><td><code>{$category_name|lower}</code></td></tr>
+      <tr><td>13</td><td><code>upper</code></td><td>대문자 변환</td><td><code>{$v|upper}</code></td><td><code>{$category_name|upper}</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 11. 조건문/반복문 ===================== -->
+<section id="control">
+  <h2>11. 조건문 & 반복문</h2>
+
+  <div class="grid-2">
+    <div>
+      <h3>조건부 표시</h3>
+      <h4>방법 1: display 모디파이어</h4>
+      <pre><code>&lt;!-- 값이 false일 때 display:none --&gt;
+&lt;span class="{$soldout_icon|display}"&gt;
+  품절
+&lt;/span&gt;
+
+&lt;!-- config 조건 --&gt;
+&lt;th class="{$config.use_date|display}"&gt;
+  날짜
+&lt;/th&gt;</code></pre>
+
+      <h4>방법 2: 로그인 상태 모듈</h4>
+      <pre><code>&lt;!-- 로그인 시에만 --&gt;
+&lt;div module="Layout_statelogon"&gt;
+  환영합니다, {$name}님!
+&lt;/div&gt;
+
+&lt;!-- 비로그인 시에만 --&gt;
+&lt;div module="Layout_statelogoff"&gt;
+  &lt;a href="/member/login.html"&gt;
+    로그인
+  &lt;/a&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div>
+      <h3>반복문</h3>
+      <h4>$count 반복</h4>
+      <pre><code>&lt;ul module="product_listnormal"&gt;
+  &lt;!-- $count = 5 --&gt;
+  &lt;li&gt;{$product_name}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- li가 5번 반복 --&gt;</code></pre>
+
+      <h4>$only_html 반복</h4>
+      <pre><code>&lt;ul module="Module_Action"&gt;
+  &lt;!--
+  $count = 5
+  $only_html = yes
+  --&gt;
+  &lt;li&gt;{$title}&lt;/li&gt;
+  &lt;li&gt;{$title}&lt;/li&gt;
+  &lt;li&gt;{$title}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- HTML 항목 수(3개)만큼만 반복 --&gt;</code></pre>
+
+      <div class="info">
+        <strong>반복 원리:</strong><br>
+        동일 항목: <code>$count=5</code> → 5개 생성<br>
+        다른 항목 3개 + <code>$count=5</code> → 마지막 항목이 반복되어 총 5개
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 12. Include ===================== -->
+<section id="include">
+  <h2>12. 파일 포함 & 리소스 로드</h2>
+
+  <table>
+    <thead><tr><th>유형</th><th>카페24 전용 문법</th><th>일반 HTML</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>레이아웃 지정</strong></td>
+        <td><code>&lt;!--@layout(/layout/basic/product.html)--&gt;</code></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td><strong>파일 포함</strong></td>
+        <td><code>&lt;!--@import(/layout/basic/header.html)--&gt;</code></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td><strong>CSS</strong></td>
+        <td><code>&lt;!--@css(/css/style.css)--&gt;</code></td>
+        <td><code>&lt;link rel="stylesheet" href="/design/skin/스킨명/css/style.css"&gt;</code></td>
+      </tr>
+      <tr>
+        <td><strong>JS</strong></td>
+        <td><code>&lt;!--@js(/js/script.js)--&gt;</code></td>
+        <td><code>&lt;script src="/design/skin/스킨명/js/script.js"&gt;&lt;/script&gt;</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>캐시 해결:</strong> <code>&lt;!--@css(/css/style.css?ver=20260305)--&gt;</code> 또는 <kbd>Ctrl</kbd>+<kbd>F5</kbd>
+  </div>
+</section>
+
+<!-- ===================== 13. 실전 패턴 ===================== -->
+<section id="patterns">
+  <h2>13. 실전 코드 패턴</h2>
+
+  <h3>메인 페이지 - 추천상품 그리드</h3>
+  <pre><code>&lt;div module="product_listmain_1" class="product-grid"&gt;
+  &lt;!-- $count = 8 --&gt;
+  &lt;h2&gt;{$category_title_text}&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li class="product-card"&gt;
+      &lt;a href="{$link_product_detail}"&gt;
+        &lt;div class="img-wrap"&gt;
+          &lt;img src="{$image_medium}" alt="{$product_name}"&gt;
+          &lt;span class="{$soldout_icon|display}"&gt;SOLD OUT&lt;/span&gt;
+          &lt;span class="{$new_icon|display}"&gt;NEW&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="info"&gt;
+          &lt;p class="name"&gt;{$product_name|cut:30,...}&lt;/p&gt;
+          &lt;p class="price"&gt;{$product_sale_price|numberformat}원&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+
+  <h3>상품 상세 - 기본 구조</h3>
+  <pre><code>&lt;!-- 카테고리 경로 --&gt;
+&lt;div module="product_headcategory"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="/"&gt;HOME&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="{$disp_cate_1}"&gt;&lt;a href="{$param_1}"&gt;{$name_1}&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="{$disp_cate_2}"&gt;&lt;a href="{$param_2}"&gt;{$name_2}&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;!-- 상품 이미지 --&gt;
+&lt;div module="product_image"&gt;
+  &lt;img src="{$big_img}" alt="{$name}"&gt;
+&lt;/div&gt;
+
+&lt;!-- 상품 정보 --&gt;
+&lt;div module="product_detail"&gt;
+  &lt;h2&gt;{$name}&lt;/h2&gt;
+  &lt;p class="price"&gt;{$product_sale_price|numberformat}원&lt;/p&gt;
+  &lt;p class="mileage"&gt;적립금: {$mileage_value}원&lt;/p&gt;
+  &lt;p&gt;배송: {$delivery}&lt;/p&gt;
+
+  &lt;!-- 옵션 --&gt;
+  &lt;div module="product_option"&gt;
+    &lt;select&gt;{$form.option}&lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;!-- 구매 버튼 --&gt;
+  &lt;div module="product_action"&gt;
+    &lt;button onclick="{$action_basket}"&gt;장바구니&lt;/button&gt;
+    &lt;button onclick="{$action_buy}"&gt;바로구매&lt;/button&gt;
+    &lt;button onclick="{$action_wishlist}"&gt;위시리스트&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+  <h3>게시판 목록</h3>
+  <pre><code>&lt;div module="board_title_1002"&gt;
+  &lt;h2&gt;{$board_name}&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;table module="board_list_1002"&gt;
+  &lt;!-- $count = 20 --&gt;
+  &lt;tr style="background:{$list_bg_color}"&gt;
+    &lt;td&gt;{$no}&lt;/td&gt;
+    &lt;td class="{$category_display|display}"&gt;{$category_name}&lt;/td&gt;
+    &lt;td&gt;
+      &lt;a href="{$param_read}" style="color:{$link_color}"&gt;
+        {$subject} {$icon_new} {$icon_hit}
+      &lt;/a&gt;
+      [{$comment_count}]
+    &lt;/td&gt;
+    &lt;td&gt;{$writer}&lt;/td&gt;
+    &lt;td class="{$date_display|display}"&gt;{$write_date|date:Y.m.d}&lt;/td&gt;
+    &lt;td class="{$hit_display|display}"&gt;{$hit_count}&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;div module="board_paging_1002"&gt;
+  &lt;a href="{$param_prev}"&gt;이전&lt;/a&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="{$param_num}" class="{$param_class}"&gt;{$no}&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;a href="{$param_next}"&gt;다음&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+
+  <h3>컬러칩 구현</h3>
+  <pre><code>&lt;div module="product_Colorchip"&gt;
+  &lt;span style="
+    background-color:{$color};
+    width:20px; height:20px;
+    display:inline-block;
+    border-radius:50%;
+    border:1px solid #ddd;
+  "&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+  <h3>로그인 폼</h3>
+  <pre><code>&lt;div module="member_login"&gt;
+  &lt;fieldset&gt;
+    &lt;input type="text" name="member_id" value="{$form.member_id}" placeholder="아이디"&gt;
+    &lt;input type="password" name="member_passwd" value="{$form.member_passwd}" placeholder="비밀번호"&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="save_id" value="{$form.check_save_id}"&gt; 아이디 저장&lt;/label&gt;
+    &lt;button onclick="{$action_func_login}"&gt;로그인&lt;/button&gt;
+  &lt;/fieldset&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="/member/join.html"&gt;회원가입&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/member/find_id.html"&gt;아이디 찾기&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/member/find_passwd.html"&gt;비밀번호 찾기&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+</section>
+
+<!-- ===================== 14. 팁 ===================== -->
+<section id="tips">
+  <h2>14. 실무 팁</h2>
+
+  <div class="grid-2">
+    <div>
+      <h3>필수 체크리스트</h3>
+      <ul style="padding-left:1.2rem; line-height:2">
+        <li>수정 전 <strong>스킨 백업</strong> 필수</li>
+        <li>모듈 HTML 추가 후 <strong>관리자에서 사용 설정</strong> 확인</li>
+        <li>편집창 <code>{$</code> → <kbd>Ctrl+Space</kbd>로 변수 자동완성</li>
+        <li>주석 옵션은 반드시 <strong>줄바꿈 포함</strong></li>
+        <li><code>.xans-*</code> 클래스는 자동생성 (커스텀 클래스 별도 추가)</li>
+        <li>Bootstrap 사용 시 카페24 기본 CSS 충돌 주의</li>
+      </ul>
+
+      <h3>CSS 반영 안 될 때</h3>
+      <ol style="padding-left:1.2rem; line-height:2">
+        <li>파일명에 <code>?ver=날짜</code> 추가</li>
+        <li><kbd>Ctrl+F5</kbd> 강력 새로고침</li>
+        <li>코드 삭제 → 저장 → 재입력</li>
+      </ol>
+    </div>
+    <div>
+      <h3>추천 라이브러리</h3>
+      <table>
+        <thead><tr><th>용도</th><th>추천</th></tr></thead>
+        <tbody>
+          <tr><td>슬라이더/캐러셀</td><td>Swiper.js</td></tr>
+          <tr><td>리뷰</td><td>크레마리뷰, 알파리뷰</td></tr>
+          <tr><td>모달/팝업</td><td>기본 JS 또는 jQuery</td></tr>
+        </tbody>
+      </table>
+
+      <h3>작업 순서 권장</h3>
+      <ol style="padding-left:1.2rem; line-height:2">
+        <li>시안과 유사한 <strong>기본 스킨 선택</strong></li>
+        <li><code>layout.html</code>에서 공통 레이아웃 수정</li>
+        <li>각 페이지별 모듈 배치 & 변수 수정</li>
+        <li>CSS로 디자인 커스터마이징</li>
+        <li>JS로 인터랙션 추가</li>
+        <li>모바일 반응형 확인</li>
+      </ol>
+
+      <h3>테스트 팁</h3>
+      <ul style="padding-left:1.2rem; line-height:2">
+        <li>GA 데이터 기반 PV 적은 시간대에 라이브 테스트</li>
+        <li>iOS는 Safari 개발자도구로 디버깅</li>
+        <li>임시 도메인과 실 도메인 속도 차이 확인</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 15. 참고 ===================== -->
+<section id="sources">
+  <h2>15. 공식 문서 & 참고 자료</h2>
+
+  <h3>공식 문서</h3>
+  <table>
+    <thead><tr><th>자료</th><th>링크</th></tr></thead>
+    <tbody>
+      <tr><td>스마트디자인 서포트 (메인)</td><td><a href="https://sdsupport.cafe24.com/" target="_blank">sdsupport.cafe24.com</a></td></tr>
+      <tr><td>모듈 전체 목록</td><td><a href="https://sdsupport.cafe24.com/product/list.html?cate_no=61" target="_blank">모듈 리스트</a></td></tr>
+      <tr><td>변수와 모듈 이해하기</td><td><a href="https://sdsupport.cafe24.com/board/tip/read_intro.html?no=191&board_no=5" target="_blank">공식 가이드</a></td></tr>
+      <tr><td>모디파이어 고급편</td><td><a href="https://sdsupport.cafe24.com/board/tip/read_begin.html?no=633&board_no=1002" target="_blank">공식 가이드</a></td></tr>
+      <tr><td>반복문 사용하기</td><td><a href="https://sdsupport.cafe24.com/board/tip/read_intro.html?no=635&board_no=5" target="_blank">공식 가이드</a></td></tr>
+      <tr><td>서비스 가이드 PDF</td><td><a href="https://img.echosting.cafe24.com/guide/cafe24_smartdesign_serviceguide_v2.pdf" target="_blank">PDF 다운로드</a></td></tr>
+      <tr><td>편집창 매뉴얼 PDF</td><td><a href="https://img.echosting.cafe24.com/guide/cafe24_smartdesign_editorguide.pdf" target="_blank">PDF 다운로드</a></td></tr>
+      <tr><td>개발자 센터</td><td><a href="https://developers.cafe24.com/design/front/smart" target="_blank">developers.cafe24.com</a></td></tr>
+      <tr><td>Help Center</td><td><a href="https://support.cafe24.com/hc/ko" target="_blank">support.cafe24.com</a></td></tr>
+    </tbody>
+  </table>
+
+  <h3>커뮤니티 가이드</h3>
+  <table>
+    <thead><tr><th>자료</th><th>링크</th></tr></thead>
+    <tbody>
+      <tr><td>모듈과 변수 설명 (UsingU)</td><td><a href="https://usingu.co.kr/e-commerce/cafe24%EC%84%A4%EB%AA%85%EC%84%9C/%EC%B9%B4%ED%8E%9824-%EC%8A%A4%EB%A7%88%ED%8A%B8-%EB%94%94%EC%9E%90%EC%9D%B8%EC%9D%98-%EB%AA%A8%EB%93%88%EA%B3%BC-%EB%B3%80%EC%88%98/" target="_blank">usingu.co.kr</a></td></tr>
+      <tr><td>코딩 팁 정리 (언투디자인)</td><td><a href="https://unto.kr/blog/coding-info/cafe24-coding-tip/" target="_blank">unto.kr</a></td></tr>
+      <tr><td>주석변수 사용설명서 (EOND)</td><td><a href="https://eond.com/cafe24/407222" target="_blank">eond.com</a></td></tr>
+      <tr><td>스마트 코딩 사용법 정리</td><td><a href="https://ppcle.com/blog/cafe24-smart-coding" target="_blank">ppcle.com</a></td></tr>
+      <tr><td>이미지 변수 & 사이즈 조절</td><td><a href="https://support.cafe24.com/hc/ko/articles/8469945418137" target="_blank">Help Center</a></td></tr>
+    </tbody>
+  </table>
+
+  <h3>페이지별 모듈 소스 (공식)</h3>
+  <table>
+    <thead><tr><th>페이지</th><th>링크</th></tr></thead>
+    <tbody>
+      <tr><td>메인 페이지</td><td><a href="https://sdsupport.cafe24.com/module/layout/index.html" target="_blank">layout/index.html</a></td></tr>
+      <tr><td>상품 목록</td><td><a href="https://sdsupport.cafe24.com/module/product/list.html" target="_blank">product/list.html</a></td></tr>
+      <tr><td>상품 상세</td><td><a href="https://sdsupport.cafe24.com/module/product/detail.html" target="_blank">product/detail.html</a></td></tr>
+      <tr><td>상품 상세 (모바일)</td><td><a href="https://sdsupport.cafe24.com/module-m/product/detail.html" target="_blank">product/detail.html (m)</a></td></tr>
+      <tr><td>장바구니 (모바일)</td><td><a href="https://sdsupport.cafe24.com/module-m/order/basket.html" target="_blank">order/basket.html (m)</a></td></tr>
+      <tr><td>로그인 (모바일)</td><td><a href="https://sdsupport.cafe24.com/module-m/member/login.html" target="_blank">member/login.html (m)</a></td></tr>
+      <tr><td>회원가입 (모바일)</td><td><a href="https://sdsupport.cafe24.com/module-m/member/join.html" target="_blank">member/join.html (m)</a></td></tr>
+      <tr><td>게시판 목록</td><td><a href="https://sdsupport.cafe24.com/module/board/free/list.html" target="_blank">board/free/list.html</a></td></tr>
+    </tbody>
+  </table>
+</section>
+
+</div>
+
+<footer>
+  <p>카페24 스마트디자인 전체 레퍼런스 | 웹 리서치 기반 정리</p>
+  <p>최신 정보는 <a href="https://sdsupport.cafe24.com/" target="_blank">카페24 공식 스마트디자인 서포트</a>를 참고하세요.</p>
+  <p>작성일: 2026-03-05</p>
+</footer>
+
+<script>
+function filterVars() {
+  const q = document.getElementById('varSearch').value.toLowerCase();
+  const tables = document.querySelectorAll('.var-table');
+  tables.forEach(table => {
+    const rows = table.querySelectorAll('tbody tr');
+    let visible = 0;
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      const show = !q || text.includes(q);
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    const section = table.previousElementSibling;
+    if (section && section.tagName === 'H3') {
+      section.style.display = visible === 0 && q ? 'none' : '';
+    }
+    table.style.display = visible === 0 && q ? 'none' : '';
+  });
+}
+</script>
+
+</body>
+</html>
