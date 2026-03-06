@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe24 Smart Design Skill</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-subtle: #1f6feb22;
+      --green: #3fb950;
+      --purple: #bc8cff;
+      --orange: #f0883e;
+      --code-bg: #1c2128;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .badge.modules { border-color: var(--accent); color: var(--accent); }
+    .badge.vars { border-color: var(--green); color: var(--green); }
+    .badge.mods { border-color: var(--purple); color: var(--purple); }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 28px 0 12px;
+      color: var(--text-muted);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .card .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .card .value {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .card .value.blue { color: var(--accent); }
+    .card .value.green { color: var(--green); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.orange { color: var(--orange); }
+
+    .card .desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .file-tree {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      line-height: 2;
+    }
+
+    .file-tree .dir { color: var(--accent); }
+    .file-tree .file { color: var(--text); }
+    .file-tree .comment { color: var(--text-muted); }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .install-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .install-card:hover {
+      border-color: var(--accent);
+    }
+
+    .install-card .tool-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .install-card .tool-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .install-card code {
+      display: block;
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--green);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.5;
+    }
+
+    .install-card .note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      padding-left: 12px;
+      border-left: 2px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td code {
+      background: var(--code-bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    .example-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .example-block .example-header {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .example-block pre {
+      padding: 20px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    .example-block pre .tag { color: var(--accent); }
+    .example-block pre .attr { color: var(--purple); }
+    .example-block pre .var { color: var(--green); }
+    .example-block pre .comment { color: var(--text-muted); }
+
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 50px 20px 40px; }
+      .hero h1 { font-size: 1.8rem; }
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .install-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>Cafe24 Smart Design Skill</h1>
+    <p>AI 코딩 에이전트를 위한 카페24 스마트디자인 레퍼런스</p>
+    <div class="badges">
+      <span class="badge modules">Modules</span>
+      <span class="badge vars">250+ Variables</span>
+      <span class="badge mods">13 Modifiers</span>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Overview -->
+    <section>
+      <h2><span class="icon" style="background:#1f6feb22;">📦</span> 포함된 레퍼런스</h2>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="label">Modules</div>
+          <div class="value blue">전체 모듈</div>
+          <div class="desc">레이아웃, 상품, 주문, 회원, 게시판</div>
+        </div>
+        <div class="card">
+          <div class="label">Variables</div>
+          <div class="value green">250+</div>
+          <div class="desc">도메인별 변수 레퍼런스</div>
+        </div>
+        <div class="card">
+          <div class="label">Modifiers</div>
+          <div class="value purple">13종</div>
+          <div class="desc">cut, numberformat, display 등</div>
+        </div>
+        <div class="card">
+          <div class="label">Patterns</div>
+          <div class="value orange">실전 템플릿</div>
+          <div class="desc">상품 목록, 로그인, 레이아웃</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- File Structure -->
+    <section>
+      <h2><span class="icon" style="background:#3fb95022;">📁</span> 파일 구조</h2>
+      <div class="file-tree">
+        <span class="dir">cafe24-smart-design/</span><br>
+        ├── <span class="file">SKILL.md</span> <span class="comment">── 스킬 정의 및 핵심 개념</span><br>
+        └── <span class="dir">references/</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">modules.md</span> <span class="comment">── 전체 모듈 목록 + 예제</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">variables.md</span> <span class="comment">── 250+ 변수 레퍼런스</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">modifiers-and-syntax.md</span> <span class="comment">── 수정자 + 제어 문법</span>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section>
+      <h2><span class="icon" style="background:#bc8cff22;">⚡</span> 설치 방법</h2>
+
+      <div class="install-grid">
+
+        <div class="install-card">
+          <div class="tool-name">Claude Code</div>
+          <div class="tool-desc">스킬 디렉토리에 클론하면 자동 트리거</div>
+          <code>git clone https://github.com/kimyoungwopo/cafe24-smart-design.git \
+  ~/.claude/skills/cafe24-smart-design</code>
+        </div>
+
+        <div class="install-card">
+          <div class="tool-name">Cursor</div>
+          <div class="tool-desc">.cursor/rules/ 에 레퍼런스 복사</div>
+          <code>mkdir -p .cursor/rules
+cp references/*.md .cursor/rules/
+cp SKILL.md .cursor/rules/cafe24.md</code>
+        </div>
+
+        <div class="install-card">
+          <div class="tool-name">GitHub Copilot</div>
+          <div class="tool-desc">.github/copilot-instructions.md 에 병합</div>
+          <code>mkdir -p .github
+cat SKILL.md references/*.md \
+  > .github/copilot-instructions.md</code>
+        </div>
+
+        <div class="install-card">
+          <div class="tool-name">Windsurf</div>
+          <div class="tool-desc">.windsurfrules 파일로 병합</div>
+          <code>cat SKILL.md references/*.md \
+  > .windsurfrules</code>
+        </div>
+
+        <div class="install-card">
+          <div class="tool-name">GPT / Codex</div>
+          <div class="tool-desc">Custom Instructions 또는 Knowledge 업로드</div>
+          <code>ChatGPT → Settings → Custom Instructions
+GPT Builder → Knowledge 파일 업로드
+Codex → AGENTS.md에 포함</code>
+        </div>
+
+        <div class="install-card">
+          <div class="tool-name">Gemini</div>
+          <div class="tool-desc">Gems 또는 System Instructions에 추가</div>
+          <code>Gems → Instructions에 붙여넣기
+AI Studio → System Instructions
+Gemini CLI → GEMINI.md에 포함</code>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Quick Reference -->
+    <section>
+      <h2><span class="icon" style="background:#f0883e22;">📋</span> 주요 모듈 미리보기</h2>
+
+      <table>
+        <thead>
+          <tr><th>모듈</th><th>용도</th><th>주요 변수</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Layout_LogoTop</code></td>
+            <td>쇼핑몰 로고</td>
+            <td><code>{$mall_name}</code></td>
+          </tr>
+          <tr>
+            <td><code>Layout_statelogon</code></td>
+            <td>로그인 상태 표시</td>
+            <td><code>{$name}</code>, <code>{$basket_cnt}</code></td>
+          </tr>
+          <tr>
+            <td><code>product_listnormal</code></td>
+            <td>일반 상품 목록</td>
+            <td><code>{$product_name}</code>, <code>{$product_price}</code></td>
+          </tr>
+          <tr>
+            <td><code>product_detail</code></td>
+            <td>상품 상세</td>
+            <td><code>{$name}</code>, <code>{$delivery_price}</code></td>
+          </tr>
+          <tr>
+            <td><code>Order_result</code></td>
+            <td>주문 완료</td>
+            <td><code>{$order_id}</code>, <code>{$paymethod_name}</code></td>
+          </tr>
+          <tr>
+            <td><code>board_list</code></td>
+            <td>게시글 목록</td>
+            <td><code>{$subject}</code>, <code>{$write_date}</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>코드 예시</h3>
+      <div class="example-block">
+        <div class="example-header">상품 목록 카드형</div>
+<pre><span class="tag">&lt;div</span> <span class="attr">module=</span><span class="var">"product_listnormal"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- $count = 8 --&gt;</span>
+  <span class="tag">&lt;ul</span> <span class="attr">class=</span>"product-list"<span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>
+      <span class="tag">&lt;a</span> <span class="attr">href=</span>"<span class="var">{$link_product_detail}{$param}</span>"<span class="tag">&gt;</span>
+        <span class="tag">&lt;img</span> <span class="attr">src=</span>"<span class="var">{$image_medium}</span>" <span class="attr">alt=</span>"<span class="var">{$product_name}</span>"<span class="tag">&gt;</span>
+        <span class="tag">&lt;p&gt;</span><span class="var">{$product_name|cut:25,...}</span><span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;span&gt;</span><span class="var">{$product_price|numberformat}</span>원<span class="tag">&lt;/span&gt;</span>
+      <span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;/ul&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="footer">
+    <p>
+      <a href="https://github.com/kimyoungwopo/cafe24-smart-design">GitHub</a>
+      &nbsp;·&nbsp; MIT License
+    </p>
+  </div>
+
+</body>
+</html>
