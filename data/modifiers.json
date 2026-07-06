@@ -1,0 +1,93 @@
+[
+  {
+    "name": "cut",
+    "purpose": "String truncation",
+    "syntax": "{$v|cut:length,suffix}",
+    "example": "{$product_name|cut:20,...}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "numberformat",
+    "purpose": "Thousands separator",
+    "syntax": "{$v|numberformat}",
+    "example": "{$product_price|numberformat}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "date",
+    "purpose": "Date format",
+    "syntax": "{$v|date:Y-m-d}",
+    "example": "{$write_date|date:Y.m.d}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "display",
+    "purpose": "false -> display:none",
+    "syntax": "{$v|display}",
+    "example": "class=\"{$soldout_icon|display}\"",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "cover",
+    "purpose": "Wrap string",
+    "syntax": "{$v|cover:before,after}",
+    "example": "{$subject|cover:[,]}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "replace",
+    "purpose": "String replace",
+    "syntax": "{$v|replace:find,replace}",
+    "example": "{$notice_icon|replace:notice,NOTICE}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "strconv",
+    "purpose": "String convert",
+    "syntax": "{$v|strconv:text}",
+    "example": "{$new_icon|strconv:NEW}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "imgconv",
+    "purpose": "Image tag convert",
+    "syntax": "{$v|imgconv:path}",
+    "example": "{$name_or_img_tag|imgconv:'/img/a.png'}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "nl2br",
+    "purpose": "Newline -> <br>",
+    "syntax": "{$v|nl2br}",
+    "example": "{$content|nl2br}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "striptag",
+    "purpose": "Remove HTML tags",
+    "syntax": "{$v|striptag}",
+    "example": "{$content|striptag}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "timetodate",
+    "purpose": "Timestamp -> date",
+    "syntax": "{$v|timetodate:Y-m-d}",
+    "example": "{$write_date|timetodate:Y-m-d}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "lower",
+    "purpose": "To lowercase",
+    "syntax": "{$v|lower}",
+    "example": "{$category_name|lower}",
+    "source": "references/modifiers-and-syntax.md"
+  },
+  {
+    "name": "upper",
+    "purpose": "To uppercase",
+    "syntax": "{$v|upper}",
+    "example": "{$category_name|upper}",
+    "source": "references/modifiers-and-syntax.md"
+  }
+]

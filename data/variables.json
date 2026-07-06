@@ -1,0 +1,1554 @@
+[
+  {
+    "name": "product_no",
+    "syntax": "{$product_no}",
+    "domain": "product-basic-info",
+    "description": "Product number",
+    "usage": "List, Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_name",
+    "syntax": "{$product_name}",
+    "domain": "product-basic-info",
+    "description": "Product name",
+    "usage": "List, Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_name_title",
+    "syntax": "{$product_name_title}",
+    "domain": "product-basic-info",
+    "description": "Product name (for title attr)",
+    "usage": "List",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_name_title_display",
+    "syntax": "{$product_name_title_display}",
+    "domain": "product-basic-info",
+    "description": "Product name title display toggle",
+    "usage": "List",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "name",
+    "syntax": "{$name}",
+    "domain": "product-basic-info",
+    "description": "Product name (detail page)",
+    "usage": "Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_code",
+    "syntax": "{$product_code}",
+    "domain": "product-basic-info",
+    "description": "Product code",
+    "usage": "Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_custom",
+    "syntax": "{$product_custom}",
+    "domain": "product-basic-info",
+    "description": "Custom product info",
+    "usage": "Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param",
+    "syntax": "{$param}",
+    "domain": "product-basic-info",
+    "description": "Product parameter (for links)",
+    "usage": "List",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "link_product_detail",
+    "syntax": "{$link_product_detail}",
+    "domain": "product-basic-info",
+    "description": "Product detail page link",
+    "usage": "List",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "link_product_list",
+    "syntax": "{$link_product_list}",
+    "domain": "product-basic-info",
+    "description": "Category product list link",
+    "usage": "Category",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_price",
+    "syntax": "{$product_price}",
+    "domain": "product-price",
+    "description": "Product price (retail)",
+    "usage": "List, Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_sale_price",
+    "syntax": "{$product_sale_price}",
+    "domain": "product-price",
+    "description": "Sale price (discounted)",
+    "usage": "List, Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_price_mobile",
+    "syntax": "{$product_price_mobile}",
+    "domain": "product-price",
+    "description": "Mobile product price",
+    "usage": "Mobile Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "mobile_dc_price",
+    "syntax": "{$mobile_dc_price}",
+    "domain": "product-price",
+    "description": "Mobile discount price",
+    "usage": "Mobile Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "mileage_value",
+    "syntax": "{$mileage_value}",
+    "domain": "product-price",
+    "description": "Mileage/points",
+    "usage": "Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "dc_price",
+    "syntax": "{$dc_price}",
+    "domain": "product-price",
+    "description": "Member discount price",
+    "usage": "Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "dc_min_price",
+    "syntax": "{$dc_min_price}",
+    "domain": "product-price",
+    "description": "Minimum discount price",
+    "usage": "Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "display_product_sale_price",
+    "syntax": "{$display_product_sale_price}",
+    "domain": "product-price",
+    "description": "Sale price display toggle",
+    "usage": "Cart",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "image_big",
+    "syntax": "{$image_big}",
+    "domain": "product-image",
+    "description": "Main image (large)",
+    "usage": "Product Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "big_img",
+    "syntax": "{$big_img}",
+    "domain": "product-image",
+    "description": "Detail page main image",
+    "usage": "Product Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "image_medium",
+    "syntax": "{$image_medium}",
+    "domain": "product-image",
+    "description": "List image (most used)",
+    "usage": "Product List",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "image_small",
+    "syntax": "{$image_small}",
+    "domain": "product-image",
+    "description": "Small image (thumbnail)",
+    "usage": "Detail bottom",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "image_tiny",
+    "syntax": "{$image_tiny}",
+    "domain": "product-image",
+    "description": "Tiny list image",
+    "usage": "Recently viewed",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "zoom_param",
+    "syntax": "{$zoom_param}",
+    "domain": "product-image",
+    "description": "Image zoom parameter",
+    "usage": "Detail",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "top_image1_tag",
+    "syntax": "{$top_image1_tag}",
+    "domain": "product-image",
+    "description": "Category top image 1",
+    "usage": "List",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "top_image2_tag",
+    "syntax": "{$top_image2_tag}",
+    "domain": "product-image",
+    "description": "Category top image 2",
+    "usage": "List",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "top_image3_tag",
+    "syntax": "{$top_image3_tag}",
+    "domain": "product-image",
+    "description": "Category top image 3",
+    "usage": "List",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "soldout_icon",
+    "syntax": "{$soldout_icon}",
+    "domain": "product-status/icons",
+    "description": "Sold out icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "recommend_icon",
+    "syntax": "{$recommend_icon}",
+    "domain": "product-status/icons",
+    "description": "Recommended icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "new_icon",
+    "syntax": "{$new_icon}",
+    "domain": "product-status/icons",
+    "description": "New product icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "sale_icon",
+    "syntax": "{$sale_icon}",
+    "domain": "product-status/icons",
+    "description": "Sale icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_icons",
+    "syntax": "{$product_icons}",
+    "domain": "product-status/icons",
+    "description": "Product icons collection",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "option_preview_icon",
+    "syntax": "{$option_preview_icon}",
+    "domain": "product-status/icons",
+    "description": "Option preview icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "basket_icon",
+    "syntax": "{$basket_icon}",
+    "domain": "product-status/icons",
+    "description": "Cart icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "zoom_icon",
+    "syntax": "{$zoom_icon}",
+    "domain": "product-status/icons",
+    "description": "Zoom icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "delvtype_display",
+    "syntax": "{$delvtype_display}",
+    "domain": "product-status/icons",
+    "description": "Delivery type display",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "option_name",
+    "syntax": "{$option_name}",
+    "domain": "product-options",
+    "description": "Option name (color, size, etc.)",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "option_value",
+    "syntax": "{$option_value}",
+    "domain": "product-options",
+    "description": "Option value",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "option_maxlength",
+    "syntax": "{$option_maxlength}",
+    "domain": "product-options",
+    "description": "Option max character length",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "add_option_name",
+    "syntax": "{$add_option_name}",
+    "domain": "product-options",
+    "description": "Additional option name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "file_option_name",
+    "syntax": "{$file_option_name}",
+    "domain": "product-options",
+    "description": "File option name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.option",
+    "syntax": "{$form.option}",
+    "domain": "product-options",
+    "description": "Basic option form",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.add_option",
+    "syntax": "{$form.add_option}",
+    "domain": "product-options",
+    "description": "Additional option form",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.option_value",
+    "syntax": "{$form.option_value}",
+    "domain": "product-options",
+    "description": "Option value form",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "quantity",
+    "syntax": "{$quantity}",
+    "domain": "product-options",
+    "description": "Quantity",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "color",
+    "syntax": "{$color}",
+    "domain": "product-options",
+    "description": "Color chip color value",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "option_str",
+    "syntax": "{$option_str}",
+    "domain": "product-options",
+    "description": "Option string",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_detail",
+    "syntax": "{$product_detail}",
+    "domain": "product-detail-shipping",
+    "description": "Product detail description",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "item_display",
+    "syntax": "{$item_display}",
+    "domain": "product-detail-shipping",
+    "description": "Item display toggle",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "item_title",
+    "syntax": "{$item_title}",
+    "domain": "product-detail-shipping",
+    "description": "Item title",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "item_title_display",
+    "syntax": "{$item_title_display}",
+    "domain": "product-detail-shipping",
+    "description": "Item title display toggle",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "item_content",
+    "syntax": "{$item_content}",
+    "domain": "product-detail-shipping",
+    "description": "Item content",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "supply_info",
+    "syntax": "{$supply_info}",
+    "domain": "product-detail-shipping",
+    "description": "Supplier info",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "payment_info",
+    "syntax": "{$payment_info}",
+    "domain": "product-detail-shipping",
+    "description": "Payment info",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "shipping_method",
+    "syntax": "{$shipping_method}",
+    "domain": "product-detail-shipping",
+    "description": "Shipping method",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "shipping_area",
+    "syntax": "{$shipping_area}",
+    "domain": "product-detail-shipping",
+    "description": "Shipping area",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "shipping",
+    "syntax": "{$shipping}",
+    "domain": "product-detail-shipping",
+    "description": "Shipping fee",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "delivery",
+    "syntax": "{$delivery}",
+    "domain": "product-detail-shipping",
+    "description": "Delivery info",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "delivery_price",
+    "syntax": "{$delivery_price}",
+    "domain": "product-detail-shipping",
+    "description": "Delivery price",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_buy",
+    "syntax": "{$action_buy}",
+    "domain": "product-actions-(buy/cart)",
+    "description": "Buy now",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_basket",
+    "syntax": "{$action_basket}",
+    "domain": "product-actions-(buy/cart)",
+    "description": "Add to cart",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_wishlist",
+    "syntax": "{$action_wishlist}",
+    "domain": "product-actions-(buy/cart)",
+    "description": "Add to wishlist",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_recommend",
+    "syntax": "{$action_recommend}",
+    "domain": "product-actions-(buy/cart)",
+    "description": "Recommend",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "category_name",
+    "syntax": "{$category_name}",
+    "domain": "category",
+    "description": "Category name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "category_title_text",
+    "syntax": "{$category_title_text}",
+    "domain": "category",
+    "description": "Category title text",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "category_title_text_display",
+    "syntax": "{$category_title_text_display}",
+    "domain": "category",
+    "description": "Title text display toggle",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "category_title_img",
+    "syntax": "{$category_title_img}",
+    "domain": "category",
+    "description": "Category title image",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "category_title_img_display",
+    "syntax": "{$category_title_img_display}",
+    "domain": "category",
+    "description": "Title image display toggle",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "title_text_or_image",
+    "syntax": "{$title_text_or_image}",
+    "domain": "category",
+    "description": "Text or image title",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "name_or_img_tag",
+    "syntax": "{$name_or_img_tag}",
+    "domain": "category",
+    "description": "Category name or image",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_count",
+    "syntax": "{$product_count}",
+    "domain": "category",
+    "description": "Product count in category",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_count_display",
+    "syntax": "{$product_count_display}",
+    "domain": "category",
+    "description": "Product count display toggle",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "children_icon",
+    "syntax": "{$children_icon}",
+    "domain": "category",
+    "description": "Sub-category icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "disp_cate_1",
+    "syntax": "{$disp_cate_1}",
+    "domain": "category",
+    "description": "Category depth 1~4 display",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "disp_cate_2",
+    "syntax": "{$disp_cate_2}",
+    "domain": "category",
+    "description": "Category depth 1~4 display",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "disp_cate_3",
+    "syntax": "{$disp_cate_3}",
+    "domain": "category",
+    "description": "Category depth 1~4 display",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "disp_cate_4",
+    "syntax": "{$disp_cate_4}",
+    "domain": "category",
+    "description": "Category depth 1~4 display",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "name_1",
+    "syntax": "{$name_1}",
+    "domain": "category",
+    "description": "Category depth 1~4 name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "name_2",
+    "syntax": "{$name_2}",
+    "domain": "category",
+    "description": "Category depth 1~4 name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "name_3",
+    "syntax": "{$name_3}",
+    "domain": "category",
+    "description": "Category depth 1~4 name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "name_4",
+    "syntax": "{$name_4}",
+    "domain": "category",
+    "description": "Category depth 1~4 name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_1",
+    "syntax": "{$param_1}",
+    "domain": "category",
+    "description": "Category depth 1~4 parameter",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_2",
+    "syntax": "{$param_2}",
+    "domain": "category",
+    "description": "Category depth 1~4 parameter",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_3",
+    "syntax": "{$param_3}",
+    "domain": "category",
+    "description": "Category depth 1~4 parameter",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_4",
+    "syntax": "{$param_4}",
+    "domain": "category",
+    "description": "Category depth 1~4 parameter",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_cate_no",
+    "syntax": "{$param_cate_no}",
+    "domain": "category",
+    "description": "Category number parameter",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_count",
+    "syntax": "{$total_count}",
+    "domain": "sort-pagination",
+    "description": "Total product count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_first",
+    "syntax": "{$param_first}",
+    "domain": "sort-pagination",
+    "description": "First page link",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_before",
+    "syntax": "{$param_before}",
+    "domain": "sort-pagination",
+    "description": "Previous page link",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_next",
+    "syntax": "{$param_next}",
+    "domain": "sort-pagination",
+    "description": "Next page link",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_last",
+    "syntax": "{$param_last}",
+    "domain": "sort-pagination",
+    "description": "Last page link",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_class",
+    "syntax": "{$param_class}",
+    "domain": "sort-pagination",
+    "description": "Current page class",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "no",
+    "syntax": "{$no}",
+    "domain": "sort-pagination",
+    "description": "Page number",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_num",
+    "syntax": "{$param_num}",
+    "domain": "sort-pagination",
+    "description": "Page number parameter",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "selected",
+    "syntax": "{$selected}",
+    "domain": "sort-pagination",
+    "description": "Selected state",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "value",
+    "syntax": "{$value}",
+    "domain": "sort-pagination",
+    "description": "Option value",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "title",
+    "syntax": "{$title}",
+    "domain": "sort-pagination",
+    "description": "Option title",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "basket_cnt",
+    "syntax": "{$basket_cnt}",
+    "domain": "shopping-info",
+    "description": "Cart item count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "mylikeprd_total_cnt",
+    "syntax": "{$mylikeprd_total_cnt}",
+    "domain": "shopping-info",
+    "description": "Liked products count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "interest_prd_cnt",
+    "syntax": "{$interest_prd_cnt}",
+    "domain": "shopping-info",
+    "description": "Wishlist product count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "mall_name",
+    "syntax": "{$mall_name}",
+    "domain": "shopping-info",
+    "description": "Shop name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "mobile_title",
+    "syntax": "{$mobile_title}",
+    "domain": "shopping-info",
+    "description": "Mobile title",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "basket_count",
+    "syntax": "{$basket_count}",
+    "domain": "cart-variables",
+    "description": "Cart product count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "item_total",
+    "syntax": "{$item_total}",
+    "domain": "cart-variables",
+    "description": "Item total",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "img",
+    "syntax": "{$img}",
+    "domain": "cart-variables",
+    "description": "Product image",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.quantity",
+    "syntax": "{$form.quantity}",
+    "domain": "cart-variables",
+    "description": "Quantity input",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "mileage",
+    "syntax": "{$mileage}",
+    "domain": "cart-variables",
+    "description": "Mileage",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "discount",
+    "syntax": "{$discount}",
+    "domain": "cart-variables",
+    "description": "Discount amount",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "delv_price_front",
+    "syntax": "{$delv_price_front}",
+    "domain": "cart-variables",
+    "description": "Shipping (primary currency)",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "delv_price_back",
+    "syntax": "{$delv_price_back}",
+    "domain": "cart-variables",
+    "description": "Shipping (secondary currency)",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "delv_type",
+    "syntax": "{$delv_type}",
+    "domain": "cart-variables",
+    "description": "Delivery type",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "sum_price_front",
+    "syntax": "{$sum_price_front}",
+    "domain": "cart-variables",
+    "description": "Subtotal (primary currency)",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "sum_price_back",
+    "syntax": "{$sum_price_back}",
+    "domain": "cart-variables",
+    "description": "Subtotal (secondary currency)",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_product_price",
+    "syntax": "{$total_product_price}",
+    "domain": "cart-variables",
+    "description": "Total product amount",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_option_price",
+    "syntax": "{$total_option_price}",
+    "domain": "cart-variables",
+    "description": "Total option amount",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_delv_price",
+    "syntax": "{$total_delv_price}",
+    "domain": "cart-variables",
+    "description": "Total shipping",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_sum_price_front",
+    "syntax": "{$total_sum_price_front}",
+    "domain": "cart-variables",
+    "description": "Grand total (primary currency)",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_sum_price_back",
+    "syntax": "{$total_sum_price_back}",
+    "domain": "cart-variables",
+    "description": "Grand total (secondary currency)",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_modify",
+    "syntax": "{$action_modify}",
+    "domain": "cart-variables",
+    "description": "Modify action",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_option_change",
+    "syntax": "{$action_option_change}",
+    "domain": "cart-variables",
+    "description": "Option change",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_wish_item",
+    "syntax": "{$action_wish_item}",
+    "domain": "cart-variables",
+    "description": "Move to wishlist",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_buy_item",
+    "syntax": "{$action_buy_item}",
+    "domain": "cart-variables",
+    "description": "Buy selected items",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_image",
+    "syntax": "{$product_image}",
+    "domain": "order-form-variables",
+    "description": "Product image",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_price_front",
+    "syntax": "{$product_price_front}",
+    "domain": "order-form-variables",
+    "description": "Product price",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_quantity_text",
+    "syntax": "{$product_quantity_text}",
+    "domain": "order-form-variables",
+    "description": "Quantity text",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "product_total_price_front",
+    "syntax": "{$product_total_price_front}",
+    "domain": "order-form-variables",
+    "description": "Product subtotal",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.oname",
+    "syntax": "{$form.oname}",
+    "domain": "order-form-variables",
+    "description": "Orderer name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.ozipcode1",
+    "syntax": "{$form.ozipcode1}",
+    "domain": "order-form-variables",
+    "description": "Orderer zip code",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.oaddr1",
+    "syntax": "{$form.oaddr1}",
+    "domain": "order-form-variables",
+    "description": "Orderer address",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.ophone1_",
+    "syntax": "{$form.ophone1_}",
+    "domain": "order-form-variables",
+    "description": "Orderer phone",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.oemail",
+    "syntax": "{$form.oemail}",
+    "domain": "order-form-variables",
+    "description": "Orderer email",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.rname",
+    "syntax": "{$form.rname}",
+    "domain": "order-form-variables",
+    "description": "Recipient name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.rzipcode1",
+    "syntax": "{$form.rzipcode1}",
+    "domain": "order-form-variables",
+    "description": "Recipient zip code",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.raddr1",
+    "syntax": "{$form.raddr1}",
+    "domain": "order-form-variables",
+    "description": "Recipient address",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_price",
+    "syntax": "{$total_price}",
+    "domain": "order-form-variables",
+    "description": "Total payment amount",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_order_price_front",
+    "syntax": "{$total_order_price_front}",
+    "domain": "order-form-variables",
+    "description": "Total order amount",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "coupon_cnt",
+    "syntax": "{$coupon_cnt}",
+    "domain": "order-form-variables",
+    "description": "Available coupon count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_avail_mileage",
+    "syntax": "{$total_avail_mileage}",
+    "domain": "order-form-variables",
+    "description": "Available mileage",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "total_deposit",
+    "syntax": "{$total_deposit}",
+    "domain": "order-form-variables",
+    "description": "Available deposit",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "addr_paymethod",
+    "syntax": "{$addr_paymethod}",
+    "domain": "order-form-variables",
+    "description": "Payment method",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "pname",
+    "syntax": "{$pname}",
+    "domain": "order-form-variables",
+    "description": "Bank name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "bankaccount",
+    "syntax": "{$bankaccount}",
+    "domain": "order-form-variables",
+    "description": "Account number",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "item_count",
+    "syntax": "{$item_count}",
+    "domain": "order-form-variables",
+    "description": "Item count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "price_unit_head",
+    "syntax": "{$price_unit_head}",
+    "domain": "order-form-variables",
+    "description": "Currency unit",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "mileage_name",
+    "syntax": "{$mileage_name}",
+    "domain": "order-form-variables",
+    "description": "Mileage name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "member_name",
+    "syntax": "{$member_name}",
+    "domain": "member-info",
+    "description": "Member name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "group_name",
+    "syntax": "{$group_name}",
+    "domain": "member-info",
+    "description": "Member grade name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "member_login_module_id",
+    "syntax": "{$member_login_module_id}",
+    "domain": "member-info",
+    "description": "Login module ID",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "member_login_tab_display",
+    "syntax": "{$member_login_tab_display}",
+    "domain": "member-info",
+    "description": "Login tab display",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.member_id",
+    "syntax": "{$form.member_id}",
+    "domain": "member-info",
+    "description": "Member ID input",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.member_passwd",
+    "syntax": "{$form.member_passwd}",
+    "domain": "member-info",
+    "description": "Password input",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.use_login_keeping",
+    "syntax": "{$form.use_login_keeping}",
+    "domain": "member-info",
+    "description": "Keep logged in",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.check_save_id",
+    "syntax": "{$form.check_save_id}",
+    "domain": "member-info",
+    "description": "Save ID",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_func_login",
+    "syntax": "{$action_func_login}",
+    "domain": "member-info",
+    "description": "Login action",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "returnUrl",
+    "syntax": "{$returnUrl}",
+    "domain": "member-info",
+    "description": "Return URL after login",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "display_nomember",
+    "syntax": "{$display_nomember}",
+    "domain": "member-info",
+    "description": "Non-member order display toggle",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_nomember_order",
+    "syntax": "{$action_nomember_order}",
+    "domain": "member-info",
+    "description": "Non-member order action",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "board_name",
+    "syntax": "{$board_name}",
+    "domain": "board-variables",
+    "description": "Board name",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "board_title",
+    "syntax": "{$board_title}",
+    "domain": "board-variables",
+    "description": "Board title",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "board_info",
+    "syntax": "{$board_info}",
+    "domain": "board-variables",
+    "description": "Board info",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "board_adult_icon",
+    "syntax": "{$board_adult_icon}",
+    "domain": "board-variables",
+    "description": "Adult verification icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "board_top_image",
+    "syntax": "{$board_top_image}",
+    "domain": "board-variables",
+    "description": "Board top image",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "subject",
+    "syntax": "{$subject}",
+    "domain": "board-variables",
+    "description": "Post title",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "content",
+    "syntax": "{$content}",
+    "domain": "board-variables",
+    "description": "Post content",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "writer",
+    "syntax": "{$writer}",
+    "domain": "board-variables",
+    "description": "Author",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "write_date",
+    "syntax": "{$write_date}",
+    "domain": "board-variables",
+    "description": "Write date",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "hit_count",
+    "syntax": "{$hit_count}",
+    "domain": "board-variables",
+    "description": "View count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "vote",
+    "syntax": "{$vote}",
+    "domain": "board-variables",
+    "description": "Recommendation count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "point_count",
+    "syntax": "{$point_count}",
+    "domain": "board-variables",
+    "description": "Points",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "comment_count",
+    "syntax": "{$comment_count}",
+    "domain": "board-variables",
+    "description": "Comment count",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "notice_icon",
+    "syntax": "{$notice_icon}",
+    "domain": "board-variables",
+    "description": "Notice icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "fixed_icon",
+    "syntax": "{$fixed_icon}",
+    "domain": "board-variables",
+    "description": "Pinned post icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "icon_re",
+    "syntax": "{$icon_re}",
+    "domain": "board-variables",
+    "description": "Reply icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "icon_new",
+    "syntax": "{$icon_new}",
+    "domain": "board-variables",
+    "description": "NEW icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "icon_hit",
+    "syntax": "{$icon_hit}",
+    "domain": "board-variables",
+    "description": "Hot post icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "icon_file",
+    "syntax": "{$icon_file}",
+    "domain": "board-variables",
+    "description": "Attachment icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "icon_lock",
+    "syntax": "{$icon_lock}",
+    "domain": "board-variables",
+    "description": "Secret post icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "member_icon",
+    "syntax": "{$member_icon}",
+    "domain": "board-variables",
+    "description": "Member icon",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "list_bg_color",
+    "syntax": "{$list_bg_color}",
+    "domain": "board-variables",
+    "description": "List background color",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "list_char_color",
+    "syntax": "{$list_char_color}",
+    "domain": "board-variables",
+    "description": "List text color",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "link_color",
+    "syntax": "{$link_color}",
+    "domain": "board-variables",
+    "description": "Link color",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "checkbox",
+    "syntax": "{$checkbox}",
+    "domain": "board-variables",
+    "description": "Checkbox",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_read",
+    "syntax": "{$param_read}",
+    "domain": "board-variables",
+    "description": "Read post parameter",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_write",
+    "syntax": "{$param_write}",
+    "domain": "board-variables",
+    "description": "Write post parameter",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "param_prev",
+    "syntax": "{$param_prev}",
+    "domain": "board-variables",
+    "description": "Previous page",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.board_category",
+    "syntax": "{$form.board_category}",
+    "domain": "board-variables",
+    "description": "Category select form",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.search_key",
+    "syntax": "{$form.search_key}",
+    "domain": "board-variables",
+    "description": "Search keyword form",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.search",
+    "syntax": "{$form.search}",
+    "domain": "board-variables",
+    "description": "Search text form",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "form.search_date",
+    "syntax": "{$form.search_date}",
+    "domain": "board-variables",
+    "description": "Search date form",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_search",
+    "syntax": "{$action_search}",
+    "domain": "board-variables",
+    "description": "Search action",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_category_move",
+    "syntax": "{$action_category_move}",
+    "domain": "board-variables",
+    "description": "Category move action",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_article_move",
+    "syntax": "{$action_article_move}",
+    "domain": "board-variables",
+    "description": "Article move action",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "action_article_copy",
+    "syntax": "{$action_article_copy}",
+    "domain": "board-variables",
+    "description": "Article copy action",
+    "usage": "",
+    "source": "references/variables.md"
+  },
+  {
+    "name": "reply_sort",
+    "syntax": "{$reply_sort}",
+    "domain": "board-variables",
+    "description": "Comment sort",
+    "usage": "",
+    "source": "references/variables.md"
+  }
+]

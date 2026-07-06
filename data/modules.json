@@ -1,0 +1,740 @@
+[
+  {
+    "id": "Layout_LogoTop",
+    "category": "layout-(layout.html)",
+    "description": "Shop logo (top)",
+    "variables": [
+      "mall_name",
+      "mobile_title"
+    ],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Layout_category",
+    "category": "layout-(layout.html)",
+    "description": "Product category menu",
+    "variables": [
+      "name_or_img_tag",
+      "link_product_list",
+      "param_cate_no"
+    ],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Layout_SearchHeader",
+    "category": "layout-(layout.html)",
+    "description": "Product search (top)",
+    "variables": [
+      "form.search",
+      "action_search"
+    ],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Layout_statelogon",
+    "category": "layout-(layout.html)",
+    "description": "Logged-in state display",
+    "variables": [
+      "name",
+      "basket_cnt"
+    ],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Layout_statelogoff",
+    "category": "layout-(layout.html)",
+    "description": "Logged-out state display",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Layout_shoppingInfo",
+    "category": "layout-(layout.html)",
+    "description": "Cart/mileage/wishlist info",
+    "variables": [
+      "basket_cnt",
+      "mylikeprd_total_cnt",
+      "interest_prd_cnt"
+    ],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Layout_orderBasketcount",
+    "category": "layout-(layout.html)",
+    "description": "Cart item count",
+    "variables": [
+      "basket_cnt"
+    ],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Layout_MobileAction",
+    "category": "layout-(layout.html)",
+    "description": "Mobile back navigation",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_listmain_1",
+    "category": "product",
+    "description": "Main recommended products",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_listmain_2",
+    "category": "product",
+    "description": "Main new products",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_listmain_3",
+    "category": "product",
+    "description": "Main additional category 1",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_listmain_4",
+    "category": "product",
+    "description": "Main additional category 2",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_listmain_5",
+    "category": "product",
+    "description": "Additional display (order 1)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_headcategory",
+    "category": "product",
+    "description": "Category breadcrumb + title/banner",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_displaycategory",
+    "category": "product",
+    "description": "Sub-category menu",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_children",
+    "category": "product",
+    "description": "Category child menu",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_listrecommend",
+    "category": "product",
+    "description": "Category recommended products",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_listnew",
+    "category": "product",
+    "description": "Category new products",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_listnormal",
+    "category": "product",
+    "description": "Normal product list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_ListItem",
+    "category": "product",
+    "description": "Product list display items (common)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_normalmenu",
+    "category": "product",
+    "description": "Product sort/search/compare",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_normalpaging",
+    "category": "product",
+    "description": "Product list pagination",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_FirstSelect",
+    "category": "product",
+    "description": "Conditional search first select",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_SecondSelect",
+    "category": "product",
+    "description": "Conditional search second select",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_Colorchip",
+    "category": "product",
+    "description": "Color chip preview",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_Orderby",
+    "category": "product",
+    "description": "Product sort function",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_detail",
+    "category": "product",
+    "description": "Product main info (name, price, shipping) + purchase",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_image",
+    "category": "product",
+    "description": "Product image + zoom",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Product_mobileImage",
+    "category": "product",
+    "description": "Mobile product image",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_addimage",
+    "category": "product",
+    "description": "Additional product images (thumbnails)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_option",
+    "category": "product",
+    "description": "Basic product options (color, size, etc.)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_addoption",
+    "category": "product",
+    "description": "Additional input options",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_fileoption",
+    "category": "product",
+    "description": "File upload options",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_noneoption",
+    "category": "product",
+    "description": "No-option product quantity select",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_action",
+    "category": "product",
+    "description": "Buy/cart/wishlist buttons",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_setproduct",
+    "category": "product",
+    "description": "Set product display",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_addproduct",
+    "category": "product",
+    "description": "Additional product display",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_additional",
+    "category": "product",
+    "description": "Product additional info",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_detaildesign",
+    "category": "product",
+    "description": "Product detail content (editor)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_relation",
+    "category": "product",
+    "description": "Related products area",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_relationlist",
+    "category": "product",
+    "description": "Related products list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_review",
+    "category": "product",
+    "description": "Product review list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_reviewpaging",
+    "category": "product",
+    "description": "Review pagination",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_qna",
+    "category": "product",
+    "description": "Product Q&A list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "product_qnapaging",
+    "category": "product",
+    "description": "Q&A pagination",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "coupon_productdetail",
+    "category": "product",
+    "description": "Product detail coupon display",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "myshop_benefit",
+    "category": "product",
+    "description": "Member discount/mileage info",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_TabInfo",
+    "category": "order-cart",
+    "description": "Domestic/international product tabs",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_Empty",
+    "category": "order-cart",
+    "description": "Empty cart notice",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_EmptyItem",
+    "category": "order-cart",
+    "description": "Cart product info",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_BasketOption",
+    "category": "order-cart",
+    "description": "Discount amount info",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_NormTitle",
+    "category": "order-cart",
+    "description": "Normal product title",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_NormNormal",
+    "category": "order-cart",
+    "description": "Normal product (standard shipping)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_list",
+    "category": "order-cart",
+    "description": "Product list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_optionAll",
+    "category": "order-cart",
+    "description": "All options",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_optionList",
+    "category": "order-cart",
+    "description": "Option list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_optionAddList",
+    "category": "order-cart",
+    "description": "Additional option list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_SuppNormal",
+    "category": "order-cart",
+    "description": "Normal product (supplier shipping)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_NormIndividual",
+    "category": "order-cart",
+    "description": "Normal product (individual shipping)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_NormOverseaTitle",
+    "category": "order-cart",
+    "description": "International shipping title",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_NormOversea",
+    "category": "order-cart",
+    "description": "Normal product (international shipping)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_InstTitle",
+    "category": "order-cart",
+    "description": "Interest-free product title",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_InstNormal",
+    "category": "order-cart",
+    "description": "Interest-free product (standard shipping)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_form",
+    "category": "order-cart",
+    "description": "Order form main module",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_normallist",
+    "category": "order-cart",
+    "description": "Standard shipping product list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_optionSet",
+    "category": "order-cart",
+    "description": "Product option setting",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_individuallist",
+    "category": "order-cart",
+    "description": "Individual shipping product list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_oversealist",
+    "category": "order-cart",
+    "description": "International shipping product list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_DeliveryList",
+    "category": "order-cart",
+    "description": "Delivery address selection list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "Order_ordadd",
+    "category": "order-cart",
+    "description": "Additional info input",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "member_login",
+    "category": "member",
+    "description": "Login form (full screen)",
+    "variables": [
+      "form.member_id",
+      "form.member_passwd",
+      "action_func_login",
+      "returnUrl"
+    ],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "member_join",
+    "category": "member",
+    "description": "Sign-up form",
+    "variables": [
+      "form.member_id"
+    ],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "member_modify",
+    "category": "member",
+    "description": "Profile edit",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "member_find",
+    "category": "member",
+    "description": "Find ID/password",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "MyShop_OrderHistoryNologin",
+    "category": "member",
+    "description": "Non-member order lookup",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_title_{no}",
+    "category": "board",
+    "description": "Board title/info",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_category",
+    "category": "board",
+    "description": "Board category classification",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_ReplySort",
+    "category": "board",
+    "description": "Comment sort",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_listheader_{no}",
+    "category": "board",
+    "description": "List header (title, author, date columns)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_notice_{no}",
+    "category": "board",
+    "description": "Notice list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_fixed_{no}",
+    "category": "board",
+    "description": "Pinned posts",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_list_{no}",
+    "category": "board",
+    "description": "Normal post list",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_ButtonList_{no}",
+    "category": "board",
+    "description": "Write button etc.",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_paging_{no}",
+    "category": "board",
+    "description": "Pagination",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_catemove_{no}",
+    "category": "board",
+    "description": "Category/board move",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_function_{no}",
+    "category": "board",
+    "description": "Board functions (move, copy)",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_search_{no}",
+    "category": "board",
+    "description": "Board search",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_listpackage_5",
+    "category": "board",
+    "description": "Free board package",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  },
+  {
+    "id": "board_listpackage_6",
+    "category": "board",
+    "description": "Product Q&A package",
+    "variables": [],
+    "source": "references/modules.md",
+    "status": "documented"
+  }
+]
