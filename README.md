@@ -14,8 +14,8 @@
 <p align="center">
   <a href="#빠른-시작">빠른 시작</a> ·
   <a href="#무엇이-들어있나요">구성</a> ·
-  <a href="#ai-도구별-설치">AI 도구별 설치</a> ·
-  <a href="#개발--검증">개발/검증</a>
+  <a href="#ai-도구별-사용법">AI 도구별 사용법</a> ·
+  <a href="#소스-검증">소스 검증</a>
 </p>
 
 ---
@@ -39,7 +39,8 @@
 | Variables | 상품/주문/회원/게시판 변수 레퍼런스 | `references/variables.md`, `data/variables.json` |
 | Modifiers | `cut`, `display`, `numberformat` 등 13종 | `references/modifiers-and-syntax.md`, `data/modifiers.json` |
 | Visual Docs | 검색 가능한 단일 HTML 레퍼런스 | `cafe24-modules-variables.html` |
-| Quality Gate | registry 무결성 검증과 CI | `scripts/validate-data.mjs`, `.github/workflows/check.yml` |
+| Source QA | registry 무결성 검증과 테스트 | `scripts/validate-data.mjs`, `test/validate-data.test.mjs` |
+| GitHub Pages | 공개 레퍼런스 뷰어 진입점 | `index.html`, `cafe24-modules-variables.html` |
 
 ```txt
 cafe24-smart-design/
@@ -102,11 +103,12 @@ npm run check
 | 수정자 레퍼런스 | 데이터 변환 modifier 문법 | `{$product_name|cut:20,...}`, `{$price|numberformat}` |
 | 실전 패턴 | 상품 목록, 로그인 분기, 게시판, 컬러칩 | `product_listmain_1`, `member_login` |
 | Registry | 자동화/AI 도구가 읽을 수 있는 JSON | `data/modules.json` |
-| CI Gate | Red Team / Blue Team / Readiness 체크 | GitHub Actions |
+| Source QA | JSON registry와 테스트로 문서/데이터 정합성 확인 | `npm run check` |
+| GitHub Pages | 루트 URL에서 HTML 레퍼런스 뷰어로 바로 이동 | `index.html` |
 
 ---
 
-## AI 도구별 설치
+## AI 도구별 사용법
 
 ### Claude Code
 
@@ -146,17 +148,31 @@ cat /tmp/cafe24-ref/SKILL.md /tmp/cafe24-ref/references/*.md   > .windsurfrules
 
 ### GPT / Gemini / Codex
 
-`SKILL.md`와 `references/*.md`를 프로젝트 지침 또는 knowledge/context 파일로 추가하세요.
+범용 AI 도구는 저장소 전체를 설치하기보다, 아래 파일을 프로젝트 지침 또는 knowledge/context로 넣는 방식이 가장 안정적입니다.
 
-| 도구 | 적용 위치 |
-|---|---|
+| 도구 | 추천 적용 위치 | 넣을 파일 | 사용 팁 |
+|---|---|---|---|
+| ChatGPT | Custom Instructions, GPT Knowledge, Project files | `SKILL.md`, `references/*.md` | “카페24 스마트디자인 작업 시 이 문서를 우선 참고”라고 지시 |
+| Gemini | `GEMINI.md`, Gems, AI Studio System Instructions | `SKILL.md`, `references/*.md` | 긴 작업은 `references/modules.md`와 `references/variables.md`를 분리해서 첨부 |
+| Codex | `AGENTS.md` 또는 프로젝트 컨텍스트 | `SKILL.md`, `references/*.md` | 실제 스킨 repo 루트에 `AGENTS.md`로 합쳐두면 반복 사용 편함 |
+
+Codex용 `AGENTS.md` 예시:
+
+```bash
+git clone https://github.com/kimyoungwopo/cafe24-smart-design.git /tmp/cafe24-ref
+cat /tmp/cafe24-ref/SKILL.md /tmp/cafe24-ref/references/*.md > AGENTS.md
+```
+
+---
+
+---|
 | ChatGPT | Custom Instructions 또는 GPT Knowledge |
 | Codex | `AGENTS.md` 또는 프로젝트 컨텍스트 |
 | Gemini | `GEMINI.md`, Gems, AI Studio System Instructions |
 
 ---
 
-## 개발 / 검증
+## 소스 검증
 
 이 저장소는 문서뿐 아니라 AI 도구가 재사용할 수 있는 machine-readable registry를 함께 제공합니다.
 
@@ -173,20 +189,6 @@ npm run check
 - 필수 필드 누락 여부
 - 모듈이 참조하는 변수가 registry에 존재하는지
 - modifier syntax/example이 실제 pipe modifier 이름을 포함하는지
-
----
-
-## Red Team / Blue Team 머지 게이트
-
-PR은 GitHub Actions의 세 가지 게이트를 통과해야 자동 머지될 수 있습니다.
-
-| Gate | 역할 |
-|---|---|
-| Red Team | diff sanity, hardcoded secret scan, critical audit |
-| Blue Team | `npm ci`, registry validation, tests |
-| Deployment Readiness | Red/Blue 결과를 fail-closed로 종합 |
-
-자세한 운영 방식은 [`docs/red-blue-merge-gates.md`](docs/red-blue-merge-gates.md)를 참고하세요.
 
 ---
 
