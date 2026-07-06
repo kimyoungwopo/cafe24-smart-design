@@ -114,12 +114,51 @@
     code { background: #eef2ff; color: #be185d; padding: .13rem .38rem; border-radius: 6px; font-size: .86rem; font-weight: 650; }
     pre code { background: none; color: inherit; padding: 0; font-weight: 500; }
 
-    table { width: 100%; border-collapse: separate; border-spacing: 0; margin: .9rem 0; font-size: .9rem; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: white; }
-    th { background: linear-gradient(135deg, #1d4ed8, #5b21b6); color: white; padding: .72rem .82rem; text-align: left; font-weight: 750; position: sticky; top: 58px; z-index: 2; }
-    td { padding: .62rem .82rem; border-bottom: 1px solid rgba(23,32,51,.08); vertical-align: top; }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 1rem 0;
+      font-size: .92rem;
+      overflow: hidden;
+      border: 1px solid rgba(16,24,40,.12);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(16,24,40,.04);
+    }
+    th {
+      background: #f8fafc;
+      color: #344054;
+      padding: .78rem .9rem;
+      text-align: left;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      border-bottom: 1px solid rgba(16,24,40,.12);
+      position: static;
+      z-index: 1;
+    }
+    td {
+      padding: .72rem .9rem;
+      border-bottom: 1px solid rgba(16,24,40,.08);
+      vertical-align: top;
+      color: #344054;
+      background: #fff;
+    }
+    tbody tr:nth-child(even) td { background: #fbfdff; }
     tbody tr:last-child td { border-bottom: 0; }
-    tr:hover td { background: #f8fbff; }
-    td code { font-size: .82rem; }
+    tr:hover td { background: #f1f6ff; }
+    td code {
+      display: inline-block;
+      margin: .08rem .1rem .08rem 0;
+      padding: .18rem .42rem;
+      border: 1px solid rgba(37,99,235,.14);
+      border-radius: 7px;
+      background: #f8fafc;
+      color: #1d4ed8;
+      font-size: .84rem;
+      font-weight: 750;
+    }
 
     .badge { display: inline-block; padding: .18rem .55rem; border-radius: 999px; font-size: .73rem; font-weight: 750; }
     .badge-blue { background: var(--primary-light); color: var(--primary); }
