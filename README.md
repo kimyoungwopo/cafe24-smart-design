@@ -141,6 +141,11 @@ data/
 
 `npm run validate:data`는 모듈/변수/수정자 중복, 필수 필드, 모듈-변수 참조 무결성을 검사합니다.
 
+### Red Team / Blue Team 머지 게이트
+
+PR은 GitHub Actions의 `Red Team`, `Blue Team`, `Deployment Readiness` 세 가지 게이트를 통과해야 자동 머지될 수 있습니다.
+자세한 운영 방식은 [`docs/red-blue-merge-gates.md`](docs/red-blue-merge-gates.md)를 참고하세요.
+
 ---
 
 ## 라이선스
