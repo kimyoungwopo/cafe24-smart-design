@@ -7,6 +7,7 @@
   "scripts": {
     "test": "node --test",
     "validate:data": "node scripts/validate-data.mjs",
+    "research:cafe24": "node scripts/research-cafe24-sources.mjs",
     "check": "npm run validate:data && npm test"
   },
   "keywords": [
