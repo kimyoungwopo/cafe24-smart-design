@@ -2,19 +2,18 @@
 
 -
 
-## Red Team
+## Source check
 
 - [ ] `git diff --check` passes
 - [ ] Added lines contain no obvious hardcoded secrets
-- [ ] Critical dependency audit passes
+- [ ] Critical dependency audit passes when dependency files change
 
-## Blue Team
+## Registry / tests
 
 - [ ] Dependencies install with `npm ci`
 - [ ] Registry validation passes
 - [ ] Test suite passes
 
-## Merge readiness
+## Review notes
 
-- [ ] `Deployment Readiness` GitHub Actions job is green
 - [ ] This PR is intended to merge through protected `main`, not direct push
