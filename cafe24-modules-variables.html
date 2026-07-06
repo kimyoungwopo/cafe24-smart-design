@@ -163,6 +163,41 @@
     .back-to-top { position: fixed; right: 1.25rem; bottom: 1.25rem; display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 999px; background: #111827; color: white; text-decoration: none; box-shadow: var(--shadow-md); z-index: 120; }
     .back-to-top:hover { background: var(--primary); }
 
+    .quick-lookup {
+      position: relative;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(239,246,255,.94));
+      border: 1px solid rgba(37,99,235,.16);
+      box-shadow: var(--shadow-md);
+    }
+    .quick-lookup h2 { border-bottom: 0; margin-bottom: .35rem; padding-bottom: 0; }
+    .quick-lookup h2::before { display: none; }
+    .lookup-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+    .lookup-head p { margin: .35rem 0 0; color: var(--text-light); }
+    .shortcut { display: inline-flex; align-items: center; gap: .25rem; color: #475467; font-size: .84rem; font-weight: 750; white-space: nowrap; }
+    .shortcut kbd { min-width: 1.55rem; padding: .12rem .4rem; border-radius: 7px; border: 1px solid rgba(16,24,40,.14); background: white; box-shadow: 0 1px 0 rgba(16,24,40,.10); text-align: center; }
+    .lookup-controls { display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: center; }
+    .lookup-input { width: 100%; min-height: 3.25rem; border: 1px solid rgba(37,99,235,.24); border-radius: 14px; padding: .85rem 1rem; font-size: 1rem; background: white; box-shadow: inset 0 1px 2px rgba(16,24,40,.04); }
+    .lookup-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,.12); }
+    .lookup-filters { display: inline-flex; gap: .35rem; padding: .25rem; border-radius: 999px; background: rgba(255,255,255,.72); border: 1px solid var(--border); }
+    .lookup-filter { min-height: 2.45rem; border: 0; border-radius: 999px; padding: .45rem .78rem; background: transparent; color: #475467; font-weight: 750; cursor: pointer; }
+    .lookup-filter[aria-pressed="true"] { background: #111827; color: white; }
+    .lookup-results { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin-top: .85rem; }
+    .lookup-card { text-align: left; min-height: 7.3rem; border: 1px solid rgba(16,24,40,.10); border-radius: 16px; background: rgba(255,255,255,.92); padding: .9rem; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform .16s, border-color .16s, box-shadow .16s; }
+    .lookup-card:hover { transform: translateY(-2px); border-color: rgba(37,99,235,.28); box-shadow: var(--shadow-md); }
+    .lookup-card:focus-visible { outline: 3px solid rgba(37,99,235,.30); outline-offset: 2px; }
+    .lookup-type { display: inline-flex; align-items: center; gap: .3rem; margin-bottom: .45rem; padding: .12rem .5rem; border-radius: 999px; background: #eff6ff; color: #1d4ed8; font-size: .72rem; font-weight: 850; text-transform: uppercase; letter-spacing: .04em; }
+    .lookup-card[data-kind="variable"] .lookup-type { background: #fdf2f8; color: #be185d; }
+    .lookup-card[data-kind="modifier"] .lookup-type { background: #f5f3ff; color: #6d28d9; }
+    .lookup-title { display: block; color: #101828; font-size: .98rem; font-weight: 850; letter-spacing: -.02em; overflow-wrap: anywhere; }
+    .lookup-desc { margin-top: .35rem; color: var(--text-light); font-size: .86rem; line-height: 1.45; }
+    .lookup-meta { margin-top: .55rem; color: #98a2b3; font-size: .78rem; font-weight: 700; }
+    .lookup-empty { grid-column: 1 / -1; padding: 1.1rem; border: 1px dashed rgba(16,24,40,.18); border-radius: 16px; background: rgba(255,255,255,.62); color: var(--text-light); }
+    .lookup-help { margin-top: .7rem; color: #667085; font-size: .86rem; }
+    .highlight-pulse { animation: highlightPulse 1.4s ease-out 1; }
+    @keyframes highlightPulse { 0% { box-shadow: 0 0 0 0 rgba(37,99,235,.42); } 100% { box-shadow: 0 0 0 16px rgba(37,99,235,0); } }
+
+
     footer { text-align: center; padding: 2.4rem 1rem 3rem; color: var(--text-light); font-size: .88rem; }
     footer a { color: var(--primary); text-decoration: none; font-weight: 700; }
 
@@ -177,6 +212,13 @@
       nav ul { justify-content: flex-start; flex-wrap: nowrap; padding-bottom: .15rem; }
       .container { padding: 1rem; }
       section { padding: 1.1rem; }
+      .lookup-head { display: block; }
+      .shortcut { margin-top: .7rem; }
+      .lookup-controls { grid-template-columns: 1fr; }
+      .lookup-filters { width: 100%; overflow-x: auto; border-radius: 14px; }
+      .lookup-filter { flex: 1 0 auto; }
+      .lookup-results { grid-template-columns: 1fr; }
+      .lookup-card { min-height: auto; }
       table { display: block; overflow-x: auto; white-space: nowrap; }
       th { position: static; }
     }
@@ -217,6 +259,28 @@
 </nav>
 
 <div class="container">
+
+<section id="quick-lookup" class="quick-lookup" aria-labelledby="quickLookupTitle">
+  <div class="lookup-head">
+    <div>
+      <h2 id="quickLookupTitle">빠른 찾기</h2>
+      <p>긴 문서를 스크롤하지 말고 모듈, 변수, 수정자를 바로 검색하세요.</p>
+    </div>
+    <div class="shortcut" aria-label="키보드 단축키"><kbd>⌘</kbd><kbd>K</kbd> 또는 <kbd>/</kbd></div>
+  </div>
+  <div class="lookup-controls">
+    <input id="quickSearch" class="lookup-input" type="search" placeholder="예: product_listnormal, product_name, display, 장바구니" autocomplete="off">
+    <div class="lookup-filters" role="group" aria-label="검색 유형">
+      <button class="lookup-filter" type="button" data-filter="all" aria-pressed="true">전체</button>
+      <button class="lookup-filter" type="button" data-filter="module" aria-pressed="false">모듈</button>
+      <button class="lookup-filter" type="button" data-filter="variable" aria-pressed="false">변수</button>
+      <button class="lookup-filter" type="button" data-filter="modifier" aria-pressed="false">수정자</button>
+    </div>
+  </div>
+  <div id="quickResults" class="lookup-results" aria-live="polite"></div>
+  <p class="lookup-help">결과 카드를 누르면 원문 표 위치로 이동합니다. 변수 표의 세부 검색은 아래 “변수 전체” 섹션에서도 사용할 수 있습니다.</p>
+</section>
+
 
 <!-- ===================== 1. 개요 ===================== -->
 <section id="overview">
@@ -1265,6 +1329,117 @@
 <a class="back-to-top" href="#top" aria-label="맨 위로 이동">↑</a>
 
 <script>
+
+const lookupState = { filter: 'all', index: [] };
+
+function cleanText(value) {
+  return (value || '').replace(/\s+/g, ' ').trim();
+}
+
+function inferKind(sectionId) {
+  if ((sectionId || '').includes('variables')) return 'variable';
+  if ((sectionId || '').includes('modifiers')) return 'modifier';
+  return 'module';
+}
+
+function buildLookupIndex() {
+  const searchableSections = [
+    '#layout-modules', '#product-modules', '#order-modules', '#member-modules', '#board-modules', '#variables-all', '#modifiers'
+  ].join(' table tbody tr, ') + ' table tbody tr';
+  const rows = Array.from(document.querySelectorAll(searchableSections));
+  lookupState.index = rows.map((row, index) => {
+    const section = row.closest('section');
+    const sectionId = section?.id || '';
+    const h2 = cleanText(section?.querySelector('h2')?.textContent);
+    const previousHeading = (() => {
+      let node = row.closest('table')?.previousElementSibling;
+      while (node && !/^H[23]$/.test(node.tagName)) node = node.previousElementSibling;
+      return cleanText(node?.textContent);
+    })();
+    const cells = Array.from(row.children).map((cell) => cleanText(cell.textContent));
+    const firstCode = cleanText(row.querySelector('code')?.textContent || cells[0]);
+    const kind = sectionId === 'variables-all' ? 'variable' : sectionId === 'modifiers' ? 'modifier' : inferKind(sectionId);
+    return {
+      id: `lookup-row-${index}`,
+      kind,
+      title: firstCode || cells[0] || h2,
+      description: cells[1] || cells[2] || '',
+      meta: [h2, previousHeading].filter(Boolean).join(' · '),
+      haystack: [firstCode, ...cells, h2, previousHeading].join(' ').toLowerCase(),
+      row
+    };
+  }).filter((item) => item.title && !['옵션', '모듈 아이디', '변수'].includes(item.title));
+}
+
+function renderLookup() {
+  const input = document.getElementById('quickSearch');
+  const results = document.getElementById('quickResults');
+  if (!input || !results) return;
+  const q = input.value.toLowerCase().trim();
+  const filtered = lookupState.index
+    .filter((item) => lookupState.filter === 'all' || item.kind === lookupState.filter)
+    .filter((item) => !q || item.haystack.includes(q))
+    .slice(0, 12);
+  if (!filtered.length) {
+    results.innerHTML = '<div class="lookup-empty">검색 결과가 없습니다. 예: <code>product</code>, <code>price</code>, <code>display</code>, <code>장바구니</code></div>';
+    return;
+  }
+  results.innerHTML = filtered.map((item, i) => `
+    <button class="lookup-card" type="button" data-index="${lookupState.index.indexOf(item)}" data-kind="${item.kind}">
+      <span class="lookup-type">${item.kind}</span>
+      <span class="lookup-title">${item.title}</span>
+      <span class="lookup-desc">${item.description || '상세 설명은 원문 표에서 확인하세요.'}</span>
+      <span class="lookup-meta">${item.meta}</span>
+    </button>
+  `).join('');
+}
+
+function initLookup() {
+  buildLookupIndex();
+  const input = document.getElementById('quickSearch');
+  const results = document.getElementById('quickResults');
+  const filters = Array.from(document.querySelectorAll('.lookup-filter'));
+  if (!input || !results) return;
+  input.addEventListener('input', renderLookup);
+  filters.forEach((button) => {
+    button.addEventListener('click', () => {
+      lookupState.filter = button.dataset.filter;
+      filters.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      renderLookup();
+      input.focus();
+    });
+  });
+  results.addEventListener('click', (event) => {
+    const card = event.target.closest('.lookup-card');
+    if (!card) return;
+    const item = lookupState.index[Number(card.dataset.index)];
+    if (!item) return;
+    item.row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    item.row.classList.remove('highlight-pulse');
+    void item.row.offsetWidth;
+    item.row.classList.add('highlight-pulse');
+  });
+  window.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
+    const editable = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
+    if ((event.metaKey || event.ctrlKey) && key === 'k') {
+      event.preventDefault();
+      input.focus();
+      input.select();
+    } else if (event.key === '/' && !editable) {
+      event.preventDefault();
+      input.focus();
+    }
+  });
+  renderLookup();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLookup);
+} else {
+  initLookup();
+}
+
 function filterVars() {
   const input = document.getElementById('varSearch');
   const result = document.getElementById('searchResult');
