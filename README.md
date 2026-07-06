@@ -192,13 +192,36 @@ npm run check
 
 ---
 
+## 주기적 소스 리서치
+
+공식 카페24 스마트디자인 문서와 주요 모듈 소스 페이지는 GitHub Actions로 주 1회 확인합니다.
+
+| 항목 | 내용 |
+|---|---|
+| Workflow | `.github/workflows/cafe24-source-watch.yml` |
+| Schedule | 매주 월요일 09:00 KST |
+| Manual run | GitHub Actions의 `Cafe24 Source Watch` → `Run workflow` |
+| Watch script | `scripts/research-cafe24-sources.mjs` |
+| Snapshot | `data/source-snapshots.json` |
+| Report | `research/cafe24-source-watch.md` |
+| Upload branch | `research/cafe24-source-watch` |
+
+동작 방식:
+
+1. 공식/참고 소스 URL을 가져와 텍스트를 정규화합니다.
+2. 이전 hash와 비교해 새 정보나 변경이 있는지 확인합니다.
+3. 변경이 있으면 `research/cafe24-source-watch` 브랜치에 report/snapshot을 올리고 PR을 생성하거나 갱신합니다.
+4. registry와 문서 본문은 자동으로 추측 수정하지 않습니다. 변경된 공식 소스를 사람이 확인한 뒤 `data/*.json`, `references/*.md`, `cafe24-modules-variables.html`에 반영합니다.
+
+---
+
 ## 다음 개발 아이디어
 
 - `cafe24-smart-design-check` CLI: HTML 스킨 파일에서 잘못된 module/variable/modifier 검사
 - VS Code / Cursor snippets 자동 생성
 - `data/*.json`에서 Markdown/HTML 문서 자동 생성
 - 공식 문서 source URL과 verifiedAt 필드 강화
-- GitHub Pages 기반 검색형 docs site
+- 소스 변경 PR을 기반으로 registry 업데이트 PR 자동 초안 생성
 
 ---
 

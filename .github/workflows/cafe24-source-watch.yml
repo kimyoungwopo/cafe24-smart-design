@@ -1,0 +1,61 @@
+name: Cafe24 Source Watch
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Monday 09:00 KST (Sunday 00:00 UTC)
+    - cron: '0 0 * * 0'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  research:
+    name: Research Cafe24 source updates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Research Cafe24 official sources
+        run: npm run research:cafe24
+      - name: Validate generated state
+        run: npm run check
+      - name: Prepare pull request when changes exist
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/source-snapshots.json research/cafe24-source-watch.md; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No source-watch changes to publish."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- data/source-snapshots.json research/cafe24-source-watch.md
+          fi
+      - name: Create or update research branch PR
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: research/cafe24-source-watch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$BRANCH_NAME"
+          git add data/source-snapshots.json research/cafe24-source-watch.md
+          git commit -m "research: update Cafe24 source watch" || exit 0
+          git push --force-with-lease origin "$BRANCH_NAME"
+          if gh pr view "$BRANCH_NAME" --base main >/dev/null 2>&1; then
+            gh pr edit "$BRANCH_NAME" --base main --title "research: update Cafe24 source watch" --body-file research/cafe24-source-watch.md
+          else
+            gh pr create --base main --head "$BRANCH_NAME" --title "research: update Cafe24 source watch" --body-file research/cafe24-source-watch.md
+          fi
