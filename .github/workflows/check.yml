@@ -1,0 +1,74 @@
+name: Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  red-team:
+    name: Red Team
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Whitespace and patch sanity
+        run: git diff --check origin/main...HEAD || git diff --check HEAD~1..HEAD
+      - name: Scan added lines for hardcoded secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            RANGE="origin/main...HEAD"
+          else
+            RANGE="HEAD~1..HEAD"
+          fi
+          git diff --unified=0 "$RANGE" > /tmp/changed.diff || true
+          node <<'NODE'
+          const { readFileSync } = require('node:fs');
+          const diff = readFileSync('/tmp/changed.diff', 'utf8');
+          const secretPattern = /^(?!\+\+\+)\+.*\b(api[_-]?key|secret|password|passwd|token|access[_-]?key|private[_-]?key)\b\s*[:=]\s*['"][^'"]{8,}['"]/i;
+          const matches = diff.split('\n').filter((line) => secretPattern.test(line));
+          if (matches.length) {
+            console.error('Potential hardcoded secret(s) found in added lines:');
+            for (const line of matches) console.error(line);
+            process.exit(1);
+          }
+          console.log('No obvious hardcoded secrets in added lines.');
+          NODE
+      - name: Critical dependency audit
+        run: npm audit --audit-level=critical
+
+  blue-team:
+    name: Blue Team
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Registry and test gate
+        run: npm run check
+
+  deployment-readiness:
+    name: Deployment Readiness
+    runs-on: ubuntu-latest
+    needs: [red-team, blue-team]
+    if: always()
+    steps:
+      - name: Fail closed unless Red and Blue teams passed
+        run: |
+          if [ "${{ needs.red-team.result }}" != "success" ] || [ "${{ needs.blue-team.result }}" != "success" ]; then
+            echo "Red Team result: ${{ needs.red-team.result }}"
+            echo "Blue Team result: ${{ needs.blue-team.result }}"
+            exit 1
+          fi
+          echo "Red Team and Blue Team gates passed. Ready to merge."

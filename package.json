@@ -1,0 +1,34 @@
+{
+  "name": "cafe24-smart-design",
+  "version": "0.1.0",
+  "description": "Cafe24 Smart Design reference, registry, and validation tools for AI-assisted storefront work.",
+  "type": "module",
+  "private": false,
+  "scripts": {
+    "test": "node --test",
+    "validate:data": "node scripts/validate-data.mjs",
+    "check": "npm run validate:data && npm test"
+  },
+  "keywords": [
+    "cafe24",
+    "smart-design",
+    "ecommerce",
+    "frontend",
+    "ai-agents",
+    "cursor",
+    "claude-code",
+    "copilot"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimyoungwopo/cafe24-smart-design.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kimyoungwopo/cafe24-smart-design/issues"
+  },
+  "homepage": "https://github.com/kimyoungwopo/cafe24-smart-design#readme",
+  "engines": {
+    "node": ">=20"
+  }
+}
