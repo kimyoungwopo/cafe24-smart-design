@@ -15,7 +15,8 @@
   <a href="#빠른-시작">빠른 시작</a> ·
   <a href="#무엇이-들어있나요">구성</a> ·
   <a href="#ai-도구별-사용법">AI 도구별 사용법</a> ·
-  <a href="#소스-검증">소스 검증</a>
+  <a href="#소스-검증">소스 검증</a> ·
+  <a href="https://kimyoungwopo.github.io/cafe24-smart-design">레퍼런스</a> 
 </p>
 
 ---
