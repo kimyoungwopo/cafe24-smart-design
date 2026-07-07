@@ -177,6 +177,16 @@
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .pattern-card { margin: 1rem 0 1.35rem; padding: 1rem; border: 1px solid rgba(37,99,235,.12); border-radius: 16px; background: linear-gradient(180deg, #fff, #f8fbff); box-shadow: var(--shadow-sm); }
+    .pattern-card h3 { margin-top: 0; display: flex; align-items: center; gap: .5rem; }
+    .pattern-card h3 .badge { flex: 0 0 auto; }
+    .pattern-note { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .75rem; margin: .85rem 0; }
+    .pattern-note > div { padding: .8rem .9rem; border: 1px solid rgba(16,24,40,.10); border-radius: 12px; background: rgba(255,255,255,.72); }
+    .pattern-note strong { display: block; margin-bottom: .35rem; color: #101828; }
+    .checklist-table td:first-child { width: 8.5rem; font-weight: 800; color: #101828; white-space: nowrap; }
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    .do-dont > div { border: 1px solid rgba(16,24,40,.10); border-radius: 14px; padding: .95rem; background: #fff; }
+    .do-dont h3 { margin-top: 0; }
 
     .folder-tree { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: linear-gradient(180deg, #101828, #111827); color: var(--code-text); padding: 1.2rem; border-radius: 14px; line-height: 1.65; font-size: .88rem; white-space: pre; overflow-x: auto; }
     .folder-tree .f { color: #93c5fd; }
@@ -245,8 +255,11 @@
 
     @media (max-width: 860px) {
       header { padding: 3rem 1rem 2.4rem; }
+      body { overflow-x: hidden; }
+      html { overflow-x: hidden; }
       header .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .grid-2, .grid-3, .pattern-note, .do-dont { grid-template-columns: 1fr; }
+      .pattern-card h3 { align-items: flex-start; flex-direction: column; }
       nav { overflow-x: auto; }
       nav ul { justify-content: flex-start; flex-wrap: nowrap; padding-bottom: .15rem; }
       .container { padding: 1rem; }
@@ -259,6 +272,9 @@
       .lookup-results { grid-template-columns: 1fr; }
       .lookup-card { min-height: auto; }
       table { display: block; overflow-x: auto; white-space: nowrap; }
+      #tips table { display: table; table-layout: fixed; white-space: normal; }
+      #tips th, #tips td { padding: .65rem .55rem; overflow-wrap: anywhere; word-break: keep-all; }
+      #tips .checklist-table td:first-child { width: 5.2rem; white-space: normal; }
       th { position: static; }
     }
   </style>
@@ -1141,172 +1157,212 @@
 <!-- ===================== 13. 실전 패턴 ===================== -->
 <section id="patterns">
   <h2>13. 실전 코드 패턴</h2>
+  <p>아래 패턴은 단순 예제가 아니라 실제 스킨 수정 전에 AI나 작업자가 먼저 확인해야 하는 단위입니다. <strong>모듈 범위, 반복 영역, display 클래스, 옵션 주석</strong>을 같이 넣어야 다른 페이지로 영향이 새는 일을 줄일 수 있습니다.</p>
 
-  <h3>메인 페이지 - 추천상품 그리드</h3>
-  <pre><code>&lt;div module="product_listmain_1" class="product-grid"&gt;
+  <div class="pattern-card">
+    <h3><span class="badge badge-blue">LIST</span> 상품 리스트 카드 - 배지와 품절 상태까지 함께 처리</h3>
+    <div class="pattern-note">
+      <div><strong>언제 쓰나</strong> 메인 추천상품, 카테고리 상품목록, 기획전 카드 UI를 만들 때</div>
+      <div><strong>확인 포인트</strong> <code>$count</code>, 이미지 변수, 판매가 변수, <code>|display</code> 처리</div>
+    </div>
+    <pre><code>&lt;div module="product_listmain_1" class="product-grid"&gt;
   &lt;!-- $count = 8 --&gt;
   &lt;h2&gt;{$category_title_text}&lt;/h2&gt;
-  &lt;ul&gt;
-    &lt;li class="product-card"&gt;
+  &lt;ul class="items"&gt;
+    &lt;li class="product-card" data-product-no="{$product_no}"&gt;
       &lt;a href="{$link_product_detail}"&gt;
-        &lt;div class="img-wrap"&gt;
-          &lt;img src="{$image_medium}" alt="{$product_name}"&gt;
-          &lt;span class="{$soldout_icon|display}"&gt;SOLD OUT&lt;/span&gt;
-          &lt;span class="{$new_icon|display}"&gt;NEW&lt;/span&gt;
+        &lt;div class="thumb"&gt;
+          &lt;img src="{$image_medium}" alt="{$product_name}" loading="lazy"&gt;
+          &lt;span class="badge-new {$new_icon|display}"&gt;NEW&lt;/span&gt;
+          &lt;span class="badge-soldout {$soldout_icon|display}"&gt;SOLD OUT&lt;/span&gt;
         &lt;/div&gt;
-        &lt;div class="info"&gt;
-          &lt;p class="name"&gt;{$product_name|cut:30,...}&lt;/p&gt;
-          &lt;p class="price"&gt;{$product_sale_price|numberformat}원&lt;/p&gt;
-        &lt;/div&gt;
+        &lt;strong class="name"&gt;{$product_name|cut:32,...}&lt;/strong&gt;
+        &lt;span class="price"&gt;{$product_sale_price|numberformat}원&lt;/span&gt;
       &lt;/a&gt;
     &lt;/li&gt;
   &lt;/ul&gt;
 &lt;/div&gt;</code></pre>
+    <div class="tip"><strong>실전 팁:</strong> 리스트 계열 모듈은 같은 마크업이 반복됩니다. AI에게 수정시킬 때는 “첫 번째 카드만”이 아니라 “반복되는 <code>&lt;li&gt;</code> 안에서만 바꿔라”라고 범위를 고정하세요.</div>
+  </div>
 
-  <h3>상품 상세 - 기본 구조</h3>
-  <pre><code>&lt;!-- 카테고리 경로 --&gt;
-&lt;div module="product_headcategory"&gt;
-  &lt;ol&gt;
-    &lt;li&gt;&lt;a href="/"&gt;HOME&lt;/a&gt;&lt;/li&gt;
-    &lt;li class="{$disp_cate_1}"&gt;&lt;a href="{$param_1}"&gt;{$name_1}&lt;/a&gt;&lt;/li&gt;
-    &lt;li class="{$disp_cate_2}"&gt;&lt;a href="{$param_2}"&gt;{$name_2}&lt;/a&gt;&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;!-- 상품 이미지 --&gt;
-&lt;div module="product_image"&gt;
-  &lt;img src="{$big_img}" alt="{$name}"&gt;
-&lt;/div&gt;
-
-&lt;!-- 상품 정보 --&gt;
-&lt;div module="product_detail"&gt;
-  &lt;h2&gt;{$name}&lt;/h2&gt;
-  &lt;p class="price"&gt;{$product_sale_price|numberformat}원&lt;/p&gt;
-  &lt;p class="mileage"&gt;적립금: {$mileage_value}원&lt;/p&gt;
-  &lt;p&gt;배송: {$delivery}&lt;/p&gt;
-
-  &lt;!-- 옵션 --&gt;
-  &lt;div module="product_option"&gt;
-    &lt;select&gt;{$form.option}&lt;/select&gt;
+  <div class="pattern-card">
+    <h3><span class="badge badge-purple">DETAIL</span> 상품 상세 - 옵션/수량/구매 액션 분리</h3>
+    <div class="pattern-note">
+      <div><strong>언제 쓰나</strong> 상세 페이지에서 가격, 옵션, 장바구니/구매 버튼 영역을 재배치할 때</div>
+      <div><strong>확인 포인트</strong> <code>product_detail</code>, <code>product_option</code>, <code>product_action</code>을 섞지 않기</div>
+    </div>
+    <pre><code>&lt;section class="detail-layout"&gt;
+  &lt;div module="product_image" class="detail-media"&gt;
+    &lt;img src="{$big_img}" alt="{$name}"&gt;
   &lt;/div&gt;
 
-  &lt;!-- 구매 버튼 --&gt;
-  &lt;div module="product_action"&gt;
-    &lt;button onclick="{$action_basket}"&gt;장바구니&lt;/button&gt;
-    &lt;button onclick="{$action_buy}"&gt;바로구매&lt;/button&gt;
-    &lt;button onclick="{$action_wishlist}"&gt;위시리스트&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+  &lt;div class="detail-info"&gt;
+    &lt;div module="product_detail"&gt;
+      &lt;p class="path"&gt;{$cate_name}&lt;/p&gt;
+      &lt;h1&gt;{$name}&lt;/h1&gt;
+      &lt;p class="summary {$summary_desc|display}"&gt;{$summary_desc}&lt;/p&gt;
+      &lt;p class="price"&gt;{$product_sale_price|numberformat}원&lt;/p&gt;
+      &lt;p class="delivery"&gt;배송비: {$delivery}&lt;/p&gt;
+    &lt;/div&gt;
 
-  <h3>게시판 목록</h3>
-  <pre><code>&lt;div module="board_title_1002"&gt;
-  &lt;h2&gt;{$board_name}&lt;/h2&gt;
+    &lt;div module="product_option" class="option-box"&gt;
+      &lt;!-- 옵션 UI는 카페24가 생성하는 form 구조를 유지 --&gt;
+      {$form.option}
+    &lt;/div&gt;
+
+    &lt;div module="product_action" class="action-row"&gt;
+      &lt;button type="button" onclick="{$action_basket}"&gt;장바구니&lt;/button&gt;
+      &lt;button type="button" onclick="{$action_buy}"&gt;바로구매&lt;/button&gt;
+      &lt;button type="button" onclick="{$action_wishlist}"&gt;관심상품&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    <div class="warn"><strong>주의:</strong> 옵션 영역은 단순 HTML이 아니라 카페24가 주문 로직과 연결합니다. 디자인을 바꿀 때 <code>{$form.option}</code>, <code>{$action_buy}</code> 같은 액션 변수는 임의로 지우지 마세요.</div>
+  </div>
+
+  <div class="pattern-card">
+    <h3><span class="badge badge-green">BOARD</span> 게시판 목록 - 표시 옵션과 빈 상태까지 같이 설계</h3>
+    <div class="pattern-note">
+      <div><strong>언제 쓰나</strong> 공지사항, FAQ, 후기 게시판 목록을 커스텀할 때</div>
+      <div><strong>확인 포인트</strong> 게시판 번호, 카테고리 표시 여부, 날짜/조회수 표시 class</div>
+    </div>
+    <pre><code>&lt;div module="board_title_1002" class="board-head"&gt;
+  &lt;h1&gt;{$board_name}&lt;/h1&gt;
+  &lt;p class="{$board_info|display}"&gt;{$board_info}&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;table module="board_list_1002"&gt;
+&lt;table module="board_list_1002" class="board-table"&gt;
   &lt;!-- $count = 20 --&gt;
-  &lt;tr style="background:{$list_bg_color}"&gt;
-    &lt;td&gt;{$no}&lt;/td&gt;
-    &lt;td class="{$category_display|display}"&gt;{$category_name}&lt;/td&gt;
-    &lt;td&gt;
+  &lt;tr&gt;
+    &lt;td class="no"&gt;{$no}&lt;/td&gt;
+    &lt;td class="category {$category_display|display}"&gt;{$category_name}&lt;/td&gt;
+    &lt;td class="subject"&gt;
       &lt;a href="{$param_read}" style="color:{$link_color}"&gt;
-        {$subject} {$icon_new} {$icon_hit}
+        {$subject} {$icon_new} {$icon_hit} {$icon_file}
       &lt;/a&gt;
-      [{$comment_count}]
+      &lt;span class="comment {$comment_count|display}"&gt;[{$comment_count}]&lt;/span&gt;
     &lt;/td&gt;
-    &lt;td&gt;{$writer}&lt;/td&gt;
-    &lt;td class="{$date_display|display}"&gt;{$write_date|date:Y.m.d}&lt;/td&gt;
-    &lt;td class="{$hit_display|display}"&gt;{$hit_count}&lt;/td&gt;
+    &lt;td class="writer"&gt;{$writer}&lt;/td&gt;
+    &lt;td class="date {$date_display|display}"&gt;{$write_date|date:Y.m.d}&lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
 
-&lt;div module="board_paging_1002"&gt;
-  &lt;a href="{$param_prev}"&gt;이전&lt;/a&gt;
-  &lt;ol&gt;
-    &lt;li&gt;&lt;a href="{$param_num}" class="{$param_class}"&gt;{$no}&lt;/a&gt;&lt;/li&gt;
-  &lt;/ol&gt;
-  &lt;a href="{$param_next}"&gt;다음&lt;/a&gt;
+&lt;div module="board_empty_1002" class="empty"&gt;
+  등록된 게시글이 없습니다.
 &lt;/div&gt;</code></pre>
+    <div class="info"><strong>AI 작업 포인트:</strong> 게시판 번호 <code>1002</code>는 예시입니다. 실제 스킨의 공지/FAQ/후기 게시판 번호를 먼저 확인한 뒤 모듈명을 바꿔야 합니다.</div>
+  </div>
 
-  <h3>컬러칩 구현</h3>
-  <pre><code>&lt;div module="product_Colorchip"&gt;
-  &lt;span style="
-    background-color:{$color};
-    width:20px; height:20px;
-    display:inline-block;
-    border-radius:50%;
-    border:1px solid #ddd;
-  "&gt;&lt;/span&gt;
-&lt;/div&gt;</code></pre>
+  <div class="pattern-card">
+    <h3><span class="badge badge-orange">LAYOUT</span> 공통 헤더/푸터 - include와 페이지별 활성 상태</h3>
+    <div class="pattern-note">
+      <div><strong>언제 쓰나</strong> 모든 페이지에 들어가는 네비게이션, 배너, 푸터를 정리할 때</div>
+      <div><strong>확인 포인트</strong> include 경로, 모바일 include 분리, 현재 메뉴 active 처리</div>
+    </div>
+    <pre><code>&lt;!-- layout/basic/layout.html --&gt;
+&lt;!--@import(/layout/basic/header.html)--&gt;
+&lt;main id="contents" data-page="{$filename}"&gt;
+  {$contents}
+&lt;/main&gt;
+&lt;!--@import(/layout/basic/footer.html)--&gt;
 
-  <h3>로그인 폼</h3>
-  <pre><code>&lt;div module="member_login"&gt;
-  &lt;fieldset&gt;
-    &lt;input type="text" name="member_id" value="{$form.member_id}" placeholder="아이디"&gt;
-    &lt;input type="password" name="member_passwd" value="{$form.member_passwd}" placeholder="비밀번호"&gt;
-    &lt;label&gt;&lt;input type="checkbox" name="save_id" value="{$form.check_save_id}"&gt; 아이디 저장&lt;/label&gt;
-    &lt;button onclick="{$action_func_login}"&gt;로그인&lt;/button&gt;
-  &lt;/fieldset&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href="/member/join.html"&gt;회원가입&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="/member/find_id.html"&gt;아이디 찾기&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="/member/find_passwd.html"&gt;비밀번호 찾기&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;</code></pre>
+&lt;!-- layout/basic/header.html --&gt;
+&lt;nav class="site-nav" module="Layout_statelogoff"&gt;
+  &lt;a href="/" class="home"&gt;홈&lt;/a&gt;
+  &lt;a href="/product/list.html?cate_no=24"&gt;신상품&lt;/a&gt;
+  &lt;a href="/board/free/list.html?board_no=1"&gt;공지사항&lt;/a&gt;
+  &lt;a href="/member/login.html"&gt;로그인&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;nav class="site-nav" module="Layout_stateLogon"&gt;
+  &lt;a href="/myshop/index.html"&gt;마이쇼핑&lt;/a&gt;
+  &lt;a href="/order/basket.html"&gt;장바구니&lt;/a&gt;
+  &lt;a href="{$action_logout}"&gt;로그아웃&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+    <div class="tip"><strong>실전 팁:</strong> 헤더를 고칠 때는 PC와 모바일 include가 나뉘어 있는지 먼저 확인하세요. PC만 바꾸고 모바일 헤더가 그대로 남는 경우가 많습니다.</div>
+  </div>
+
+  <div class="pattern-card">
+    <h3><span class="badge badge-red">GUARD</span> AI 수정 요청용 안전 프롬프트</h3>
+    <p>AI 에이전트에게 카페24 스킨을 맡길 때는 “예쁘게 고쳐줘”보다 아래처럼 <strong>수정 범위와 금지사항</strong>을 같이 줘야 합니다.</p>
+    <pre><code>카페24 스마트디자인 스킨을 수정한다.
+범위: /product/list.html 의 product_listnormal 모듈 내부만 수정한다.
+목표: 상품 카드의 이미지, 상품명, 가격, 품절 배지 레이아웃을 정리한다.
+유지: module 속성, {$...} 변수, &lt;!-- $count --&gt; 옵션, onclick 액션 변수는 삭제하지 않는다.
+금지: 주문/결제/회원 관련 액션 변경, 다른 페이지 include 수정, 임의 변수 생성.
+검증: PC 1440px, 모바일 390px에서 상품 1개/여러 개/품절 상태를 확인한다.</code></pre>
+  </div>
 </section>
 
 <!-- ===================== 14. 팁 ===================== -->
 <section id="tips">
   <h2>14. 실무 팁</h2>
 
-  <div class="grid-2">
-    <div>
-      <h3>필수 체크리스트</h3>
-      <ul style="padding-left:1.2rem; line-height:2">
-        <li>수정 전 <strong>스킨 백업</strong> 필수</li>
-        <li>모듈 HTML 추가 후 <strong>관리자에서 사용 설정</strong> 확인</li>
-        <li>편집창 <code>{$</code> → <kbd>Ctrl+Space</kbd>로 변수 자동완성</li>
-        <li>주석 옵션은 반드시 <strong>줄바꿈 포함</strong></li>
-        <li><code>.xans-*</code> 클래스는 자동생성 (커스텀 클래스 별도 추가)</li>
-        <li>Bootstrap 사용 시 카페24 기본 CSS 충돌 주의</li>
-      </ul>
+  <h3>수정 전 체크리스트</h3>
+  <table class="checklist-table">
+    <thead><tr><th>항목</th><th>확인 질문</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr><td>스킨 백업</td><td>현재 스킨을 복사하거나 파일을 내려받았나?</td><td>카페24 스킨은 작은 변경도 여러 화면에 영향을 줄 수 있습니다.</td></tr>
+      <tr><td>페이지 범위</td><td>PC/모바일 파일이 같은가, 분리되어 있는가?</td><td>PC만 수정하고 모바일이 그대로 남는 실수가 많습니다.</td></tr>
+      <tr><td>모듈 범위</td><td>수정할 HTML이 어느 <code>module="..."</code> 안에 있는가?</td><td>변수는 모듈 밖으로 나가면 비거나 다르게 동작할 수 있습니다.</td></tr>
+      <tr><td>반복 영역</td><td><code>&lt;li&gt;</code>, <code>&lt;tr&gt;</code> 같은 반복 단위 안에서 수정하는가?</td><td>첫 번째 항목만 맞고 나머지가 깨지는 문제를 막습니다.</td></tr>
+      <tr><td>옵션 주석</td><td><code>&lt;!-- $count --&gt;</code>, <code>&lt;!-- $basket_result --&gt;</code> 같은 주석을 유지했나?</td><td>주석 옵션은 카페24가 읽는 설정값입니다.</td></tr>
+      <tr><td>액션 변수</td><td><code>{$action_buy}</code>, <code>{$action_basket}</code>를 임의로 바꾸지 않았나?</td><td>주문/장바구니/로그인 플로우와 직접 연결됩니다.</td></tr>
+    </tbody>
+  </table>
 
-      <h3>CSS 반영 안 될 때</h3>
-      <ol style="padding-left:1.2rem; line-height:2">
-        <li>파일명에 <code>?ver=날짜</code> 추가</li>
-        <li><kbd>Ctrl+F5</kbd> 강력 새로고침</li>
-        <li>코드 삭제 → 저장 → 재입력</li>
-      </ol>
+  <h3>자주 터지는 문제와 빠른 진단</h3>
+  <table>
+    <thead><tr><th>증상</th><th>먼저 볼 곳</th><th>해결 방향</th></tr></thead>
+    <tbody>
+      <tr><td>CSS가 반영되지 않음</td><td>브라우저 캐시, include 경로, 파일명</td><td><code>?ver=YYYYMMDD</code> 추가, 강력 새로고침, 실제 로드 URL 확인</td></tr>
+      <tr><td>변수가 빈 값으로 나옴</td><td>변수가 들어간 모듈 범위</td><td>공식 모듈 문서에서 해당 변수가 어느 모듈에서 쓰이는지 확인</td></tr>
+      <tr><td>상품 카드 일부만 깨짐</td><td>반복되는 <code>&lt;li&gt;</code> 내부 구조</td><td>첫 항목 기준이 아니라 반복 항목 전체에 같은 구조 적용</td></tr>
+      <tr><td>모바일만 어긋남</td><td>모바일 전용 파일, media query, 이미지 비율</td><td>390px 기준으로 줄바꿈, 버튼 높이, 터치 영역 확인</td></tr>
+      <tr><td>구매 버튼이 동작하지 않음</td><td><code>product_action</code> 모듈과 action 변수</td><td>버튼 디자인만 바꾸고 onclick/action 변수는 유지</td></tr>
+      <tr><td>게시판 링크가 이상함</td><td><code>{$param_read}</code>, 게시판 번호</td><td>게시판별 모듈 번호와 read/list 파라미터를 함께 확인</td></tr>
+    </tbody>
+  </table>
+
+  <div class="do-dont">
+    <div>
+      <h3>좋은 수정 방식</h3>
+      <ul style="padding-left:1.2rem; line-height:2">
+        <li>기존 module/변수/액션을 유지하고 class를 추가한다.</li>
+        <li>PC와 모바일을 같은 시나리오로 확인한다.</li>
+        <li>품절, 할인, 옵션 없음, 게시글 없음 같은 빈/예외 상태를 본다.</li>
+        <li>CSS는 새 prefix를 붙여 충돌 범위를 줄인다.</li>
+      </ul>
     </div>
     <div>
-      <h3>추천 라이브러리</h3>
-      <table>
-        <thead><tr><th>용도</th><th>추천</th></tr></thead>
-        <tbody>
-          <tr><td>슬라이더/캐러셀</td><td>Swiper.js</td></tr>
-          <tr><td>리뷰</td><td>크레마리뷰, 알파리뷰</td></tr>
-          <tr><td>모달/팝업</td><td>기본 JS 또는 jQuery</td></tr>
-        </tbody>
-      </table>
-
-      <h3>작업 순서 권장</h3>
-      <ol style="padding-left:1.2rem; line-height:2">
-        <li>시안과 유사한 <strong>기본 스킨 선택</strong></li>
-        <li><code>layout.html</code>에서 공통 레이아웃 수정</li>
-        <li>각 페이지별 모듈 배치 & 변수 수정</li>
-        <li>CSS로 디자인 커스터마이징</li>
-        <li>JS로 인터랙션 추가</li>
-        <li>모바일 반응형 확인</li>
-      </ol>
-
-      <h3>테스트 팁</h3>
+      <h3>피해야 할 수정 방식</h3>
       <ul style="padding-left:1.2rem; line-height:2">
-        <li>GA 데이터 기반 PV 적은 시간대에 라이브 테스트</li>
-        <li>iOS는 Safari 개발자도구로 디버깅</li>
-        <li>임시 도메인과 실 도메인 속도 차이 확인</li>
+        <li>AI가 만든 임의 변수명을 그대로 넣는다.</li>
+        <li><code>module</code> 속성을 지우고 일반 HTML로 바꾼다.</li>
+        <li>주문/회원 action을 새 JS로 대체한다.</li>
+        <li>PC 화면만 보고 완료 처리한다.</li>
       </ul>
     </div>
   </div>
+
+  <h3>작업 순서 권장</h3>
+  <ol style="padding-left:1.2rem; line-height:2">
+    <li>수정 대상 URL과 PC/모바일 파일을 먼저 찾기</li>
+    <li>해당 화면의 모듈명과 반복 영역 표시하기</li>
+    <li>변수와 action을 지우지 않는 선에서 HTML class 추가</li>
+    <li>CSS는 새 prefix로 작성하고 캐시 버전 붙이기</li>
+    <li>JS가 필요하면 기존 카페24 액션과 충돌하지 않는 이벤트만 추가</li>
+    <li>상품 있음/없음, 품절, 옵션, 로그인/로그아웃 상태 확인</li>
+    <li>수정 전후 스크린샷과 변경 파일 목록을 남기기</li>
+  </ol>
+
+  <h3>AI 에이전트에게 맡길 때의 검증 문장</h3>
+  <pre><code>수정 후 다음을 보고하라.
+1. 변경한 파일과 줄 범위
+2. 유지한 Cafe24 module/변수/action 목록
+3. 임의로 만든 변수나 삭제한 액션이 없는지
+4. PC 1440px / 모바일 390px 확인 결과
+5. 품절/빈 목록/로그인 상태 같은 예외 상태 영향</code></pre>
 </section>
 
 <!-- ===================== 15. 참고 ===================== -->
