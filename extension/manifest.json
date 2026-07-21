@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Cafe24 Smart Design Guard",
+  "version": "0.1.0",
+  "description": "Read-only guard and AI prompt builder for Cafe24 Smart Design editor.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://*.cafe24.com/*",
+    "https://*.cafe24.co.kr/*",
+    "https://*.cafe24shop.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.cafe24.com/disp/admin/editor/*",
+        "https://*.cafe24.co.kr/disp/admin/editor/*"
+      ],
+      "js": ["src/content-loader.js"],
+      "css": ["src/panel.css"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/*.js"],
+      "matches": [
+        "https://*.cafe24.com/*",
+        "https://*.cafe24.co.kr/*"
+      ]
+    }
+  ]
+}

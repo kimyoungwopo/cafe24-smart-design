@@ -89,6 +89,10 @@
     }
     header h1 { max-width: 920px; margin: 0 auto; font-size: clamp(2.4rem, 5vw, 5rem); line-height: .98; letter-spacing: -.07em; font-weight: 840; }
     header p { max-width: 720px; margin: 1.1rem auto 0; color: var(--text-light); font-size: clamp(1rem, 2vw, 1.2rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin: 1.45rem auto 0; }
+    .hero-action { display: inline-flex; align-items: center; justify-content: center; min-height: 2.8rem; padding: .7rem 1rem; border-radius: 999px; text-decoration: none; font-weight: 850; letter-spacing: -.02em; border: 1px solid rgba(37,99,235,.16); background: rgba(255,255,255,.82); color: var(--primary-dark); box-shadow: var(--shadow-sm); }
+    .hero-action.primary { background: #111827; color: #fff; border-color: #111827; }
+    .hero-action:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
     header .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .9rem; max-width: 860px; margin: 2rem auto 0; }
     header .stat { background: var(--card); border: 1px solid var(--border); padding: 1rem 1.1rem; border-radius: 18px; box-shadow: var(--shadow-sm); backdrop-filter: blur(16px); }
     header .stat strong { font-size: 1.6rem; line-height: 1; display: block; letter-spacing: -.04em; color: var(--primary); }
@@ -180,6 +184,12 @@
     .pattern-card { margin: 1rem 0 1.35rem; padding: 1rem; border: 1px solid rgba(37,99,235,.12); border-radius: 16px; background: linear-gradient(180deg, #fff, #f8fbff); box-shadow: var(--shadow-sm); }
     .pattern-card h3 { margin-top: 0; display: flex; align-items: center; gap: .5rem; }
     .pattern-card h3 .badge { flex: 0 0 auto; }
+    .update-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; margin: 1rem 0; }
+    .update-card { border: 1px solid rgba(37,99,235,.14); border-radius: 16px; background: linear-gradient(180deg, #fff, #f8fbff); padding: 1rem; box-shadow: var(--shadow-sm); }
+    .update-card strong { display: block; color: #101828; font-size: 1rem; letter-spacing: -.025em; }
+    .update-card span { display: block; margin-top: .35rem; color: var(--text-light); font-size: .88rem; }
+    .update-card a { color: var(--primary); font-weight: 800; text-decoration: none; }
+    .update-card a:hover { text-decoration: underline; }
     .pattern-note { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .75rem; margin: .85rem 0; }
     .pattern-note > div { padding: .8rem .9rem; border: 1px solid rgba(16,24,40,.10); border-radius: 12px; background: rgba(255,255,255,.72); }
     .pattern-note strong { display: block; margin-bottom: .35rem; color: #101828; }
@@ -246,6 +256,22 @@
     .highlight-pulse { animation: highlightPulse 1.4s ease-out 1; }
     @keyframes highlightPulse { 0% { box-shadow: 0 0 0 0 rgba(37,99,235,.42); } 100% { box-shadow: 0 0 0 16px rgba(37,99,235,0); } }
 
+    .url-template-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .url-template-card { text-align: left; border: 1px solid rgba(37,99,235,.14); border-radius: 16px; padding: 1rem; background: linear-gradient(180deg, #fff, #f8fbff); box-shadow: var(--shadow-sm); cursor: pointer; transition: transform .16s, border-color .16s, box-shadow .16s; }
+    .url-template-card:hover { transform: translateY(-2px); border-color: rgba(37,99,235,.32); box-shadow: var(--shadow-md); }
+    .url-template-card strong { display: block; margin: .45rem 0 .25rem; color: #101828; font-size: 1rem; letter-spacing: -.02em; }
+    .url-template-card span { color: #667085; font-size: .88rem; }
+    .modal-backdrop[hidden] { display: none; }
+    .modal-backdrop { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 1rem; background: rgba(15,23,42,.46); backdrop-filter: blur(8px); }
+    .modal-panel { width: min(680px, 100%); max-height: min(86vh, 760px); overflow: auto; border-radius: 22px; background: #fff; border: 1px solid rgba(16,24,40,.12); box-shadow: 0 30px 90px rgba(15,23,42,.28); }
+    .modal-head { display: flex; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.25rem; border-bottom: 1px solid rgba(16,24,40,.10); }
+    .modal-head h3 { margin: 0; color: #101828; }
+    .modal-close { width: 2.25rem; height: 2.25rem; border: 0; border-radius: 999px; background: #f2f4f7; color: #344054; font-size: 1.2rem; cursor: pointer; }
+    .modal-body { padding: 1.25rem; }
+    .modal-body dl { display: grid; grid-template-columns: 7.2rem 1fr; gap: .6rem .8rem; margin: 1rem 0; }
+    .modal-body dt { color: #667085; font-weight: 800; }
+    .modal-body dd { margin: 0; color: #101828; overflow-wrap: anywhere; }
+    .modal-body code { overflow-wrap: anywhere; }
 
     footer { text-align: center; padding: 2.4rem 1rem 3rem; color: var(--text-light); font-size: .88rem; }
     footer a { color: var(--primary); text-decoration: none; font-weight: 700; }
@@ -258,7 +284,7 @@
       body { overflow-x: hidden; }
       html { overflow-x: hidden; }
       header .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid-2, .grid-3, .pattern-note, .do-dont { grid-template-columns: 1fr; }
+      .grid-2, .grid-3, .update-grid, .pattern-note, .do-dont { grid-template-columns: 1fr; }
       .pattern-card h3 { align-items: flex-start; flex-direction: column; }
       nav { overflow-x: auto; }
       nav ul { justify-content: flex-start; flex-wrap: nowrap; padding-bottom: .15rem; }
@@ -271,6 +297,8 @@
       .lookup-filter { flex: 1 0 auto; }
       .lookup-results { grid-template-columns: 1fr; }
       .lookup-card { min-height: auto; }
+      .url-template-grid { grid-template-columns: 1fr; }
+      .modal-body dl { grid-template-columns: 1fr; }
       table { display: block; overflow-x: auto; white-space: nowrap; }
       #tips table { display: table; table-layout: fixed; white-space: normal; }
       #tips th, #tips td { padding: .65rem .55rem; overflow-wrap: anywhere; word-break: keep-all; }
@@ -285,6 +313,11 @@
   <div class="eyebrow">AI Skill Ready · Cafe24 Smart Design</div>
   <h1>카페24 스마트디자인 전체 레퍼런스</h1>
   <p>AI 에이전트가 카페24 스킨을 더 정확하게 작성하도록 돕는 모듈, 변수, 수정자, 실전 패턴 가이드입니다.</p>
+  <div class="hero-actions" aria-label="주요 링크">
+    <a class="hero-action primary" href="https://kimyoungwopo.github.io/cafe24-smart-design">공개 GitHub Pages</a>
+    <a class="hero-action" href="#whats-new">이번에 추가된 것</a>
+    <a class="hero-action" href="#quick-lookup">바로 검색하기</a>
+  </div>
   <div class="stats" aria-label="레퍼런스 요약">
     <div class="stat"><strong>89</strong><span>Modules</span></div>
     <div class="stat"><strong>194</strong><span>Variables</span></div>
@@ -295,6 +328,7 @@
 
 <nav>
   <ul>
+    <li><a href="#whats-new">업데이트</a></li>
     <li><a href="#overview">개요</a></li>
     <li><a href="#structure">구조</a></li>
     <li><a href="#syntax">기본 문법</a></li>
@@ -309,11 +343,30 @@
     <li><a href="#include">Include</a></li>
     <li><a href="#patterns">실전 패턴</a></li>
     <li><a href="#tips">팁</a></li>
+    <li><a href="#official-map">공식 문서 맵</a></li>
+    <li><a href="#skin-workflow">제작 흐름</a></li>
+    <li><a href="#ai-guardrails">AI 안전 규칙</a></li>
+    <li><a href="#component-cheatsheet">컴포넌트 치트시트</a></li>
+    <li><a href="#gitops-preview">GitOps/Preview</a></li>
+    <li><a href="#url-template-map">URL/템플릿</a></li>
     <li><a href="#sources">참고</a></li>
   </ul>
 </nav>
 
 <div class="container">
+
+<section id="whats-new" aria-labelledby="whatsNewTitle">
+  <h2 id="whatsNewTitle">이번에 추가된 것</h2>
+  <p>새 섹션이 아래쪽에 숨어 있지 않도록, 이번 업데이트의 핵심 진입점을 먼저 모았습니다. 설치 없이 공개 페이지에서 바로 확인할 수 있습니다.</p>
+  <div class="update-grid">
+    <div class="update-card"><strong>공식 디자인 문서 맵</strong><span>개발자센터 Design 문서군을 제작/운영/컴포넌트 기준으로 분류합니다. <a href="#official-map">열기</a></span></div>
+    <div class="update-card"><strong>스킨 제작 실제 흐름</strong><span>구상, 편집, 로컬 확인, Cafe24 테스트 스킨 preview, 상품화 단계를 한 번에 봅니다. <a href="#skin-workflow">열기</a></span></div>
+    <div class="update-card"><strong>AI 안전 규칙</strong><span><code>module</code>, <code>{$...}</code>, action/form 변수, <code>ec-base-*</code> 보존 체크리스트입니다. <a href="#ai-guardrails">열기</a></span></div>
+    <div class="update-card"><strong>GitOps/Preview 흐름</strong><span>local mock preview와 Cafe24 테스트 스킨 preview를 분리해서 설명합니다. <a href="#gitops-preview">열기</a></span></div>
+    <div class="update-card"><strong>URL/템플릿 모달</strong><span>샘플 URL을 누르면 수정 후보 파일, 관련 모듈, 위험 포인트를 모달로 확인합니다. <a href="#url-template-map">열기</a></span></div>
+    <div class="update-card"><strong>Chrome Extension MVP</strong><span>팝업 에디터 코드 분석, 위험 diff, Blue Team, AI 프롬프트 복사를 지원합니다. <a href="extension/README.md">문서 보기</a></span></div>
+  </div>
+</section>
 
 <section id="quick-lookup" class="quick-lookup" aria-labelledby="quickLookupTitle">
   <div class="lookup-head">
@@ -371,7 +424,13 @@
             <li><a href="#include">12. Import / CSS / JS</a></li>
             <li><a href="#patterns">13. 실전 코드 패턴</a></li>
             <li><a href="#tips">14. 실무 팁</a></li>
-            <li><a href="#sources">15. 공식 문서 링크</a></li>
+            <li><a href="#official-map">15. 공식 디자인 문서 맵</a></li>
+            <li><a href="#skin-workflow">16. 스킨 제작 실제 흐름</a></li>
+            <li><a href="#ai-guardrails">17. AI 수정 안전 규칙</a></li>
+            <li><a href="#component-cheatsheet">18. 테마 컴포넌트 치트시트</a></li>
+            <li><a href="#gitops-preview">19. 샘플몰/Preview/GitOps</a></li>
+            <li><a href="#url-template-map">20. URL별 템플릿/샘플 사이트 모달</a></li>
+            <li><a href="#sources">21. 공식 문서 링크</a></li>
           </ul>
         </div>
       </div>
@@ -1365,9 +1424,253 @@
 5. 품절/빈 목록/로그인 상태 같은 예외 상태 영향</code></pre>
 </section>
 
-<!-- ===================== 15. 참고 ===================== -->
+
+
+<!-- ===================== 15. 공식 디자인 문서 맵 ===================== -->
+<section id="official-map">
+  <h2>15. 공식 디자인 문서 맵</h2>
+  <p>카페24 개발자센터의 Design 문서는 스킨 코딩 레퍼런스만이 아니라, <strong>파트너 등록 → 상품 제작 → 심사 → 판매/운영</strong>까지 이어지는 운영 문서와 스마트디자인 제작 문서가 함께 연결되어 있습니다.</p>
+  <div class="grid-3">
+    <div class="toc-card">
+      <h4>디자인 가이드</h4>
+      <ul>
+        <li>파트너 등록, 결제/정산, 주문/매출 관리</li>
+        <li>쇼핑몰디자인/워드프레스/홈페이지/디자인소스/유지보수 상품 등록</li>
+        <li>심사, 취소/환불, 분쟁, 페널티, 스토리/청구서</li>
+      </ul>
+    </div>
+    <div class="toc-card">
+      <h4>스마트디자인</h4>
+      <ul>
+        <li>스마트디자인 소개</li>
+        <li>디자인 기본 이해하기</li>
+        <li>디자인 편집창 활용 방법</li>
+        <li>화면보기/HTML보기 기반 수정 흐름</li>
+      </ul>
+    </div>
+    <div class="toc-card">
+      <h4>테마 컴포넌트</h4>
+      <ul>
+        <li>PC: Font, Grid, Box, Tab, Button, Product, Table, Form 등</li>
+        <li>Mobile: Font, Button, Layer, PrdInfo, Fold, Form 등</li>
+        <li><code>ec-base-*</code>, <code>prdList</code>, <code>eTab</code>, <code>eToggle</code> 같은 기본 계약</li>
+      </ul>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>문서군</th><th>실무에서 쓰는 목적</th><th>AI 작업 시 해석</th></tr></thead>
+    <tbody>
+      <tr><td>디자인 가이드</td><td>디자인 상품 등록, 샘플쇼핑몰, 심사, 판매/정산 운영</td><td>스킨을 상품화하거나 납품/분쟁 대비 자료를 만들 때 확인</td></tr>
+      <tr><td>스마트디자인</td><td>HTML/CSS/JS 편집, 레이아웃과 콘텐츠 연결, 편집창 사용</td><td>실제 스킨 파일을 어느 범위에서 고칠지 판단하는 제작 기준</td></tr>
+      <tr><td>테마 컴포넌트</td><td>카페24 기본 UI 클래스와 동작 패턴 재사용</td><td>AI가 새 UI를 발명하기 전에 보존/재사용해야 하는 기본 컴포넌트 계약</td></tr>
+    </tbody>
+  </table>
+  <div class="info"><strong>핵심 구분:</strong> 파트너(디자인) 사이트는 상품 등록·판매·매출 관리 영역이고, 실제 스킨 제작/적용은 쇼핑몰센터의 스마트디자인 편집창과 샘플쇼핑몰/테스트 스킨에서 검증합니다.</div>
+</section>
+
+<!-- ===================== 16. 스킨 제작 실제 흐름 ===================== -->
+<section id="skin-workflow">
+  <h2>16. 스킨 제작 실제 흐름</h2>
+  <p>공식 문서 흐름을 작업 프로세스로 바꾸면, 카페24 스킨 제작은 <strong>디자인 구상 → 스마트디자인 파일 수정 → 샘플쇼핑몰/테스트 스킨 검증 → 상품 등록/심사</strong> 순서로 관리하는 것이 안전합니다.</p>
+  <ol style="padding-left:1.2rem; line-height:2">
+    <li>운영 스킨을 직접 수정하지 말고 스킨 복사 또는 파일 다운로드로 기준본을 확보합니다.</li>
+    <li>로컬 Git 저장소에서 baseline commit을 만들고, 작업 브랜치에서만 수정합니다.</li>
+    <li>수정 대상 페이지의 PC/모바일 파일, include 구조, <code>module="..."</code> 범위를 먼저 표시합니다.</li>
+    <li>HTML보기에서는 카페24 변수/모듈/action을 보존하면서 class, wrapper, CSS를 중심으로 수정합니다.</li>
+    <li>로컬 mock preview로 레이아웃을 빠르게 확인하되, 이 단계는 카페24 엔진 검증이 아님을 명확히 둡니다.</li>
+    <li>테스트 스킨 또는 샘플쇼핑몰에 변경 파일만 적용해 실제 상품/옵션/로그인/장바구니 동작을 확인합니다.</li>
+    <li>수정 전후 스크린샷, 변경 파일 목록, 보존한 모듈/변수/action 목록을 QA 리포트로 남깁니다.</li>
+    <li>판매 상품이면 대표/진열/썸네일/모바일 이미지 규격과 심사 기준까지 확인한 뒤 등록합니다.</li>
+  </ol>
+  <table class="checklist-table">
+    <thead><tr><th>단계</th><th>확인할 것</th><th>완료 기준</th></tr></thead>
+    <tbody>
+      <tr><td>구상</td><td>메인, 상품목록, 상품상세, 회원, 주문, 게시판 중 수정 범위</td><td>파일/페이지/모듈 단위로 작업 범위가 좁혀짐</td></tr>
+      <tr><td>편집</td><td>스마트디자인 HTML보기, include, CSS/JS 경로</td><td>모듈/변수/action 삭제 없이 diff가 제한됨</td></tr>
+      <tr><td>로컬 확인</td><td>mock 데이터, 긴 상품명, 품절, 빈 목록, 모바일 390px</td><td>레이아웃 깨짐과 수평 overflow 없음</td></tr>
+      <tr><td>카페24 확인</td><td>샘플쇼핑몰/테스트 스킨 preview, 실제 상품/옵션/구매 버튼</td><td>카페24 엔진에서 변수와 액션이 정상 동작</td></tr>
+      <tr><td>상품화</td><td>대표/진열/썸네일/모바일 이미지 규격, 글로벌 한글 노출, 저작권</td><td>심사 전 자체 체크리스트 통과</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 17. AI 수정 안전 규칙 ===================== -->
+<section id="ai-guardrails">
+  <h2>17. AI 수정 안전 규칙</h2>
+  <p>카페24 스킨에서 AI가 가장 많이 망가뜨리는 것은 일반 UI가 아니라 <strong>카페24가 실행 시 읽는 계약</strong>입니다. 아래 항목은 디자인을 바꿔도 보존해야 합니다.</p>
+  <div class="do-dont">
+    <div>
+      <h3>반드시 유지</h3>
+      <ul style="padding-left:1.2rem; line-height:2">
+        <li><code>module="..."</code> 속성</li>
+        <li><code>{$...}</code> 변수와 변수 scope</li>
+        <li><code>&lt;!-- $count --&gt;</code>, <code>&lt;!-- $only_html --&gt;</code> 같은 카페24 주석 옵션</li>
+        <li><code>{$action_buy}</code>, <code>{$action_basket}</code>, <code>{$action_login}</code>, <code>{$action_logout}</code> 등 액션 변수</li>
+        <li><code>ec-base-*</code>, <code>prdList</code>, <code>eTab</code>, <code>eToggle</code> 등 공식 컴포넌트/동작 클래스</li>
+      </ul>
+    </div>
+    <div>
+      <h3>기본 금지</h3>
+      <ul style="padding-left:1.2rem; line-height:2">
+        <li>카페24에 없는 임의 변수 생성</li>
+        <li>구매/장바구니/로그인 action을 새 JavaScript로 대체</li>
+        <li>폼 변수를 일반 <code>input</code>/<code>select</code>로 재작성</li>
+        <li>주문/결제/회원 파일을 디자인 수정 명목으로 광범위하게 변경</li>
+        <li>PC만 보고 모바일 파일 또는 모바일 전용 컴포넌트 검증 생략</li>
+      </ul>
+    </div>
+  </div>
+  <h3>AI에게 줄 안전 프롬프트 템플릿</h3>
+  <pre><code>카페24 스마트디자인 스킨을 수정한다.
+수정 범위: [파일 경로]의 [module="..."] 내부만.
+목표: [디자인/레이아웃 목표].
+유지: module 속성, {$...} 변수, 카페24 주석 옵션, onclick/action 변수, ec-base-* 클래스.
+금지: 임의 변수 생성, 주문/결제/회원 action 재작성, 폼 변수 구조 변경, 범위 밖 파일 수정.
+검증: git diff, PC 1440px, 모바일 390px, 실제 카페24 테스트 스킨 preview, 품절/빈 목록/로그인 상태.</code></pre>
+  <div class="warn"><strong>주의:</strong> 로컬 HTML에서 보기 좋게 보이는 것과 카페24에서 정상 동작하는 것은 다릅니다. 카페24 변수와 action은 테스트 스킨/샘플쇼핑몰 preview에서만 최종 확인됩니다.</div>
+</section>
+
+<!-- ===================== 18. 테마 컴포넌트 치트시트 ===================== -->
+<section id="component-cheatsheet">
+  <h2>18. 테마 컴포넌트 치트시트</h2>
+  <p>테마 컴포넌트 문서는 “디자인 예제”이면서 동시에 기존 스킨과 충돌하지 않기 위한 <strong>카페24 기본 UI 어휘</strong>입니다. 완전한 새 구조보다 기존 컴포넌트를 보존·확장하는 편이 안전합니다.</p>
+  <div class="grid-2">
+    <div>
+      <h3>PC 주요 컴포넌트</h3>
+      <table>
+        <thead><tr><th>컴포넌트</th><th>대표 클래스/용도</th></tr></thead>
+        <tbody>
+          <tr><td>Font</td><td><code>txtInfo</code>, <code>txtWarn</code>, <code>txtEm</code>, <code>txtDel</code>, <code>txt11~18</code></td></tr>
+          <tr><td>Grid</td><td><code>gBlank*</code>, <code>gIndent*</code>, <code>gSpace*</code>, <code>fWidthFull</code>, <code>gLabel</code></td></tr>
+          <tr><td>Box</td><td><code>ec-base-box</code>, <code>typeThin</code>, <code>typeBg</code>, <code>typeThinBg</code>, <code>gHalf</code></td></tr>
+          <tr><td>Button</td><td><code>ec-base-button</code>, <code>btnNormal</code>, <code>btnEm</code>, <code>btnSubmit</code>, <code>sizeS/M/L</code></td></tr>
+          <tr><td>Product</td><td><code>prdList</code>, <code>grid2</code>, <code>grid3</code>, <code>grid4</code></td></tr>
+          <tr><td>Table/Form</td><td><code>ec-base-table</code>, <code>typeList</code>; 폼 태그는 변수 내부 구조를 존중</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Mobile 주요 컴포넌트</h3>
+      <table>
+        <thead><tr><th>컴포넌트</th><th>대표 클래스/용도</th></tr></thead>
+        <tbody>
+          <tr><td>Button</td><td><code>btnStrong</code>, <code>btnNormal</code>, 100% 너비형, 버튼+버튼 조합</td></tr>
+          <tr><td>Uses</td><td><code>ec-base-field</code>, <code>ec-base-qty</code>, 검색/수량 조합</td></tr>
+          <tr><td>Layer</td><td><code>body.popup</code>, 레이어 팝업, 모달형</td></tr>
+          <tr><td>Tooltip</td><td><code>ec-base-tooltip</code>, 아이콘형 툴팁</td></tr>
+          <tr><td>PrdInfo</td><td>상품 정보/옵션값 표시, 후기/마이쇼핑/주문 페이지에서 사용</td></tr>
+          <tr><td>Fold</td><td><code>eToggle</code> 추가 시 토글 동작 가능</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tip"><strong>실전 기준:</strong> 기존 스킨에 <code>ec-base-*</code> 구조가 있으면 먼저 보존하고, 새 브랜드 디자인은 wrapper class와 scoped CSS로 덧입히세요.</div>
+</section>
+
+<!-- ===================== 19. 샘플몰/Preview/GitOps 워크플로우 ===================== -->
+<section id="gitops-preview">
+  <h2>19. 샘플몰/Preview/GitOps 워크플로우</h2>
+  <p>AI를 붙인 카페24 작업의 중심은 FTP 편집창이 아니라 <strong>로컬 Git 작업공간</strong>이어야 합니다. 카페24는 최종 런타임이고, 로컬은 diff·검증·리포트의 기준점입니다.</p>
+  <div class="folder-tree"><span class="f">cafe24-skin-project/</span>
+├── <span class="f">skin/</span>
+│   ├── <span class="f">pc/</span> layout/ product/ board/ member/ order/ css/ js/
+│   └── <span class="f">mobile/</span> layout/ product/ board/ member/ order/ css/ js/
+├── <span class="f">preview/</span> product-list.mock.html detail.mock.html mock-data.json
+├── <span class="f">docs/</span> module-map.md variable-map.md work-log.md
+├── <span class="f">reports/</span> qa/ diff/ deploy/
+├── <span class="f">prompts/</span>
+└── <span class="f">scripts/</span> check-skin.mjs make-preview.mjs push-dry-run.sh</div>
+  <table>
+    <thead><tr><th>검증 레벨</th><th>무엇을 확인하나</th><th>한계</th></tr></thead>
+    <tbody>
+      <tr><td>Git diff</td><td>변경 파일, 모듈/변수/action 삭제, 위험 파일 변경 여부</td><td>시각/카페24 실행 결과는 모름</td></tr>
+      <tr><td>로컬 정적 preview</td><td>CSS 깨짐, 반응형, 레이아웃 overflow</td><td><code>{$...}</code>와 <code>module</code>은 실행되지 않음</td></tr>
+      <tr><td>로컬 mock preview</td><td>샘플 상품명/가격/이미지로 빠른 시각 QA</td><td>실제 관리자 설정, 옵션, 로그인 상태는 모름</td></tr>
+      <tr><td>FTP dry-run</td><td>업로드될 파일 목록과 제외 파일 확인</td><td>시각 preview가 아니라 배포 범위 확인용</td></tr>
+      <tr><td>카페24 테스트 스킨/샘플쇼핑몰 preview</td><td>실제 모듈, 변수, action, 상품/옵션/장바구니 동작</td><td>운영 반영 전 마지막 검증 단계로 사용</td></tr>
+    </tbody>
+  </table>
+  <h3>권장 커밋 흐름</h3>
+  <pre><code>baseline: cafe24 skin snapshot
+sync: pull latest skin from ftp
+feat(product-list): improve product card layout
+fix(product-list): preserve soldout display class
+qa(product-list): add mobile screenshot report
+release: upload to test skin</code></pre>
+  <div class="info"><strong>업로드 제외 기본값:</strong> <code>.git/</code>, <code>.env</code>, <code>docs/</code>, <code>reports/</code>, <code>prompts/</code>, <code>preview/</code>, <code>scripts/</code>, <code>node_modules/</code>, <code>.DS_Store</code>는 스킨 업로드 대상에서 제외하는 것이 안전합니다.</div>
+</section>
+
+<!-- ===================== 20. URL별 템플릿/샘플 사이트 모달 ===================== -->
+<section id="url-template-map">
+  <h2>20. URL별 템플릿/샘플 사이트 모달</h2>
+  <p>카페24 스마트디자인에는 Next.js 같은 임의 라우터가 있는 것이 아니라, <strong>URL이 대체로 정해진 스킨 파일과 모듈에 매핑</strong>됩니다. 따라서 “특정 URL에 새 템플릿 적용”은 아래 네 방식 중 하나로 설계합니다.</p>
+  <table class="checklist-table">
+    <thead><tr><th>방식</th><th>언제 쓰나</th><th>주의점</th></tr></thead>
+    <tbody>
+      <tr><td>기존 URL 파일 수정</td><td><code>/product/list.html</code>, <code>/product/detail.html</code>, <code>/board/free/list.html</code>처럼 카페24가 이미 쓰는 화면</td><td>해당 파일의 <code>module</code>, 변수, action을 유지해야 함</td></tr>
+      <tr><td>커스텀 HTML 페이지 추가</td><td>브랜드 소개, 이벤트, 랜딩처럼 독립 URL이 필요한 경우</td><td>상품/주문/회원 모듈은 필요한 범위만 넣고 링크로 연결</td></tr>
+      <tr><td>조건부 템플릿</td><td>카테고리, 게시판 번호, URL 파라미터에 따라 같은 파일 안에서 다른 섹션을 보여줄 때</td><td>카페24 조건문/변수 scope가 가능한지 먼저 확인</td></tr>
+      <tr><td>로컬 샘플 사이트 모달</td><td>초보자/작업자가 “이 URL은 어느 파일을 고쳐야 하나?”를 빠르게 배우게 할 때</td><td>학습/진단 UI이며, 실제 카페24 라우팅 기능은 아님</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info"><strong>판단:</strong> 아이디어 좋습니다. 실제 카페24에 “아무 URL을 새 템플릿에 연결하는 라우터”가 있다고 보기보다는, 이 레퍼런스에 <strong>샘플 사이트 UI → 클릭 → 모달로 URL/수정 파일/모듈/주의점 안내</strong>를 넣는 방식이 실용적입니다.</div>
+
+  <div class="url-template-grid" aria-label="샘플 사이트 URL 템플릿 예시">
+    <button class="url-template-card" type="button" data-template-title="상품 목록 URL" data-template-route="/product/list.html?cate_no=24" data-template-file="skin/pc/product/list.html + skin/mobile/product/list.html" data-template-module="product_listnormal, product_normalmenu, product_listrecommend" data-template-desc="카테고리 상품 목록 화면입니다. 상품 카드 UI를 고칠 때는 반복되는 li 내부와 품절/할인/페이지네이션 상태를 함께 확인합니다.">
+      <span class="badge badge-blue">LIST</span>
+      <strong>/product/list.html?cate_no=24</strong>
+      <span>상품 목록 템플릿과 카테고리별 체크포인트</span>
+    </button>
+    <button class="url-template-card" type="button" data-template-title="상품 상세 URL" data-template-route="/product/detail.html?product_no=123" data-template-file="skin/pc/product/detail.html + skin/mobile/product/detail.html" data-template-module="product_detail, product_image, product_option, product_action" data-template-desc="구매 버튼, 옵션, 수량, 장바구니 action이 연결되는 위험도가 높은 화면입니다. 디자인만 바꾸고 action 변수는 유지합니다.">
+      <span class="badge badge-red">DETAIL</span>
+      <strong>/product/detail.html?product_no=123</strong>
+      <span>옵션/구매/장바구니 action 보존이 핵심</span>
+    </button>
+    <button class="url-template-card" type="button" data-template-title="게시판 목록 URL" data-template-route="/board/free/list.html?board_no=1" data-template-file="skin/pc/board/free/list.html + skin/mobile/board/free/list.html" data-template-module="board_list, board_category, board_paging" data-template-desc="공지사항/FAQ/리뷰 목록처럼 게시판 번호에 따라 콘텐츠가 달라지는 화면입니다. read/list 파라미터와 빈 목록 상태를 확인합니다.">
+      <span class="badge badge-green">BOARD</span>
+      <strong>/board/free/list.html?board_no=1</strong>
+      <span>게시판 번호와 list/read 파라미터 확인</span>
+    </button>
+    <button class="url-template-card" type="button" data-template-title="브랜드 소개 커스텀 URL" data-template-route="/shopinfo/company.html 또는 /layout/basic/custom.html" data-template-file="skin/pc/shopinfo/company.html 또는 custom page" data-template-module="Layout_LogoTop, Layout_category, 공통 include" data-template-desc="독립 랜딩/브랜드 소개 페이지는 커스텀 HTML 파일로 만들고, 공통 header/footer include와 필요한 모듈만 연결합니다.">
+      <span class="badge badge-purple">CUSTOM</span>
+      <strong>/shopinfo/company.html</strong>
+      <span>독립 페이지/랜딩은 커스텀 HTML 후보</span>
+    </button>
+    <button class="url-template-card" type="button" data-template-title="장바구니 URL" data-template-route="/order/basket.html" data-template-file="skin/pc/order/basket.html + skin/mobile/order/basket.html" data-template-module="order_basket, order_total, action_basket 관련 변수" data-template-desc="주문 흐름과 직접 연결되므로 새 JS로 대체하지 않습니다. UI 수정 전후로 수량 변경, 삭제, 주문하기 버튼을 실제 preview에서 확인합니다.">
+      <span class="badge badge-orange">ORDER</span>
+      <strong>/order/basket.html</strong>
+      <span>위험 파일. action 보존과 실제 preview 필수</span>
+    </button>
+    <button class="url-template-card" type="button" data-template-title="로그인 URL" data-template-route="/member/login.html" data-template-file="skin/pc/member/login.html + skin/mobile/member/login.html" data-template-module="member_login, form.login, returnUrl, action_func_login" data-template-desc="폼 태그가 변수 안에 들어가는 경우가 많아 일반 input으로 재작성하면 깨질 수 있습니다. 레이아웃 wrapper와 CSS 중심으로 수정합니다.">
+      <span class="badge badge-cyan">MEMBER</span>
+      <strong>/member/login.html</strong>
+      <span>폼 변수와 returnUrl 보존</span>
+    </button>
+  </div>
+
+  <div id="urlTemplateModal" class="modal-backdrop" hidden>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="urlTemplateModalTitle">
+      <div class="modal-head">
+        <h3 id="urlTemplateModalTitle">URL 템플릿 정보</h3>
+        <button class="modal-close" type="button" aria-label="닫기">×</button>
+      </div>
+      <div class="modal-body">
+        <dl>
+          <dt>실제 URL</dt><dd><code data-modal-route></code></dd>
+          <dt>수정 후보 파일</dt><dd><code data-modal-file></code></dd>
+          <dt>관련 모듈</dt><dd><code data-modal-module></code></dd>
+          <dt>설명</dt><dd data-modal-desc></dd>
+        </dl>
+        <div class="warn"><strong>주의:</strong> 이 모달은 작업자 학습/진단용 UI입니다. 실제 적용은 해당 스킨 파일을 수정하고, 카페24 테스트 스킨 또는 샘플쇼핑몰 preview에서 확인해야 합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 21. 참고 ===================== -->
 <section id="sources">
-  <h2>15. 공식 문서 & 참고 자료</h2>
+  <h2>21. 공식 문서 & 참고 자료</h2>
 
   <h3>공식 문서</h3>
   <table>
@@ -1380,6 +1683,12 @@
       <tr><td>반복문 사용하기</td><td><a href="https://sdsupport.cafe24.com/board/tip/read_intro.html?no=635&board_no=5" target="_blank">공식 가이드</a></td></tr>
       <tr><td>서비스 가이드 PDF</td><td><a href="https://img.echosting.cafe24.com/guide/cafe24_smartdesign_serviceguide_v2.pdf" target="_blank">PDF 다운로드</a></td></tr>
       <tr><td>편집창 매뉴얼 PDF</td><td><a href="https://img.echosting.cafe24.com/guide/cafe24_smartdesign_editorguide.pdf" target="_blank">PDF 다운로드</a></td></tr>
+      <tr><td>개발자센터 Design 시작하기</td><td><a href="https://developers.cafe24.com/design/front/design" target="_blank">design/front/design</a></td></tr>
+      <tr><td>스마트디자인 소개</td><td><a href="https://developers.cafe24.com/design/front/smart" target="_blank">design/front/smart</a></td></tr>
+      <tr><td>디자인 기본 이해하기</td><td><a href="https://developers.cafe24.com/design/front/smart/sdsupport/basic" target="_blank">sdsupport/basic</a></td></tr>
+      <tr><td>디자인 편집창 활용 방법</td><td><a href="https://developers.cafe24.com/design/front/smart/sdsupport/editor" target="_blank">sdsupport/editor</a></td></tr>
+      <tr><td>테마 컴포넌트 PC</td><td><a href="https://developers.cafe24.com/design/front/component/pc" target="_blank">component/pc</a></td></tr>
+      <tr><td>테마 컴포넌트 Mobile</td><td><a href="https://developers.cafe24.com/design/front/component/mobile" target="_blank">component/mobile</a></td></tr>
       <tr><td>개발자 센터</td><td><a href="https://developers.cafe24.com/design/front/smart" target="_blank">developers.cafe24.com</a></td></tr>
       <tr><td>Help Center</td><td><a href="https://support.cafe24.com/hc/ko" target="_blank">support.cafe24.com</a></td></tr>
     </tbody>
@@ -1533,6 +1842,43 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initLookup);
 } else {
   initLookup();
+}
+
+function initUrlTemplateModal() {
+  const modal = document.getElementById('urlTemplateModal');
+  if (!modal) return;
+  const title = modal.querySelector('#urlTemplateModalTitle');
+  const route = modal.querySelector('[data-modal-route]');
+  const file = modal.querySelector('[data-modal-file]');
+  const module = modal.querySelector('[data-modal-module]');
+  const desc = modal.querySelector('[data-modal-desc]');
+  const closeButton = modal.querySelector('.modal-close');
+  const openModal = (button) => {
+    title.textContent = button.dataset.templateTitle || 'URL 템플릿 정보';
+    route.textContent = button.dataset.templateRoute || '';
+    file.textContent = button.dataset.templateFile || '';
+    module.textContent = button.dataset.templateModule || '';
+    desc.textContent = button.dataset.templateDesc || '';
+    modal.hidden = false;
+    closeButton?.focus();
+  };
+  const closeModal = () => { modal.hidden = true; };
+  document.querySelectorAll('.url-template-card').forEach((button) => {
+    button.addEventListener('click', () => openModal(button));
+  });
+  closeButton?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
+  });
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modal.hidden) closeModal();
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initUrlTemplateModal);
+} else {
+  initUrlTemplateModal();
 }
 
 function filterVars() {
