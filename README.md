@@ -12,6 +12,8 @@
 </p>
 
 <p align="center">
+  <a href="https://kimyoungwopo.github.io/cafe24-smart-design"><strong>공개 GitHub Pages 보기</strong></a> ·
+  <a href="#이번-업데이트에서-추가된-것">이번 업데이트</a> ·
   <a href="#빠른-시작">빠른 시작</a> ·
   <a href="#무엇이-들어있나요">구성</a> ·
   <a href="#ai-도구별-사용법">AI 도구별 사용법</a> ·
@@ -30,6 +32,24 @@
 
 ---
 
+## 이번 업데이트에서 추가된 것
+
+이번 확장은 기존 registry 숫자만 늘리는 업데이트가 아니라, 실제 작업자가 어디를 봐야 하는지 바로 알 수 있도록 **공개 뷰어 섹션과 Chrome Extension MVP**를 추가한 업데이트입니다.
+
+| 추가 영역 | 사람들이 바로 확인할 위치 | 무엇을 알 수 있나 |
+|---|---|---|
+| 공개 GitHub Pages | https://kimyoungwopo.github.io/cafe24-smart-design | 검색 가능한 레퍼런스 뷰어를 설치 없이 확인 |
+| 공식 디자인 문서 맵 | `index.html#official-map` | 개발자센터 Design 문서군을 제작/운영/컴포넌트로 분류 |
+| 스킨 제작 흐름 | `index.html#skin-workflow` | 구상 → 편집 → 로컬 확인 → 테스트 스킨 preview → 상품화 단계 |
+| AI 안전 규칙 | `index.html#ai-guardrails` | `module`, `{$...}`, action/form 변수, `ec-base-*` 보존 체크 |
+| GitOps/Preview 흐름 | `index.html#gitops-preview` | local mock preview와 Cafe24 테스트 스킨 preview의 역할 구분 |
+| URL/템플릿 모달 | `index.html#url-template-map` | URL별 수정 후보 파일·모듈·위험 포인트를 카드/모달로 확인 |
+| Chrome Extension MVP | `extension/README.md` | 팝업 에디터 코드 분석, 위험 diff, Blue Team, AI 프롬프트 복사 |
+
+> 먼저 볼 링크: **https://kimyoungwopo.github.io/cafe24-smart-design**
+
+---
+
 ## 무엇이 들어있나요?
 
 | 영역 | 내용 | 파일 |
@@ -39,8 +59,13 @@
 | Variables | 상품/주문/회원/게시판 변수 레퍼런스 | `references/variables.md`, `data/variables.json` |
 | Modifiers | `cut`, `display`, `numberformat` 등 13종 | `references/modifiers-and-syntax.md`, `data/modifiers.json` |
 | Visual Docs | 검색 가능한 단일 HTML 레퍼런스 | `cafe24-modules-variables.html` |
+| Official Map | 개발자센터 Design 하위 문서 맵과 제작/운영 흐름 | `index.html#official-map` |
+| Workflow | 샘플쇼핑몰, 테스트 스킨, GitOps preview 안전 흐름 | `index.html#gitops-preview` |
+| Component Cheatsheet | PC/Mobile 테마 컴포넌트 핵심 클래스 | `index.html#component-cheatsheet` |
+| URL Template Map | 특정 URL이 어느 스킨 파일/모듈에 연결되는지 보여주는 샘플 모달 | `index.html#url-template-map` |
+| Chrome Extension MVP | 스마트디자인 팝업 에디터용 Guard/Prompt/Blue Team 보조 도구 | `extension/` |
 | Source QA | registry 무결성 검증과 테스트 | `scripts/validate-data.mjs`, `test/validate-data.test.mjs` |
-| GitHub Pages | 공개 레퍼런스 뷰어 진입점 | `index.html`, `cafe24-modules-variables.html` |
+| GitHub Pages | 공개 레퍼런스 뷰어 진입점 | https://kimyoungwopo.github.io/cafe24-smart-design |
 
 ```txt
 cafe24-smart-design/
@@ -51,6 +76,15 @@ cafe24-smart-design/
 │   ├── modules.json
 │   ├── variables.json
 │   └── modifiers.json
+├── extension/
+│   ├── manifest.json
+│   ├── README.md
+│   └── src/
+│       ├── analyzer.js
+│       ├── blue-team.js
+│       ├── diff.js
+│       ├── panel.js
+│       └── prompt-builder.js
 ├── references/
 │   ├── modules.md
 │   ├── variables.md
@@ -65,7 +99,11 @@ cafe24-smart-design/
 
 ### 레퍼런스 보기
 
-브라우저에서 아래 파일을 열면 검색 가능한 전체 레퍼런스를 볼 수 있습니다.
+공개 페이지에서 바로 볼 수 있습니다.
+
+- https://kimyoungwopo.github.io/cafe24-smart-design
+
+로컬에서는 아래 파일을 열면 검색 가능한 전체 레퍼런스를 볼 수 있습니다.
 
 ```bash
 open cafe24-modules-variables.html
@@ -88,8 +126,8 @@ npm run check
 
 ```txt
 ✓ registry ok: 89 modules, 194 variables, 13 modifiers
-# tests 2
-# pass 2
+# tests 9
+# pass 9
 ```
 
 ---
@@ -102,9 +140,38 @@ npm run check
 | 변수 레퍼런스 | 상품/주문/회원/게시판 변수 정리 | `{$product_name}`, `{$product_price}`, `{$order_id}` |
 | 수정자 레퍼런스 | 데이터 변환 modifier 문법 | `{$product_name|cut:20,...}`, `{$price|numberformat}` |
 | 실전 패턴 | 상품 목록, 로그인 분기, 게시판, 컬러칩 | `product_listmain_1`, `member_login` |
+| 공식 문서 맵 | 개발자센터 Design 하위 문서를 제작/운영/컴포넌트로 분류 | `index.html#official-map` |
+| AI 안전 규칙 | module/변수/action/폼 변수 보존 체크리스트 | `index.html#ai-guardrails` |
+| Preview Workflow | 로컬 mock preview와 카페24 테스트 스킨 preview 구분 | `index.html#gitops-preview` |
+| URL Template Map | URL별 수정 후보 파일/모듈을 모달로 보여주는 작업자 학습 UI | `index.html#url-template-map` |
+| Chrome Extension Guard | 카페24 에디터 팝업에서 코드 분석, 위험 diff, Blue Team, AI 프롬프트 복사 | `extension/README.md` |
 | Registry | 자동화/AI 도구가 읽을 수 있는 JSON | `data/modules.json` |
 | Source QA | JSON registry와 테스트로 문서/데이터 정합성 확인 | `npm run check` |
-| GitHub Pages | 루트 URL에서 HTML 레퍼런스 뷰어로 바로 이동 | `index.html` |
+| GitHub Pages | 루트 URL에서 HTML 레퍼런스 뷰어로 바로 이동 | https://kimyoungwopo.github.io/cafe24-smart-design |
+
+---
+
+## 공식 Design 문서 리서치 반영
+
+개발자센터 Design 하위 문서를 기준으로, 레퍼런스 뷰어에 다음 실무 섹션을 추가했습니다.
+
+| 섹션 | 내용 | 링크 |
+|---|---|---|
+| 공식 디자인 문서 맵 | 디자인 가이드, 스마트디자인, 테마 컴포넌트 문서군 구분 | `index.html#official-map` |
+| 스킨 제작 실제 흐름 | 구상, 편집, 로컬 확인, 카페24 preview, 상품화 단계 | `index.html#skin-workflow` |
+| AI 수정 안전 규칙 | `module`, `{$...}`, action 변수, 폼 변수, `ec-base-*` 보존 규칙 | `index.html#ai-guardrails` |
+| 테마 컴포넌트 치트시트 | PC/Mobile 기본 컴포넌트와 대표 클래스 | `index.html#component-cheatsheet` |
+| 샘플몰/Preview/GitOps | local mock preview와 테스트 스킨 preview를 분리한 작업 흐름 | `index.html#gitops-preview` |
+| URL별 템플릿/모달 | 샘플 사이트 카드를 클릭하면 URL, 수정 후보 파일, 관련 모듈, 주의점을 모달로 표시 | `index.html#url-template-map` |
+| Chrome Extension Guard | 스마트디자인 팝업에서 현재 파일 분석, 스냅샷 diff, Blue Team 검수, AI 프롬프트 복사를 제공 | `extension/README.md` |
+
+핵심 원칙:
+
+```txt
+카페24는 최종 런타임, 로컬 Git은 작업 기준점입니다.
+AI는 로컬 스킨 파일을 수정하고, git diff/check/local mock preview를 거친 뒤
+카페24 테스트 스킨 또는 샘플쇼핑몰 preview에서 실제 module/변수/action 동작을 확인합니다.
+```
 
 ---
 
@@ -218,6 +285,7 @@ npm run check
 ## 다음 개발 아이디어
 
 - `cafe24-smart-design-check` CLI: HTML 스킨 파일에서 잘못된 module/variable/modifier 검사
+- Chrome Extension Native Messaging helper: 에디터 스냅샷을 로컬 Git workspace로 보내고 `git diff`/check 결과 반환
 - VS Code / Cursor snippets 자동 생성
 - `data/*.json`에서 Markdown/HTML 문서 자동 생성
 - 공식 문서 source URL과 verifiedAt 필드 강화

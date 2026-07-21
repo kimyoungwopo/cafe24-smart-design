@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>Cafe24 Guard Fixture</title>
+  <link rel="stylesheet" href="../src/panel.css">
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #f8fafc; }
+    header { height: 52px; display: flex; align-items: center; padding: 0 16px; background: #111827; color: white; }
+    main { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 16px; }
+    .preview { min-height: 220px; border: 1px solid #d0d5dd; background: white; border-radius: 12px; padding: 16px; }
+    textarea { width: 100%; min-height: 360px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; border: 1px solid #d0d5dd; border-radius: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>카페24 스마트디자인 fixture</strong>
+  </header>
+  <main>
+    <section class="preview">
+      <button>저장</button>
+      <button>미리보기</button>
+      <p>확장 패널이 저장/미리보기 버튼을 가리지 않는지 Blue Team으로 확인합니다.</p>
+    </section>
+    <textarea><!--@layout(/layout/basic/layout.html)-->
+<!--@js(/layout/basic/js/main.js)-->
+<!--@css(/layout/basic/css/main.css)-->
+<!--@import(/smart-banner/shop1/smart-banner-admin-RES00001.html)-->
+<div module="Layout_statelogon">
+  <a href="{$action_logout}">로그아웃</a>
+  {$name}
+</div>
+<div module="product_listmain_1">
+  <!-- $count = 8 -->
+  <a href="{$link_product_detail}">{$product_name}</a>
+  <span>{$product_price|numberformat}</span>
+</div></textarea>
+  </main>
+  <script type="module">
+    import { startCafe24Guard } from '../src/content.js';
+    history.replaceState(null, '', '/disp/admin/editor/main?skin_no=1&skin_code=base&shop_no=1&editorFile=/index.html');
+    startCafe24Guard();
+  </script>
+</body>
+</html>
