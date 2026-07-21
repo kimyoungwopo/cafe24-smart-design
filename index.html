@@ -98,12 +98,17 @@
     header .stat strong { font-size: 1.6rem; line-height: 1; display: block; letter-spacing: -.04em; color: var(--primary); }
     header .stat span { display: block; margin-top: .28rem; color: var(--text-light); font-size: .84rem; font-weight: 650; }
 
-    nav { background: rgba(255,255,255,.86); border-block: 1px solid var(--border); padding: .8rem 1rem; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); backdrop-filter: blur(18px); }
-    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; max-width: 1220px; margin: 0 auto; justify-content: center; }
-    nav a { display: inline-flex; align-items: center; min-height: 2.15rem; text-decoration: none; color: #344054; padding: .35rem .72rem; border-radius: 999px; font-size: .86rem; font-weight: 650; transition: background .18s, color .18s, transform .18s; white-space: nowrap; }
-    nav a:hover { background: var(--primary); color: white; transform: translateY(-1px); }
-
-    .container { max-width: 1220px; margin: 0 auto; padding: 2rem; }
+    .container { max-width: 1320px; margin: 0 auto; padding: 1.5rem 2rem 2rem; display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+    .content { min-width: 0; }
+    .side-nav { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; padding: 1rem; border: 1px solid var(--border); border-radius: 18px; background: rgba(255,255,255,.90); box-shadow: var(--shadow-sm); backdrop-filter: blur(18px); }
+    .side-nav h2 { margin: 0 0 .55rem; padding: 0; border: 0; font-size: .82rem; color: #667085; letter-spacing: .08em; text-transform: uppercase; }
+    .side-nav h2::before { display: none; }
+    .side-nav-group { margin-top: .85rem; }
+    .side-nav-group strong { display: block; margin-bottom: .35rem; color: #101828; font-size: .82rem; letter-spacing: -.01em; }
+    .side-nav a { display: flex; align-items: center; min-height: 2.2rem; padding: .38rem .55rem; border-radius: 10px; color: #475467; text-decoration: none; font-size: .84rem; font-weight: 700; line-height: 1.25; }
+    .side-nav a:hover { background: #eff6ff; color: var(--primary-dark); }
+    .side-nav .primary-link { margin-bottom: .7rem; justify-content: center; background: #111827; color: #fff; }
+    .side-nav .primary-link:hover { background: var(--primary); color: #fff; }
 
     section { background: var(--card); border-radius: var(--radius); padding: clamp(1.25rem, 2.5vw, 2rem); margin-bottom: 1.25rem; border: 1px solid var(--border); box-shadow: var(--shadow-sm); backdrop-filter: blur(10px); scroll-margin-top: 6rem; }
     section:hover { box-shadow: var(--shadow-md); }
@@ -286,9 +291,10 @@
       header .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .grid-2, .grid-3, .update-grid, .pattern-note, .do-dont { grid-template-columns: 1fr; }
       .pattern-card h3 { align-items: flex-start; flex-direction: column; }
-      nav { overflow-x: auto; }
-      nav ul { justify-content: flex-start; flex-wrap: nowrap; padding-bottom: .15rem; }
-      .container { padding: 1rem; }
+      .container { display: block; padding: 1rem; }
+      .side-nav { position: static; max-height: none; margin-bottom: 1rem; }
+      .side-nav-group { display: grid; grid-template-columns: 1fr 1fr; gap: .25rem .35rem; }
+      .side-nav-group strong { grid-column: 1 / -1; margin-top: .35rem; }
       section { padding: 1.1rem; }
       .lookup-head { display: block; }
       .shortcut { margin-top: .7rem; }
@@ -314,9 +320,9 @@
   <h1>카페24 스마트디자인 전체 레퍼런스</h1>
   <p>AI 에이전트가 카페24 스킨을 더 정확하게 작성하도록 돕는 모듈, 변수, 수정자, 실전 패턴 가이드입니다.</p>
   <div class="hero-actions" aria-label="주요 링크">
-    <a class="hero-action primary" href="https://kimyoungwopo.github.io/cafe24-smart-design">공개 GitHub Pages</a>
-    <a class="hero-action" href="#whats-new">이번에 추가된 것</a>
-    <a class="hero-action" href="#quick-lookup">바로 검색하기</a>
+    <a class="hero-action primary" href="#quick-lookup">바로 검색하기</a>
+    <a class="hero-action" href="#whats-new">업데이트 보기</a>
+    <a class="hero-action" href="https://kimyoungwopo.github.io/cafe24-smart-design">공개 페이지</a>
   </div>
   <div class="stats" aria-label="레퍼런스 요약">
     <div class="stat"><strong>89</strong><span>Modules</span></div>
@@ -326,45 +332,54 @@
   </div>
 </header>
 
-<nav>
-  <ul>
-    <li><a href="#whats-new">업데이트</a></li>
-    <li><a href="#overview">개요</a></li>
-    <li><a href="#structure">구조</a></li>
-    <li><a href="#syntax">기본 문법</a></li>
-    <li><a href="#layout-modules">레이아웃</a></li>
-    <li><a href="#product-modules">상품</a></li>
-    <li><a href="#order-modules">주문/장바구니</a></li>
-    <li><a href="#member-modules">회원</a></li>
-    <li><a href="#board-modules">게시판</a></li>
-    <li><a href="#variables-all">변수 전체</a></li>
-    <li><a href="#modifiers">모디파이어</a></li>
-    <li><a href="#control">조건문/반복문</a></li>
-    <li><a href="#include">Include</a></li>
-    <li><a href="#patterns">실전 패턴</a></li>
-    <li><a href="#tips">팁</a></li>
-    <li><a href="#official-map">공식 문서 맵</a></li>
-    <li><a href="#skin-workflow">제작 흐름</a></li>
-    <li><a href="#ai-guardrails">AI 안전 규칙</a></li>
-    <li><a href="#component-cheatsheet">컴포넌트 치트시트</a></li>
-    <li><a href="#gitops-preview">GitOps/Preview</a></li>
-    <li><a href="#url-template-map">URL/템플릿</a></li>
-    <li><a href="#sources">참고</a></li>
-  </ul>
-</nav>
+
 
 <div class="container">
+  <aside class="side-nav" aria-label="문서 목차">
+    <a class="primary-link" href="https://kimyoungwopo.github.io/cafe24-smart-design">공개 GitHub Pages</a>
+    <h2>목차</h2>
+    <div class="side-nav-group">
+      <strong>먼저 보기</strong>
+      <a href="#whats-new">업데이트</a>
+      <a href="#quick-lookup">빠른 찾기</a>
+      <a href="#overview">개요</a>
+      <a href="#structure">구조</a>
+    </div>
+    <div class="side-nav-group">
+      <strong>레퍼런스</strong>
+      <a href="#syntax">기본 문법</a>
+      <a href="#layout-modules">레이아웃</a>
+      <a href="#product-modules">상품</a>
+      <a href="#order-modules">주문/장바구니</a>
+      <a href="#member-modules">회원</a>
+      <a href="#board-modules">게시판</a>
+      <a href="#variables-all">변수 전체</a>
+      <a href="#modifiers">모디파이어</a>
+      <a href="#control">조건문/반복문</a>
+      <a href="#include">Include</a>
+    </div>
+    <div class="side-nav-group">
+      <strong>실무 가이드</strong>
+      <a href="#patterns">실전 패턴</a>
+      <a href="#tips">팁</a>
+      <a href="#official-map">공식 문서 맵</a>
+      <a href="#skin-workflow">제작 흐름</a>
+      <a href="#ai-guardrails">AI 안전 규칙</a>
+      <a href="#component-cheatsheet">컴포넌트 치트시트</a>
+      <a href="#url-template-map">URL/템플릿</a>
+      <a href="#sources">참고</a>
+    </div>
+  </aside>
+  <main class="content">
 
 <section id="whats-new" aria-labelledby="whatsNewTitle">
   <h2 id="whatsNewTitle">이번에 추가된 것</h2>
-  <p>새 섹션이 아래쪽에 숨어 있지 않도록, 이번 업데이트의 핵심 진입점을 먼저 모았습니다. 설치 없이 공개 페이지에서 바로 확인할 수 있습니다.</p>
+  <p>새로 추가된 공개 문서 중 바로 참고할 만한 것만 추려 상단에 배치했습니다. 아직 검증이 끝나지 않은 실험성 항목은 노출하지 않았습니다.</p>
   <div class="update-grid">
     <div class="update-card"><strong>공식 디자인 문서 맵</strong><span>개발자센터 Design 문서군을 제작/운영/컴포넌트 기준으로 분류합니다. <a href="#official-map">열기</a></span></div>
-    <div class="update-card"><strong>스킨 제작 실제 흐름</strong><span>구상, 편집, 로컬 확인, Cafe24 테스트 스킨 preview, 상품화 단계를 한 번에 봅니다. <a href="#skin-workflow">열기</a></span></div>
+    <div class="update-card"><strong>스킨 제작 실제 흐름</strong><span>구상, 편집, 로컬 확인, Cafe24 preview, 상품화 단계를 한 번에 봅니다. <a href="#skin-workflow">열기</a></span></div>
     <div class="update-card"><strong>AI 안전 규칙</strong><span><code>module</code>, <code>{$...}</code>, action/form 변수, <code>ec-base-*</code> 보존 체크리스트입니다. <a href="#ai-guardrails">열기</a></span></div>
-    <div class="update-card"><strong>GitOps/Preview 흐름</strong><span>local mock preview와 Cafe24 테스트 스킨 preview를 분리해서 설명합니다. <a href="#gitops-preview">열기</a></span></div>
     <div class="update-card"><strong>URL/템플릿 모달</strong><span>샘플 URL을 누르면 수정 후보 파일, 관련 모듈, 위험 포인트를 모달로 확인합니다. <a href="#url-template-map">열기</a></span></div>
-    <div class="update-card"><strong>Chrome Extension MVP</strong><span>팝업 에디터 코드 분석, 위험 diff, Blue Team, AI 프롬프트 복사를 지원합니다. <a href="extension/README.md">문서 보기</a></span></div>
   </div>
 </section>
 
@@ -428,9 +443,8 @@
             <li><a href="#skin-workflow">16. 스킨 제작 실제 흐름</a></li>
             <li><a href="#ai-guardrails">17. AI 수정 안전 규칙</a></li>
             <li><a href="#component-cheatsheet">18. 테마 컴포넌트 치트시트</a></li>
-            <li><a href="#gitops-preview">19. 샘플몰/Preview/GitOps</a></li>
-            <li><a href="#url-template-map">20. URL별 템플릿/샘플 사이트 모달</a></li>
-            <li><a href="#sources">21. 공식 문서 링크</a></li>
+            <li><a href="#url-template-map">19. URL별 템플릿/샘플 사이트 모달</a></li>
+            <li><a href="#sources">20. 공식 문서 링크</a></li>
           </ul>
         </div>
       </div>
@@ -1567,42 +1581,9 @@
   <div class="tip"><strong>실전 기준:</strong> 기존 스킨에 <code>ec-base-*</code> 구조가 있으면 먼저 보존하고, 새 브랜드 디자인은 wrapper class와 scoped CSS로 덧입히세요.</div>
 </section>
 
-<!-- ===================== 19. 샘플몰/Preview/GitOps 워크플로우 ===================== -->
-<section id="gitops-preview">
-  <h2>19. 샘플몰/Preview/GitOps 워크플로우</h2>
-  <p>AI를 붙인 카페24 작업의 중심은 FTP 편집창이 아니라 <strong>로컬 Git 작업공간</strong>이어야 합니다. 카페24는 최종 런타임이고, 로컬은 diff·검증·리포트의 기준점입니다.</p>
-  <div class="folder-tree"><span class="f">cafe24-skin-project/</span>
-├── <span class="f">skin/</span>
-│   ├── <span class="f">pc/</span> layout/ product/ board/ member/ order/ css/ js/
-│   └── <span class="f">mobile/</span> layout/ product/ board/ member/ order/ css/ js/
-├── <span class="f">preview/</span> product-list.mock.html detail.mock.html mock-data.json
-├── <span class="f">docs/</span> module-map.md variable-map.md work-log.md
-├── <span class="f">reports/</span> qa/ diff/ deploy/
-├── <span class="f">prompts/</span>
-└── <span class="f">scripts/</span> check-skin.mjs make-preview.mjs push-dry-run.sh</div>
-  <table>
-    <thead><tr><th>검증 레벨</th><th>무엇을 확인하나</th><th>한계</th></tr></thead>
-    <tbody>
-      <tr><td>Git diff</td><td>변경 파일, 모듈/변수/action 삭제, 위험 파일 변경 여부</td><td>시각/카페24 실행 결과는 모름</td></tr>
-      <tr><td>로컬 정적 preview</td><td>CSS 깨짐, 반응형, 레이아웃 overflow</td><td><code>{$...}</code>와 <code>module</code>은 실행되지 않음</td></tr>
-      <tr><td>로컬 mock preview</td><td>샘플 상품명/가격/이미지로 빠른 시각 QA</td><td>실제 관리자 설정, 옵션, 로그인 상태는 모름</td></tr>
-      <tr><td>FTP dry-run</td><td>업로드될 파일 목록과 제외 파일 확인</td><td>시각 preview가 아니라 배포 범위 확인용</td></tr>
-      <tr><td>카페24 테스트 스킨/샘플쇼핑몰 preview</td><td>실제 모듈, 변수, action, 상품/옵션/장바구니 동작</td><td>운영 반영 전 마지막 검증 단계로 사용</td></tr>
-    </tbody>
-  </table>
-  <h3>권장 커밋 흐름</h3>
-  <pre><code>baseline: cafe24 skin snapshot
-sync: pull latest skin from ftp
-feat(product-list): improve product card layout
-fix(product-list): preserve soldout display class
-qa(product-list): add mobile screenshot report
-release: upload to test skin</code></pre>
-  <div class="info"><strong>업로드 제외 기본값:</strong> <code>.git/</code>, <code>.env</code>, <code>docs/</code>, <code>reports/</code>, <code>prompts/</code>, <code>preview/</code>, <code>scripts/</code>, <code>node_modules/</code>, <code>.DS_Store</code>는 스킨 업로드 대상에서 제외하는 것이 안전합니다.</div>
-</section>
-
-<!-- ===================== 20. URL별 템플릿/샘플 사이트 모달 ===================== -->
+<!-- ===================== 19. URL별 템플릿/샘플 사이트 모달 ===================== -->
 <section id="url-template-map">
-  <h2>20. URL별 템플릿/샘플 사이트 모달</h2>
+  <h2>19. URL별 템플릿/샘플 사이트 모달</h2>
   <p>카페24 스마트디자인에는 Next.js 같은 임의 라우터가 있는 것이 아니라, <strong>URL이 대체로 정해진 스킨 파일과 모듈에 매핑</strong>됩니다. 따라서 “특정 URL에 새 템플릿 적용”은 아래 네 방식 중 하나로 설계합니다.</p>
   <table class="checklist-table">
     <thead><tr><th>방식</th><th>언제 쓰나</th><th>주의점</th></tr></thead>
@@ -1668,9 +1649,9 @@ release: upload to test skin</code></pre>
   </div>
 </section>
 
-<!-- ===================== 21. 참고 ===================== -->
+<!-- ===================== 20. 참고 ===================== -->
 <section id="sources">
-  <h2>21. 공식 문서 & 참고 자료</h2>
+  <h2>20. 공식 문서 & 참고 자료</h2>
 
   <h3>공식 문서</h3>
   <table>
@@ -1722,6 +1703,7 @@ release: upload to test skin</code></pre>
   </table>
 </section>
 
+  </main>
 </div>
 
 <footer>
