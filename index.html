@@ -3,7 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cafe24 Smart Design Reference</title>
+  <title>카페24 스마트디자인 레퍼런스 | AI 에이전트용 모듈·변수·스킨 패턴</title>
+  <meta name="description" content="카페24 스마트디자인 스킨 작업에 필요한 모듈 89개, 변수 194개, 수정자 13종, URL별 템플릿 맵과 AI 안전 규칙을 정리한 공개 레퍼런스입니다.">
+  <meta name="keywords" content="카페24, 스마트디자인, Cafe24 Smart Design, 카페24 모듈, 카페24 변수, 쇼핑몰 스킨, AI 코딩, 프론트엔드, ecommerce template">
+  <meta name="author" content="kimyoungwopo">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="canonical" href="https://kimyoungwopo.github.io/cafe24-smart-design/">
+  <link rel="sitemap" type="application/xml" href="https://kimyoungwopo.github.io/cafe24-smart-design/sitemap.xml">
+  <link rel="alternate" type="text/plain" title="LLMs summary" href="https://kimyoungwopo.github.io/cafe24-smart-design/llms.txt">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="Cafe24 Smart Design Reference">
+  <meta property="og:title" content="카페24 스마트디자인 레퍼런스">
+  <meta property="og:description" content="AI 에이전트와 프론트엔드 작업자를 위한 카페24 모듈·변수·수정자·스킨 패턴 공개 문서입니다.">
+  <meta property="og:url" content="https://kimyoungwopo.github.io/cafe24-smart-design/">
+  <meta property="og:image" content="https://kimyoungwopo.github.io/cafe24-smart-design/assets/og-cafe24-smart-design.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cafe24 Smart Design Reference - modules, variables, modifiers, AI guardrails">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="카페24 스마트디자인 레퍼런스">
+  <meta name="twitter:description" content="카페24 스킨 작업용 모듈·변수·수정자·AI 안전 규칙을 한곳에서 검색합니다.">
+  <meta name="twitter:image" content="https://kimyoungwopo.github.io/cafe24-smart-design/assets/og-cafe24-smart-design.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://kimyoungwopo.github.io/cafe24-smart-design/#website",
+        "url": "https://kimyoungwopo.github.io/cafe24-smart-design/",
+        "name": "Cafe24 Smart Design Reference",
+        "alternateName": "카페24 스마트디자인 레퍼런스",
+        "inLanguage": "ko-KR",
+        "description": "AI 에이전트와 프론트엔드 작업자를 위한 카페24 스마트디자인 모듈, 변수, 수정자, 스킨 패턴 레퍼런스입니다.",
+        "publisher": { "@type": "Person", "name": "kimyoungwopo", "url": "https://github.com/kimyoungwopo" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://kimyoungwopo.github.io/cafe24-smart-design/?q={search_term_string}#quick-lookup",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://kimyoungwopo.github.io/cafe24-smart-design/#article",
+        "headline": "카페24 스마트디자인 전체 레퍼런스",
+        "name": "카페24 스마트디자인 모듈·변수·수정자 레퍼런스",
+        "inLanguage": "ko-KR",
+        "about": ["Cafe24 Smart Design", "카페24 스킨", "AI-assisted frontend coding", "ecommerce templates"],
+        "audience": [
+          { "@type": "Audience", "audienceType": "프론트엔드 개발자" },
+          { "@type": "Audience", "audienceType": "AI 코딩 에이전트" },
+          { "@type": "Audience", "audienceType": "카페24 쇼핑몰 운영자" }
+        ],
+        "teaches": ["카페24 module 문법", "카페24 변수 scope", "스마트디자인 modifier", "스킨 수정 안전 체크리스트", "URL별 템플릿 추정"],
+        "isBasedOn": [
+          "https://sdsupport.cafe24.com/",
+          "https://developers.cafe24.com/design/front/design",
+          "https://developers.cafe24.com/design/front/smart"
+        ],
+        "mainEntityOfPage": "https://kimyoungwopo.github.io/cafe24-smart-design/",
+        "author": { "@type": "Person", "name": "kimyoungwopo", "url": "https://github.com/kimyoungwopo" },
+        "datePublished": "2026-03-05",
+        "dateModified": "2026-07-24"
+      },
+      {
+        "@type": "Dataset",
+        "@id": "https://kimyoungwopo.github.io/cafe24-smart-design/#dataset",
+        "name": "Cafe24 Smart Design registry",
+        "description": "카페24 스마트디자인 모듈 89개, 변수 194개, 수정자 13종을 검증 가능한 JSON registry로 정리한 데이터셋입니다.",
+        "license": "https://github.com/kimyoungwopo/cafe24-smart-design/blob/main/LICENSE",
+        "distribution": [
+          { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://kimyoungwopo.github.io/cafe24-smart-design/data/modules.json", "name": "modules.json" },
+          { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://kimyoungwopo.github.io/cafe24-smart-design/data/variables.json", "name": "variables.json" },
+          { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://kimyoungwopo.github.io/cafe24-smart-design/data/modifiers.json", "name": "modifiers.json" }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://kimyoungwopo.github.io/cafe24-smart-design/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kimyoungwopo.github.io/cafe24-smart-design/" },
+          { "@type": "ListItem", "position": 2, "name": "빠른 찾기", "item": "https://kimyoungwopo.github.io/cafe24-smart-design/#quick-lookup" },
+          { "@type": "ListItem", "position": 3, "name": "AI 안전 규칙", "item": "https://kimyoungwopo.github.io/cafe24-smart-design/#ai-guardrails" }
+        ]
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       color-scheme: light;
@@ -195,6 +283,14 @@
     .update-card span { display: block; margin-top: .35rem; color: var(--text-light); font-size: .88rem; }
     .update-card a { color: var(--primary); font-weight: 800; text-decoration: none; }
     .update-card a:hover { text-decoration: underline; }
+    .geo-summary { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 1rem; align-items: stretch; }
+    .geo-card { border: 1px solid rgba(37,99,235,.14); border-radius: 16px; background: linear-gradient(180deg, #fff, #f8fbff); padding: 1rem; box-shadow: var(--shadow-sm); }
+    .geo-card h3 { margin-top: 0; }
+    .geo-list { margin: .4rem 0 0 1.05rem; color: #344054; }
+    .geo-list li { margin: .28rem 0; }
+    .machine-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .7rem; }
+    .machine-links a { display: inline-flex; min-height: 2.2rem; align-items: center; border-radius: 999px; padding: .35rem .7rem; background: #eef2ff; color: #1d4ed8; text-decoration: none; font-weight: 800; font-size: .84rem; }
+    .machine-links a:hover { background: #dbeafe; }
     .pattern-note { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .75rem; margin: .85rem 0; }
     .pattern-note > div { padding: .8rem .9rem; border: 1px solid rgba(16,24,40,.10); border-radius: 12px; background: rgba(255,255,255,.72); }
     .pattern-note strong { display: block; margin-bottom: .35rem; color: #101828; }
@@ -289,7 +385,7 @@
       body { overflow-x: hidden; }
       html { overflow-x: hidden; }
       header .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid-2, .grid-3, .update-grid, .pattern-note, .do-dont { grid-template-columns: 1fr; }
+      .grid-2, .grid-3, .update-grid, .pattern-note, .do-dont, .geo-summary { grid-template-columns: 1fr; }
       .pattern-card h3 { align-items: flex-start; flex-direction: column; }
       .container { display: block; padding: 1rem; }
       .side-nav { position: static; max-height: none; margin-bottom: 1rem; }
@@ -342,6 +438,7 @@
       <strong>먼저 보기</strong>
       <a href="#whats-new">업데이트</a>
       <a href="#quick-lookup">빠른 찾기</a>
+      <a href="#ai-geo-summary">AI/GEO 요약</a>
       <a href="#overview">개요</a>
       <a href="#structure">구조</a>
     </div>
@@ -402,6 +499,31 @@
   </div>
   <div id="quickResults" class="lookup-results" aria-live="polite"></div>
   <p class="lookup-help">결과 카드를 누르면 원문 표 위치로 이동합니다. 변수 표의 세부 검색은 아래 “변수 전체” 섹션에서도 사용할 수 있습니다.</p>
+</section>
+
+<section id="ai-geo-summary" aria-labelledby="aiGeoTitle">
+  <h2 id="aiGeoTitle">AI/GEO 요약</h2>
+  <div class="geo-summary">
+    <div class="geo-card">
+      <h3>이 페이지가 답하는 질문</h3>
+      <ul class="geo-list">
+        <li>카페24 스마트디자인에서 <strong>module</strong>, <strong>{$...}</strong> 변수, modifier를 어떻게 안전하게 써야 하는가?</li>
+        <li>상품·주문·회원·게시판 URL은 어떤 스킨 파일과 모듈 후보로 연결되는가?</li>
+        <li>AI 코딩 에이전트가 카페24 스킨을 수정할 때 보존해야 할 action, form 변수, <code>ec-base-*</code> 규칙은 무엇인가?</li>
+      </ul>
+    </div>
+    <div class="geo-card">
+      <h3>기계가 읽기 좋은 진입점</h3>
+      <p>검색엔진, AI 검색, 에이전트가 핵심 범위와 데이터 원본을 빠르게 파악할 수 있도록 별도 파일과 구조화 데이터를 제공합니다.</p>
+      <div class="machine-links" aria-label="기계 판독용 파일">
+        <a href="llms.txt">llms.txt</a>
+        <a href="sitemap.xml">sitemap.xml</a>
+        <a href="robots.txt">robots.txt</a>
+        <a href="data/modules.json">modules.json</a>
+        <a href="data/variables.json">variables.json</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 

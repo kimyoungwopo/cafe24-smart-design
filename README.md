@@ -39,6 +39,7 @@
 | 추가 영역 | 사람들이 바로 확인할 위치 | 무엇을 알 수 있나 |
 |---|---|---|
 | 공개 GitHub Pages | https://kimyoungwopo.github.io/cafe24-smart-design | 검색 가능한 레퍼런스 뷰어를 설치 없이 확인 |
+| SEO/GEO 메타 | `index.html`, `robots.txt`, `sitemap.xml`, `llms.txt` | 검색엔진·AI 검색·에이전트가 canonical, 범위, 데이터 출처를 파악 |
 | 공식 디자인 문서 맵 | `index.html#official-map` | 개발자센터 Design 문서군을 제작/운영/컴포넌트로 분류 |
 | 스킨 제작 흐름 | `index.html#skin-workflow` | 구상 → 편집 → 로컬 확인 → 테스트 스킨 preview → 상품화 단계 |
 | AI 안전 규칙 | `index.html#ai-guardrails` | `module`, `{$...}`, action/form 변수, `ec-base-*` 보존 체크 |
