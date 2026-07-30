@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kimyoungwopo.github.io/cafe24-smart-design/sitemap.xml

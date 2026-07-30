@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/kimyoungwopo/cafe24-smart-design/issues"
   },
-  "homepage": "https://github.com/kimyoungwopo/cafe24-smart-design#readme",
+  "homepage": "https://kimyoungwopo.github.io/cafe24-smart-design",
   "engines": {
     "node": ">=20"
   }

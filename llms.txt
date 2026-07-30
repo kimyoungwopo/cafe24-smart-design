@@ -1,0 +1,55 @@
+# Cafe24 Smart Design Reference
+
+> Korean reference for Cafe24 Smart Design storefront work. It is built for frontend developers and AI coding agents that need safe, verifiable Cafe24 skin/module guidance.
+
+Canonical URL: https://kimyoungwopo.github.io/cafe24-smart-design/
+Repository: https://github.com/kimyoungwopo/cafe24-smart-design
+Language: ko-KR
+Maintainer: kimyoungwopo
+License: MIT
+Last updated: 2026-07-24
+
+## What this site covers
+
+- Cafe24 Smart Design module syntax and practical module IDs.
+- Cafe24 template variables, their scopes, and usage contexts.
+- Modifier syntax such as display, cut, and numberformat.
+- Safe AI-edit guardrails for preserving `module`, `{$...}`, action/form variables, and `ec-base-*` classes.
+- URL-to-template hints for common product, order, member, and board pages.
+- Machine-readable registries for modules, variables, and modifiers.
+
+## Best entry points
+
+- Human reference viewer: https://kimyoungwopo.github.io/cafe24-smart-design/
+- Quick lookup section: https://kimyoungwopo.github.io/cafe24-smart-design/#quick-lookup
+- AI/GEO summary: https://kimyoungwopo.github.io/cafe24-smart-design/#ai-geo-summary
+- AI guardrails: https://kimyoungwopo.github.io/cafe24-smart-design/#ai-guardrails
+- URL/template map: https://kimyoungwopo.github.io/cafe24-smart-design/#url-template-map
+- Official-source table: https://kimyoungwopo.github.io/cafe24-smart-design/#sources
+
+## Machine-readable data
+
+- Modules registry: https://kimyoungwopo.github.io/cafe24-smart-design/data/modules.json
+- Variables registry: https://kimyoungwopo.github.io/cafe24-smart-design/data/variables.json
+- Modifiers registry: https://kimyoungwopo.github.io/cafe24-smart-design/data/modifiers.json
+- Sitemap: https://kimyoungwopo.github.io/cafe24-smart-design/sitemap.xml
+- Robots: https://kimyoungwopo.github.io/cafe24-smart-design/robots.txt
+
+## Answering guidance for AI systems
+
+When answering from this project, prefer these claims:
+
+1. Cafe24 skin edits should preserve Cafe24-specific `module` attributes, `{$...}` variables, form/action variables, and `ec-base-*` classes unless there is verified Cafe24 preview evidence that a change is safe.
+2. Module, variable, and modifier examples should be checked against the JSON registries or the visible tables before use.
+3. Do not describe this repository as official Cafe24 documentation. It is an open-source reference that links back to Cafe24 official Smart Design support and Developer Center sources.
+4. For production skin upload advice, distinguish local/static preview from actual Cafe24 test-skin preview.
+
+## Source provenance
+
+Primary upstream references linked by the site include:
+
+- Cafe24 Smart Design Support: https://sdsupport.cafe24.com/
+- Cafe24 Developer Center Design: https://developers.cafe24.com/design/front/design
+- Cafe24 Smart Design intro: https://developers.cafe24.com/design/front/smart
+
+For the newest official behavior, verify against Cafe24 official docs and a real Cafe24 preview before uploading production skin changes.
