@@ -489,7 +489,7 @@
     <div class="shortcut" aria-label="키보드 단축키"><kbd>⌘</kbd><kbd>K</kbd> 또는 <kbd>/</kbd></div>
   </div>
   <div class="lookup-controls">
-    <input id="quickSearch" class="lookup-input" type="search" placeholder="예: product_listnormal, product_name, display, 장바구니" autocomplete="off">
+    <input id="quickSearch" class="lookup-input" type="search" placeholder="예: product_listnormal, product_name, display, 장바구니" autocomplete="off" aria-label="모듈·변수·수정자 빠른 검색" aria-controls="quickResults">
     <div class="lookup-filters" role="group" aria-label="검색 유형">
       <button class="lookup-filter" type="button" data-filter="all" aria-pressed="true">전체</button>
       <button class="lookup-filter" type="button" data-filter="module" aria-pressed="false">모듈</button>
@@ -497,7 +497,7 @@
       <button class="lookup-filter" type="button" data-filter="modifier" aria-pressed="false">수정자</button>
     </div>
   </div>
-  <div id="quickResults" class="lookup-results" aria-live="polite"></div>
+  <div id="quickResults" class="lookup-results" role="status" aria-live="polite" aria-atomic="true"></div>
   <p class="lookup-help">결과 카드를 누르면 원문 표 위치로 이동합니다. 변수 표의 세부 검색은 아래 “변수 전체” 섹션에서도 사용할 수 있습니다.</p>
 </section>
 
@@ -1908,7 +1908,15 @@ function initLookup() {
   const results = document.getElementById('quickResults');
   const filters = Array.from(document.querySelectorAll('.lookup-filter'));
   if (!input || !results) return;
-  input.addEventListener('input', renderLookup);
+  const query = new URLSearchParams(window.location.search).get('q') || '';
+  input.value = query;
+  input.addEventListener('input', () => {
+    const url = new URL(window.location.href);
+    if (input.value.trim()) url.searchParams.set('q', input.value.trim());
+    else url.searchParams.delete('q');
+    window.history.replaceState({}, '', url);
+    renderLookup();
+  });
   filters.forEach((button) => {
     button.addEventListener('click', () => {
       lookupState.filter = button.dataset.filter;
@@ -1938,6 +1946,10 @@ function initLookup() {
       event.preventDefault();
       input.focus();
     }
+  });
+  window.addEventListener('popstate', () => {
+    input.value = new URLSearchParams(window.location.search).get('q') || '';
+    renderLookup();
   });
   renderLookup();
 }
