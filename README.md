@@ -137,6 +137,32 @@ npm run check
 
 ---
 
+## 자동 소스 리서치와 PR 승인 정책
+
+`.github/workflows/cafe24-source-watch.yml`이 매주 공식 Cafe24 자료를 확인하고, 변경이 있으면 `research/cafe24-source-watch` PR을 생성합니다.
+
+저위험 source-watch PR은 `.github/workflows/auto-approve-source-watch.yml`에서 다음 조건을 모두 확인한 뒤에만 별도 reviewer 계정으로 자동 승인합니다.
+
+- PR 작성자가 `github-actions[bot]`
+- head branch가 `research/cafe24-source-watch`
+- 동일 저장소에서 생성된 PR
+- 변경 파일이 `data/source-snapshots.json`과 `research/cafe24-source-watch.md`뿐
+- registry, workflow, dependency, script 파일 변경 없음
+
+자동 승인은 새 Cafe24 계약을 추측하거나 registry를 직접 수정하는 권한이 아닙니다. `data/modules.json`, `data/variables.json`, `data/modifiers.json` 변경은 항상 수동 검토 대상으로 남깁니다.
+
+### GitHub 저장소 설정
+
+자동 승인 reviewer는 PR을 만든 `github-actions[bot]`과 다른 GitHub App 또는 별도 사용자여야 합니다. 해당 reviewer의 토큰을 저장소 secret으로 등록합니다.
+
+```bash
+gh secret set CAFE24_REVIEW_TOKEN --repo kimyoungwopo/cafe24-smart-design
+```
+
+토큰 값은 저장소 파일, 로그, PR 본문에 기록하지 않습니다. secret을 등록하기 전에는 workflow가 자동 승인을 수행하지 않고 명확히 실패합니다.
+
+---
+
 ## 공식 Design 문서 리서치 반영
 
 개발자센터 Design 하위 문서를 기준으로, 레퍼런스 뷰어에 다음 실무 섹션을 추가했습니다.

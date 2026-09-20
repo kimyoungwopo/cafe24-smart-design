@@ -1,0 +1,65 @@
+name: Auto-approve Cafe24 source watch
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+# This workflow intentionally does not checkout or execute pull-request code.
+# The token must belong to a separate reviewer identity from github-actions[bot].
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  approve-low-risk-source-watch:
+    name: Approve low-risk source-watch PR
+    if: >-
+      github.event.pull_request.head.ref == 'research/cafe24-source-watch' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login == 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect changed files and approve when policy allows
+        uses: actions/github-script@v7
+        env:
+          REVIEW_TOKEN: ${{ secrets.CAFE24_REVIEW_TOKEN }}
+        with:
+          github-token: ${{ secrets.CAFE24_REVIEW_TOKEN }}
+          script: |
+            const pull = context.payload.pull_request;
+            const allowed = new Set([
+              'data/source-snapshots.json',
+              'research/cafe24-source-watch.md',
+            ]);
+            const forbiddenName = /(^|\/)(\.github\/workflows|data\/(modules|variables|modifiers)\.json|package(-lock)?\.json|scripts)\//;
+            const files = await github.paginate(
+              github.rest.pulls.listFiles,
+              { owner: context.repo.owner, repo: context.repo.repo, pull_number: pull.number, per_page: 100 },
+            );
+            const names = files.map((file) => file.filename);
+            const invalid = names.filter((name) => !allowed.has(name) || forbiddenName.test(name));
+            if (!names.length || invalid.length) {
+              core.setFailed(`Auto-approval blocked. Changed files: ${names.join(', ') || '(none)'}. Invalid: ${invalid.join(', ') || '(none)'}`);
+              return;
+            }
+            if (!process.env.REVIEW_TOKEN) {
+              core.setFailed('CAFE24_REVIEW_TOKEN is not configured.');
+              return;
+            }
+            const body = [
+              'Automated approval: low-risk Cafe24 source-watch update.',
+              '',
+              `Policy: only ${[...allowed].join(' and ')} may change.`,
+              'Registry, workflow, dependency, and script changes require manual review.',
+              '',
+              `Files checked: ${names.join(', ')}`,
+            ].join('\n');
+            await github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pull.number,
+              event: 'APPROVE',
+              body,
+            });
+            core.info(`Approved PR #${pull.number} as ${context.actor}.`);
