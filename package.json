@@ -5,10 +5,11 @@
   "type": "module",
   "private": false,
   "scripts": {
-    "test": "node --test",
+    "test": "node --test \"test/**/*.test.mjs\"",
     "validate:data": "node scripts/validate-data.mjs",
     "research:cafe24": "node scripts/research-cafe24-sources.mjs",
-    "check": "npm run validate:data && npm test"
+    "check": "npm run validate:data && node scripts/sync-doc-counts.mjs --check && npm test",
+    "sync:docs": "node scripts/sync-doc-counts.mjs"
   },
   "keywords": [
     "cafe24",
@@ -31,5 +32,8 @@
   "homepage": "https://kimyoungwopo.github.io/cafe24-smart-design",
   "engines": {
     "node": ">=20"
+  },
+  "bin": {
+    "cafe24-smart-design-check": "./bin/cafe24-smart-design-check.mjs"
   }
 }

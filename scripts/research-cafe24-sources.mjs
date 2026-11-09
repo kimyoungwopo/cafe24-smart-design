@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 
 const ROOT = new URL('../', import.meta.url);
 const SNAPSHOT_PATH = new URL('data/source-snapshots.json', ROOT);
@@ -75,13 +76,15 @@ const SOURCES = [
   },
 ];
 
-function normalizeContent(text) {
+export function normalizeContent(text, sourceId = '') {
   return text
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
+    // View counts change without changes to the module reference.
+    .replace(sourceId === 'module-list' ? /조회수\s*[:：]\s*[\d,]+/g : /$^/, '조회수: [변동값]')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -106,7 +109,7 @@ async function fetchSource(source) {
       },
     });
     const raw = await response.text();
-    const normalized = normalizeContent(raw);
+    const normalized = normalizeContent(raw, source.id);
     return {
       ...source,
       ok: response.ok,
@@ -140,14 +143,18 @@ async function readPrevious() {
   return JSON.parse(await readFile(SNAPSHOT_PATH, 'utf8'));
 }
 
-function classify(current, previous) {
+export function classify(current, previous) {
   const prior = previous.sources?.[current.id];
   if (!prior) return current.ok ? 'new' : 'new_fetch_failed';
   if (!current.ok) {
     const sameFailure = prior.ok === false && prior.status === current.status && prior.error === current.error;
     return sameFailure ? 'unchanged_fetch_failed' : 'fetch_failed';
   }
+  // Only the module list changed normalization; all other v1 hashes remain comparable.
+  const version = current.id === 'module-list' ? 2 : 1;
+  if ((prior.normalizationVersion || 1) !== version || !prior.hash) return 'rebaseline';
   if (prior.hash !== current.hash) return 'changed';
+  if (prior.ok === false) return 'recovered';
   return 'unchanged';
 }
 
@@ -167,14 +174,21 @@ function renderReport({ checkedAt, rows }) {
   lines.push(`- New/changed sources: ${changed.length}`);
   lines.push(`- Unchanged sources: ${unchanged.length}`);
   lines.push(`- Fetch failures: ${failed.length}`);
+  lines.push(`- Baselines refreshed after normalization update: ${rows.filter((row) => row.state === 'rebaseline').length}`);
   lines.push('');
+  if (rows.some((row) => row.state === 'rebaseline')) {
+    lines.push('## Baseline migration requires review');
+    lines.push('');
+    lines.push('Normalization changed; these sources cannot be compared reliably with the old hashes. Review any outstanding source-watch PR before accepting the new baseline.');
+    lines.push('');
+  }
   if (changed.length) {
     lines.push('## Review required');
     lines.push('');
-    lines.push('| State | Source | Category | URL | Excerpt |');
+    lines.push('| State | Source | URL | Previous excerpt | Current excerpt |');
     lines.push('|---|---|---|---|---|');
     for (const row of changed) {
-      lines.push(`| ${row.state} | ${row.name} | ${row.category} | ${row.url} | ${row.excerpt} |`);
+      lines.push(`| ${row.state} | ${row.name} | ${row.url} | ${row.previousExcerpt || '-'} | ${row.excerpt} |`);
     }
     lines.push('');
     lines.push('Next step: inspect the changed official source and update `data/*.json`, `references/*.md`, and `cafe24-modules-variables.html` only after confirming the change manually.');
@@ -208,8 +222,8 @@ async function main() {
   for (const source of SOURCES) {
     currentRows.push(await fetchSource(source));
   }
-  const rows = currentRows.map((row) => ({ ...row, state: classify(row, previous) }));
-  const actionable = rows.filter((row) => row.state === 'new' || row.state === 'changed' || row.state === 'new_fetch_failed' || row.state === 'fetch_failed');
+  const rows = currentRows.map((row) => ({ ...row, previousExcerpt: previous.sources?.[row.id]?.excerpt || '', state: classify(row, previous) }));
+  const actionable = rows.filter((row) => row.state === 'new' || row.state === 'changed' || row.state === 'new_fetch_failed' || row.state === 'fetch_failed' || row.state === 'rebaseline' || row.state === 'recovered');
   if (!actionable.length) {
     console.log(`Cafe24 source watch checked ${rows.length} sources.`);
     console.log('Actionable rows: 0');
@@ -228,8 +242,10 @@ async function main() {
       finalUrl: row.finalUrl,
       bytes: row.bytes,
       textBytes: row.textBytes,
-      hash: row.hash,
-      excerpt: row.excerpt,
+      // Keep the last successful baseline across transient failures.
+      hash: row.ok ? row.hash : previous.sources?.[row.id]?.hash || null,
+      excerpt: row.ok ? row.excerpt : previous.sources?.[row.id]?.excerpt || '',
+      normalizationVersion: row.ok ? (row.id === 'module-list' ? 2 : 1) : previous.sources?.[row.id]?.normalizationVersion || null,
       lastCheckedAt: checkedAt,
       lastChangedAt: row.state === 'new' || row.state === 'changed'
         ? checkedAt
@@ -247,7 +263,9 @@ async function main() {
   for (const row of actionable) console.log(`- ${row.state}: ${row.name} (${row.url})`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}

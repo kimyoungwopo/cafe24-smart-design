@@ -42,7 +42,7 @@ You are an expert in Cafe24 Smart Design template development. When working with
 For detailed module, variable, and modifier listings, read the reference files in this skill:
 
 - `references/modules.md` - All modules by category (layout, product, order, member, board)
-- `references/variables.md` - All 250+ variables organized by domain
+- `references/variables.md` - Variables organized by domain; the registry is a curated subset
 - `references/modifiers-and-syntax.md` - 13 modifiers, control flow, includes, and patterns
 
 ## Quick Lookup

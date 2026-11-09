@@ -168,7 +168,13 @@
     "description": "Normal product list",
     "variables": [],
     "source": "references/modules.md",
-    "status": "documented"
+    "status": "documented",
+    "verification": {
+      "status": "official_example",
+      "sourceUrl": "https://sdsupport.cafe24.com/module/product/list.html",
+      "verifiedAt": "2026-11-05",
+      "scope": "공식 상품 목록 예시에서 모듈 선언 확인"
+    }
   },
   {
     "id": "product_ListItem",

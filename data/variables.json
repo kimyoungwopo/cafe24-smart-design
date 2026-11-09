@@ -13,7 +13,13 @@
     "domain": "product-basic-info",
     "description": "Product name",
     "usage": "List, Detail",
-    "source": "references/variables.md"
+    "source": "references/variables.md",
+    "verification": {
+      "status": "official_example",
+      "sourceUrl": "https://sdsupport.cafe24.com/module/product/list.html",
+      "verifiedAt": "2026-11-05",
+      "scope": "공식 상품 목록 예시에서 변수 사용 확인"
+    }
   },
   {
     "name": "product_name_title",

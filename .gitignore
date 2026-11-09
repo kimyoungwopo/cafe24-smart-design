@@ -4,3 +4,7 @@ node_modules/
 coverage/
 dist/
 .tmp/
+
+# Chrome extension (distributed separately via Chrome Web Store / GitHub Releases)
+extension/
+.omc/

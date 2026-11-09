@@ -11,7 +11,13 @@
     "purpose": "Thousands separator",
     "syntax": "{$v|numberformat}",
     "example": "{$product_price|numberformat}",
-    "source": "references/modifiers-and-syntax.md"
+    "source": "references/modifiers-and-syntax.md",
+    "verification": {
+      "status": "official_example",
+      "sourceUrl": "https://sdsupport.cafe24.com/board/tip/read_begin.html?no=633&board_no=1002",
+      "verifiedAt": "2026-11-05",
+      "scope": "공식 모디파이어 가이드에서 사용법 확인"
+    }
   },
   {
     "name": "date",

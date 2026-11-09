@@ -26,6 +26,8 @@
 
 `cafe24-smart-design`는 카페24 쇼핑몰 스킨 작업에서 AI가 자주 틀리는 **모듈명, 변수 scope, modifier 문법, 실전 템플릿 패턴**을 한곳에 정리한 오픈소스 레퍼런스입니다.
 
+카페24 편집기 안에서 이 레퍼런스로 디자인을 수정하고 검증하는 **Cafe24 Smart Design Guard 크롬 확장**은 이 저장소와 별도로 배포합니다. Chrome 웹 스토어 등록 전까지는 [GitHub Releases](https://github.com/kimyoungwopo/cafe24-smart-design/releases)에서 설치 파일을 내려받을 수 있습니다. 확장 프로그램의 소스는 이 저장소에 포함되지 않습니다.
+
 단순 문서 모음이 아니라, AI 도구와 자동화가 재사용할 수 있도록 `data/*.json` registry와 검증 스크립트까지 포함합니다.
 
 > 목표: Claude Code, Cursor, GitHub Copilot, Windsurf, GPT, Gemini 같은 AI 도구가 카페24 스마트디자인 코드를 더 안전하고 정확하게 생성하도록 돕기.
@@ -284,8 +286,8 @@ npm run check
 
 동작 방식:
 
-1. 공식/참고 소스 URL을 가져와 텍스트를 정규화합니다.
-2. 이전 hash와 비교해 새 정보나 변경이 있는지 확인합니다.
+1. 공식/참고 소스 URL을 가져와 텍스트를 정규화하고 모듈 목록 조회수 변동은 제외합니다.
+2. 이전 hash와 비교해 새 정보나 변경이 있는지 확인합니다. 정규화 방식이 바뀐 첫 실행은 새 기준으로 표시합니다. 기존 source-watch PR이 열려 있으면 변경 내역을 덮어쓰지 않도록 작업을 중단하므로, 해당 PR을 수동 검토 후 병합하거나 닫아야 합니다.
 3. 변경이 있으면 `research/cafe24-source-watch` 브랜치에 report/snapshot을 올리고 PR을 생성하거나 갱신합니다.
 4. registry와 문서 본문은 자동으로 추측 수정하지 않습니다. 변경된 공식 소스를 사람이 확인한 뒤 `data/*.json`, `references/*.md`, `cafe24-modules-variables.html`에 반영합니다.
 
@@ -293,10 +295,10 @@ npm run check
 
 ## 다음 개발 아이디어
 
-- `cafe24-smart-design-check` CLI: HTML 스킨 파일에서 잘못된 module/variable/modifier 검사
+- CLI 검사 범위와 분석 정확도 개선: 템플릿 문법 및 모듈 scope 검증
 - VS Code / Cursor snippets 자동 생성
 - `data/*.json`에서 Markdown/HTML 문서 자동 생성
-- 공식 문서 source URL과 verifiedAt 필드 강화
+- 더 많은 항목에 공식 문서 source URL, 검증 날짜와 확인 범위 추가
 - 소스 변경 PR을 기반으로 registry 업데이트 PR 자동 초안 생성
 
 ---
@@ -304,3 +306,27 @@ npm run check
 ## 라이선스
 
 MIT
+
+## 스킨 HTML 검사 CLI
+
+저장소를 클론한 뒤 Node.js 20 이상에서 실행합니다.
+
+```bash
+node bin/cafe24-smart-design-check.mjs /path/to/skin
+node bin/cafe24-smart-design-check.mjs --json /path/to/skin/product/detail.html
+node bin/cafe24-smart-design-check.mjs --strict /path/to/skin
+```
+
+디렉터리 안의 `.html`과 `.htm`을 재귀적으로 검사하고, registry에 없는 모듈·변수·수정자와 위치를 출력합니다. 기본 종료 코드는 발견 항목이 있어도 0이며, `--strict`를 사용하면 1입니다. 실행 오류는 2입니다. npm으로 설치하면 `cafe24-smart-design-check` 명령을 사용할 수 있습니다.
+
+Registry는 **선별된 목록**이므로 미등록 항목은 잘못되었다는 뜻이 아닙니다. 이 정적 검사는 변수의 모듈별 scope, 실제 동작, 스킨 설정이나 카페24 서버의 렌더링을 검증하지 않습니다. 반드시 공식 자료와 테스트 스킨 preview에서 확인하세요.
+
+## 출처와 검증 범위
+
+`source`는 저장소 내 참고 문서입니다. 공식 문서에서 직접 확인한 항목에만 `verification`을 추가하며, `sourceUrl`, `verifiedAt`, `scope`는 확인한 근거와 범위를 나타냅니다. 이 필드가 없는 기존 항목은 **개별 공식 검증 여부가 기록되지 않은 상태**이며 오류라는 의미는 아닙니다. 공식 예시 확인은 모든 스킨·상황에서의 동작을 보증하지 않습니다.
+
+문서의 registry 요약 숫자를 갱신하려면 `npm run sync:docs`를 실행하세요. `npm run check`는 요약 숫자가 데이터와 일치하는지 검사합니다. Markdown과 HTML의 모든 본문이 자동 생성되는 것은 아니므로 항목의 실제 설명과 예시는 여전히 수동 대조가 필요합니다.
+
+## FTP로 스킨 작업하기
+
+FTP로 내려받은 스킨의 HTML은 위 CLI로 점검할 수 있습니다. FTP 경로 확인, 백업과 preview 절차는 [FTP 작업 안내](references/ftp-workflow.md)를 참고하세요. 이 저장소의 확장과 CLI는 FTP 연결이나 업로드를 수행하지 않습니다.

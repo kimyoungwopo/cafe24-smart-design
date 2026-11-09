@@ -1,4 +1,4 @@
-# Cafe24 Variables Reference (250+)
+# Cafe24 Variables Reference
 
 ## 1. Product Basic Info
 | Variable | Description | Usage |

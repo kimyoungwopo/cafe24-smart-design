@@ -33,6 +33,15 @@ assertUnique(modules, 'id', 'modules');
 assertUnique(variables, 'name', 'variables');
 assertUnique(modifiers, 'name', 'modifiers');
 
+// Missing verification means the entry has not yet been checked against an official example.
+for (const record of [...modules, ...variables, ...modifiers]) {
+  if (!record.verification) continue;
+  const { status, sourceUrl, verifiedAt, scope } = record.verification;
+  if (status !== 'official_example' || !/^https:\/\/(sdsupport|developers)\.cafe24\.com\//.test(sourceUrl || '') || !/^\d{4}-\d{2}-\d{2}$/.test(verifiedAt || '') || !scope?.trim()) {
+    fail(`${record.id || record.name} has invalid official verification metadata`);
+  }
+}
+
 const variableNames = new Set(variables.map((variable) => variable.name));
 
 for (const module of modules) {
