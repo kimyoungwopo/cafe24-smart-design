@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Design Guard for Cafe24 개인정보처리방침</title>
+<style>
+  body { max-width: 760px; margin: 40px auto; padding: 0 16px; color: #1f2933; background: #fff; font: 15px/1.7 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  h2 { font-size: 18px; margin-top: 32px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { padding: 8px 10px; border: 1px solid #d9dee5; text-align: left; vertical-align: top; }
+  th { background: #f4f6f9; }
+  .meta { color: #5b6676; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Smart Design Guard for Cafe24 개인정보처리방침</h1>
+<p class="meta">시행일: 2026년 11월 9일</p>
+
+<p>Smart Design Guard for Cafe24(이하 "확장")는 카페24 스마트디자인 편집기에서 디자인 수정 요청을 돕는 Chrome 확장 프로그램입니다. 확장은 카페24 공식 제품이 아니며 카페24와 제휴하지 않았습니다. 이 방침은 확장이 다루는 정보와 그 사용 방식을 설명합니다.</p>
+
+<h2>1. 개발자가 수집하는 정보</h2>
+<p>개발자는 사용자의 정보를 수집하지 않습니다. 개발자가 운영하는 서버가 없고, 사용 통계·광고 추적·오류 보고를 보내지 않습니다.</p>
+
+<h2>2. 확장이 다루는 정보와 저장 위치</h2>
+<table>
+  <tr><th>정보</th><th>용도</th><th>저장 위치</th></tr>
+  <tr><td>디자인 요청 문장, 대화 기록</td><td>수정안 생성, 대화 이어가기</td><td>사용자 브라우저(chrome.storage.local). 쇼핑몰·스킨별로 보관하며 [새 대화]를 누르면 삭제됩니다.</td></tr>
+  <tr><td>편집 중인 스킨 파일 내용</td><td>수정안 생성과 검사, 백업과 되돌리기</td><td>사용자 브라우저. 사용자가 백업을 내보내면 사용자 PC의 다운로드 폴더.</td></tr>
+  <tr><td>첨부한 참고 이미지, 미리보기 화면 캡처</td><td>참고 이미지 반영, 결과 화면 비교</td><td>저장하지 않으며 요청 처리 중에만 사용합니다.</td></tr>
+  <tr><td>카페24 OAuth 토큰(API 연결 시)</td><td>쇼핑몰 스킨 파일 읽기</td><td>확장이 아닌 사용자 PC의 연결 프로그램 폴더에만 저장(소유자만 읽기 가능). 확장으로는 전달되지 않습니다.</td></tr>
+</table>
+
+<h2>3. 제3자 전송</h2>
+<p>수정안을 만들기 위해 요청 문장, 관련 스킨 파일 내용, 첨부 이미지, 화면 비교 시 미리보기 캡처가 사용자 PC에 설치된 OpenAI Codex CLI를 거쳐 <strong>OpenAI</strong>로 전송됩니다. 이 전송은 사용자 본인의 OpenAI 계정과 약관에 따라 이루어지며, OpenAI의 데이터 처리는 OpenAI 개인정보처리방침을 따릅니다.</p>
+<p>카페24 API를 연결한 경우, 스킨 파일을 읽기 위해 사용자의 카페24 쇼핑몰 API에 요청합니다. 이 밖의 제3자에게 정보를 판매하거나 전달하지 않으며, 확장의 목적과 관련 없는 용도로 사용하지 않습니다.</p>
+
+<h2>4. 보관 기간과 삭제</h2>
+<ul>
+  <li>대화 기록: [새 대화]를 누르거나 확장을 삭제하면 지워집니다.</li>
+  <li>복구 정보: 복구를 마치거나 확장을 삭제하면 지워집니다.</li>
+  <li>카페24 연결: 연결 프로그램에서 연결을 해제하거나 토큰 파일을 삭제하면 지워집니다.</li>
+  <li>내려받은 백업 파일은 사용자가 직접 관리합니다.</li>
+</ul>
+
+<h2>5. 권한 사용</h2>
+<p>확장은 카페24 편집기와 상품 페이지에서만 동작하며, 화면 캡처는 사용자가 확장 아이콘을 누른 편집기 탭에서만 합니다. 쇼핑몰에 적용 중인 대표 스킨에는 자동으로 저장하지 않습니다.</p>
+
+<h2>6. 변경</h2>
+<p>이 방침이 바뀌면 이 페이지에 시행일과 함께 게시합니다.</p>
+
+<h2>7. 문의</h2>
+<p>kbc01054575075@gmail.com</p>
+</body>
+</html>
