@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Design Guard 연결 안내</title>
+<style>
+  body { max-width: 760px; margin: 40px auto; padding: 0 16px; color: #1f2933; background: #fff; font: 15px/1.7 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  h2 { font-size: 18px; margin-top: 32px; }
+  pre { padding: 12px 14px; border-radius: 8px; background: #1f2933; color: #e6edf3; overflow-x: auto; font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .note { padding: 10px 12px; border-left: 3px solid #173f78; background: #f4f7fb; font-size: 14px; }
+  .meta { color: #5b6676; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Smart Design Guard 연결 안내</h1>
+<p class="meta">Smart Design Guard for Cafe24 Chrome 확장을 이 Mac의 Codex와 연결하는 방법이에요. 카페24 공식 제품이 아닌 개인 개발 도구예요.</p>
+
+<h2>1. 확장 설치</h2>
+<p>Chrome 웹 스토어에서 Smart Design Guard for Cafe24를 설치해요.</p>
+
+<h2>2. Codex 연결 (명령 한 줄)</h2>
+<p>터미널(응용 프로그램 › 유틸리티 › 터미널)을 열고 아래 명령을 붙여 넣은 뒤 Enter를 눌러요.</p>
+<pre>npx cafe24-guard-connect</pre>
+<p>안내에 따라 진행하면 돼요.</p>
+<ul>
+  <li>Codex CLI가 없으면 설치를 제안해요.</li>
+  <li>Codex에 로그인돼 있지 않으면 로그인 창을 열어요 (ChatGPT 계정 또는 OpenAI API 키).</li>
+  <li>연결 프로그램을 <code>~/Library/Application Support/Cafe24Guard</code>에 설치하고 Chrome에 등록해요.</li>
+</ul>
+<p class="note"><code>npx</code>는 Node.js에 들어 있어요. "command not found: npx"가 나오면 <a href="https://nodejs.org/ko">nodejs.org</a>에서 LTS 버전을 설치한 뒤 다시 실행해 주세요.</p>
+
+<h2>3. 확인</h2>
+<p>카페24 스마트디자인 편집기 탭을 새로고침해요. 사이드바의 연결 안내 카드가 사라지면 준비가 끝난 거예요. 카드가 남아 있으면 카드에 적힌 명령을 실행하고 [연결 다시 확인]을 눌러 주세요.</p>
+
+<h2>카페24 API (선택)</h2>
+<p>연결하지 않아도 편집기에서 바로 수정할 수 있어요. 관련 파일을 편집기 탭을 옮기지 않고 읽고 싶을 때만, 사이드바의 [이미지 · 수정 도구] › [API 설정 방법 보기] 안내를 따라 본인의 카페24 개발자 앱을 연결해요.</p>
+
+<h2>지원 환경과 제거</h2>
+<ul>
+  <li>macOS의 Chrome, Node.js 18 이상</li>
+  <li>제거: <code>~/Library/Application Support/Cafe24Guard</code> 폴더와 <code>~/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.cafe24.smart_design_guard.json</code> 파일을 지우고 확장을 삭제해요.</li>
+</ul>
+<p class="meta">데이터 처리는 <a href="smart-design-guard-privacy.html">개인정보처리방침</a>을 확인하세요. 문의: <a href="https://github.com/kimyoungwopo/cafe24-smart-design/issues">GitHub Issues</a></p>
+</body>
+</html>
