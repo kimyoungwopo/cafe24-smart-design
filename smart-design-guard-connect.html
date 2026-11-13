@@ -16,23 +16,33 @@
 </head>
 <body>
 <h1>Smart Design Guard 연결 안내</h1>
-<p class="meta">Smart Design Guard for Cafe24 Chrome 확장을 이 Mac의 Codex와 연결하는 방법이에요. 카페24 공식 제품이 아닌 개인 개발 도구예요.</p>
+<p class="meta">Smart Design Guard for Cafe24 Chrome 확장을 이 Mac의 AI 명령줄 도구(Codex, Claude, Gemini 중 하나)와 연결하는 방법이에요. 카페24 공식 제품이 아닌 개인 개발 도구예요.</p>
 
 <h2>1. 확장 설치</h2>
 <p>Chrome 웹 스토어에서 Smart Design Guard for Cafe24를 설치해요.</p>
 
-<h2>2. Codex 연결 (명령 한 줄)</h2>
+<h2>2. 연결 (명령 한 줄)</h2>
 <p>터미널(응용 프로그램 › 유틸리티 › 터미널)을 열고 아래 명령을 붙여 넣은 뒤 Enter를 눌러요.</p>
 <pre>npx cafe24-guard-connect</pre>
 <p>안내에 따라 진행하면 돼요.</p>
 <ul>
-  <li>Codex CLI가 없으면 설치를 제안해요.</li>
-  <li>Codex에 로그인돼 있지 않으면 로그인 창을 열어요 (ChatGPT 계정 또는 OpenAI API 키).</li>
-  <li>연결 프로그램을 <code>~/Library/Application Support/Cafe24Guard</code>에 설치하고 Chrome에 등록해요.</li>
+  <li>Codex, Claude, Gemini(Antigravity) 도구를 모두 찾고, 각각 설치·로그인돼 있는지 알려 줘요.</li>
+  <li>세 도구가 하나도 없으면 Codex CLI 설치를 제안해요.</li>
+  <li>찾은 도구의 위치를 기록하고, 연결 프로그램을 <code>~/Library/Application Support/Cafe24Guard</code>에 설치해 Chrome에 등록해요.</li>
 </ul>
 <p class="note"><code>npx</code>는 Node.js에 들어 있어요. "command not found: npx"가 나오면 <a href="https://nodejs.org/ko">nodejs.org</a>에서 LTS 버전을 설치한 뒤 다시 실행해 주세요.</p>
 
-<h2>3. 확인</h2>
+<h2>3. 수정안 모델 고르기</h2>
+<p>수정안을 만들 도구는 하나만 있으면 돼요. 쓰고 싶은 도구에 로그인해 두세요.</p>
+<ul>
+  <li><strong>Codex</strong> (OpenAI Codex CLI): <code>codex login</code> (ChatGPT 계정 또는 OpenAI API 키). 요청 내용은 OpenAI로 전송돼요.</li>
+  <li><strong>Claude</strong> (Claude Code CLI): <code>claude auth login</code> (Claude 계정 또는 Anthropic API 키). 요청 내용은 Anthropic으로 전송돼요.</li>
+  <li><strong>Gemini</strong> (Google Antigravity CLI): 터미널에서 <code>agy</code>를 한 번 실행해 Google 계정으로 로그인해요. 요청 내용은 Google로 전송돼요. Google이 개인 계정의 Gemini CLI 지원을 Antigravity로 옮겨서, Gemini CLI가 아닌 Antigravity CLI를 사용해요.</li>
+</ul>
+<p>편집기 사이드바의 [이미지 · 수정 도구] 탭 › "수정안 모델"에서 도구를 골라요. 각 도구 옆에 사용 가능 / 로그인 필요 / 설치되지 않음이 표시돼요. 선택은 모든 쇼핑몰에 똑같이 적용되고, 고른 도구를 쓸 수 없으면 사용 가능한 다른 도구로 자동 전환해요. 요청 내용은 고른 도구 하나에만 전달돼요.</p>
+<p class="note">나중에 다른 도구를 설치하거나 로그인했다면 사이드바에서 [연결 다시 확인]을 눌러요. 연결 명령을 실행한 뒤에 설치한 도구가 목록에 보이지 않으면 <code>npx cafe24-guard-connect</code>를 다시 실행해 주세요.</p>
+
+<h2>4. 확인</h2>
 <p>카페24 스마트디자인 편집기 탭을 새로고침해요. 사이드바의 연결 안내 카드가 사라지면 준비가 끝난 거예요. 카드가 남아 있으면 카드에 적힌 명령을 실행하고 [연결 다시 확인]을 눌러 주세요.</p>
 
 <h2>카페24 API (선택)</h2>
